@@ -3,6 +3,28 @@ from urllib.parse import urlparse, unquote
 import re
 import shutil
 import hashlib
+from functools import wraps
+
+
+def export(export_name=None):
+    """
+    标识一个export
+    :return:
+    """
+
+    def wrapper(func):
+        func.__name__ = export_name or func.__name__
+        func.export = True
+
+        @wraps(func)
+        def inner(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return inner
+
+    return wrapper
+
+
 
 static_res = {'js': {
     'content-type': 'application/javascript'
