@@ -66,7 +66,7 @@ def statistic_summary(data, *args, **kwargs):
                 "count": 10,
                 "hit_rate": "20.00%",
                 "max_bindwidth": "320\xa0bps",
-                "flow": "0\xa430字节"
+                "flow": "30字节"
             }
         }
     '''
@@ -85,6 +85,30 @@ def statistic_domain_bandwidth(data, *args, **kwargs):
 
 @export("/statistic/node-bandwidth-ranking/")
 def statistic_node_bandwidth_ranking(data, *args, **kwargs):
+    data = get_data(args[0][0])
+    return bytes(data, encoding='utf-8')
+
+
+@export("/statistic/node-flow/")
+def statistic_node_flow(data, *args, **kwargs):
+    data = get_data(args[0][0], "time")
+    return bytes(data, encoding='utf-8')
+
+
+@export("/statistic/node-flow-ranking/")
+def statistic_node_flow_ranking(data, *args, **kwargs):
+    data = get_data(args[0][0])
+    return bytes(data, encoding='utf-8')
+
+
+@export("/statistic/node-visit/")
+def statistic_node_visit(data, *args, **kwargs):
+    data = get_data(args[0][0], "time")
+    return bytes(data, encoding='utf-8')
+
+
+@export("/statistic/node-visit-ranking/")
+def statistic_node_visit_ranking(data, *args, **kwargs):
     data = get_data(args[0][0])
     return bytes(data, encoding='utf-8')
 
