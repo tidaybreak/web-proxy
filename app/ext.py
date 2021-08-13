@@ -64,9 +64,9 @@ class Signal(object):
 
 
 app = None
-signal = Signal()
+# signal = Signal()
 serv = Service()
-serv.signal = signal
+# serv.signal = signal
 
 v = ""
 
@@ -76,4 +76,4 @@ def init_ext(a):
 
     app = a
     serv.init_app(app)
-    signal.init_app(app)
+    # signal.init_app(app)

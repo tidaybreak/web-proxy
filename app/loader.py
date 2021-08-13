@@ -7,7 +7,7 @@ import traceback
 __author__ = 'Feng Lu'
 
 
-def load_mod_dir(mod_dirs):
+def load_mod_dir(mod_dirs, plugin_name):
     names = {}
     modules = []
     for mod_dir in mod_dirs:
@@ -17,12 +17,15 @@ def load_mod_dir(mod_dirs):
             if fn_.startswith('_'):
                 continue
             if fn_.endswith('.py') and not fn_.startswith("_sys_"):
-                extpos = fn_.rfind('.')
-                if extpos > 0:
-                    _name = fn_[:extpos]
+                expos = fn_.rfind('.')
+                if expos > 0:
+                    _name = fn_[:expos]
                 else:
                     _name = fn_
-                names[_name] = os.path.join(mod_dir, fn_)
+                if plugin_name is None or plugin_name == _name:
+                    names[_name] = os.path.join(mod_dir, fn_)
+                else:
+                    pass
     for name in names:
         try:
             # 模块的加载mod_dirs一定是一个list类型数据，否则执行失败
@@ -47,7 +50,7 @@ def load_plugins(name, app):
     name = name.replace('.', '/')
     base_dir = os.path.dirname(os.path.abspath(__file__))
     mod_dirs = [os.path.join(base_dir, "plugins", name)]
-    names, modules = load_mod_dir(mod_dirs)
+    names, modules = load_mod_dir(mod_dirs, app.plugin_name)
 
     for mod in modules:
         for attr in dir(mod):
@@ -65,7 +68,7 @@ def load_plugins(name, app):
 
                         funcs[func.__name__] = func
                     except:
-                        #print traceback.format_exc()
+                        # print traceback.format_exc()
                         continue
     return funcs
 
@@ -81,7 +84,7 @@ def load_signals(app):
     funcs = {}
     base_dir = os.path.dirname(os.path.abspath(__file__))
     mod_dirs = [os.path.join(base_dir, "signals")]
-    names, modules = load_mod_dir(mod_dirs)
+    names, modules = load_mod_dir(mod_dirs, None)
 
     for mod in modules:
         for attr in dir(mod):
@@ -112,7 +115,7 @@ def load_services(app):
     funcs = {}
     base_dir = os.path.dirname(os.path.abspath(__file__))
     mod_dirs = [os.path.join(base_dir, "services")]
-    names, modules = load_mod_dir(mod_dirs)
+    names, modules = load_mod_dir(mod_dirs, None)
 
     for mod in modules:
         for attr in dir(mod):
@@ -144,7 +147,7 @@ def load_export(app):
     funcs = {}
     base_dir = os.path.dirname(os.path.abspath(__file__))
     mod_dirs = [os.path.join(base_dir, "export")]
-    names, modules = load_mod_dir(mod_dirs)
+    names, modules = load_mod_dir(mod_dirs, None)
 
     for mod in modules:
         for attr in dir(mod):
@@ -174,7 +177,7 @@ def load_form(app):
     funcs = {}
     base_dir = os.path.dirname(os.path.abspath(__file__))
     mod_dirs = [os.path.join(base_dir, "form")]
-    names, modules = load_mod_dir(mod_dirs)
+    names, modules = load_mod_dir(mod_dirs, None)
 
     for mod in modules:
         for attr in dir(mod):

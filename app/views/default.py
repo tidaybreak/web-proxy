@@ -3,8 +3,11 @@
 
 import requests
 import hashlib
+import logging
 from flask import Blueprint, request, make_response
 from app.ext import serv, app
+#from app.settings import log
+
 from app.utils import get_cache_file, save_cache_file, is_valid_domain
 from app.config import cfg
 
@@ -31,11 +34,9 @@ def catch_all():
     # 获取真实host host可能在path[1]
     real_host = request.values.get('real_host', cfg.DOMAIN)
     paths = request.path.split('/')
-    if len(paths) > 2 and is_valid_domain(paths[1]):
+    if len(paths) > 2 and paths[1] in cfg.DOMAIN_PROXY:
         real_host = paths[1]
         full_path = request.full_path.replace('/' + real_host, '', 1)
-
-    # cookies = {h: request.cookies.get(h) for h in request.cookies}
 
     # 获取真实请求url
     headers['Host'] = real_host
@@ -46,97 +47,73 @@ def catch_all():
     read_url = cfg.HTTP + real_host + full_path
 
     # byte或dict
-    post_data = b''
-    # Post Content-Type一般是 text/plain  application/x-www-form-urlencoded
+    req_data = b''
     hash_data = b''
     if 'Content-Type' in headers:
+        # Post Content-Type一般是 text/plain  application/x-www-form-urlencoded
         if headers['Content-Type'].find('application/x-www-form-urlencoded') >= 0:
-            post_data = request.form.to_dict()
-            hash_data = bytes(str(post_data), encoding='utf-8')
+            req_data = request.form.to_dict()
+            hash_data = bytes(str(req_data), encoding='utf-8')
         else:
-            post_data = request.data
+            req_data = request.data
             hash_data = request.data
     post_data_hash = ''
     if len(hash_data) > 0:
         post_data_hash = hashlib.md5(hash_data).hexdigest()
 
-    # 忽略参数维度的url
-    contain_query = True
-    if request.path in cfg.QUERY_PATH:
-        contain_query = False
+    # 改写header data
+    headers, post_data = serv.main.hook_request(real_host, headers, req_data)
 
+    # 获取缓存
     get_cache = True
     if request.path in cfg.NO_CACHE_READ_PATH:
         get_cache = False
     if len(cfg.NO_CACHE_READ_PATH) == 1 and cfg.NO_CACHE_READ_PATH[0] == "*":
         get_cache = False
+    contain_query = True
+    if request.path in cfg.QUERY_PATH:
+        contain_query = False
+    cache_file, res_status, res_headers, res_cookies, res_data = 'skip ', 502, {}, None, b''
     if get_cache:
-        cache_file, status_code, header, cookies, data = get_cache_file(read_url, post_data_hash,
+        cache_file, res_status, res_headers, res_cookies, res_data = get_cache_file(read_url, post_data_hash,
                                                                         contain_query=contain_query)
-    else:
-        cache_file, status_code, header, cookies, data = 'skip ', 404, None, None, None
-
-    # if True:
-    if data is None:
+    if res_data is None:
+        # 获取数据
         try:
-            status_code = 502
-            header = {}
-            data = b''
-
-            # 不移除有些会返回403 如：https://wechat.gyfyy.com/gy1yqlc/user/Images/doc/007403.jpg
-            headers.pop("If-None-Match", None)
-            headers.pop("If-Modified-Since", None)
-            headers = {**headers, **cfg.REQ_HEADER}
             result = requests.request(request.method, read_url,
-                                      data=post_data,
+                                      data=req_data,
                                       headers=headers,
                                       allow_redirects=False,
                                       timeout=(8, 8))
-            cookies = requests.utils.dict_from_cookiejar(result.cookies)
+            res_cookies = requests.utils.dict_from_cookiejar(result.cookies)
+            res_status = result.status_code
+            res_headers = {k: result.headers.get(k) for k in result.headers}
+            res_data = result.content
             if result.status_code in cfg.CACHE_CODES:
                 save_cache_file(read_url, post_data_hash, result.content,
                                 status_code=result.status_code,
                                 header=result.headers,
-                                cookies=cookies,
+                                cookies=res_cookies,
                                 contain_query=contain_query)
-            status_code = result.status_code
-            header = result.headers
-            data = result.content
         except Exception as error:
-            print("error:", read_url, str(error))
+            res_data = b''
+            logging.error("error:%s  rul:%s" % (str(error), read_url))
 
     # 改写数据
-    data = serv.main.hook_response(request.path, full_path, post_data, data)
+    res_headers, res_data = serv.main.hook_response(request.path, full_path, req_data, res_headers, res_data)
 
-    response = make_response(data)
-    for k in header:
-        lk = k.lower()
-        # 穗康码 sk.gzonline.gov.cn
-        if lk == "connection":
-            continue
+    response = make_response(res_data)
+    for k in res_headers:
+        response.headers[k] = res_headers.get(k)
 
-        if lk == "transfer-encoding" or lk == "content-encoding":
-            continue
+    if res_cookies:
+        for k, v in res_cookies.items():
+            response.set_cookie(k, v)
 
-        if lk == "content-length" or lk == "status_code":
-            continue
-
-        # print(i, k, result.headers.get(k))
-        response.headers[k] = header.get(k)
-
-    print(f"info:, {status_code}  {cache_file}  {cookies}")
+    print(f"info:, {res_status}  {cache_file}  {res_cookies}")
     # print(f"info:, {status_code}  {read_url}  {cookies}")
 
-    for k, v in cookies.items():
-        response.set_cookie(k, v)
-
-    # try:
-    #     for k, v in cookies.items():
-    #         response.set_cookie(k, v)
-    # except Exception as error:
-    #     print("error:", cookies)
-    # return data
-    return response, status_code
+    return response, res_status
 
 
 @default.route("/other", methods=["GET", "POST"])
