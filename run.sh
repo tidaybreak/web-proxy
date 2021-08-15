@@ -14,7 +14,7 @@ pip install -r requirements.txt
 export C_FORCE_ROOT="true"
 export LOGFILE="/data/logs"
 #file=/data/logs/trading-`date +%Y-%m-%d-%H-%M-%S`
-#touch $file
+touch logging.log
 
 curr_dir=$(pwd)
 export PYTHONPATH=${PYTHONPATH}:${curr_dir}
