@@ -17,10 +17,11 @@ def get_data(url, y="domain"):
     url = url.replace('[]', '')
     query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(url).query))
     domains = url.split('&domain%5B%5D=')
-    del domains[0]
+    if len(domains) > 1:
+        del domains[0]
     domains[-1] = domains[-1].split('&')[0]
-    start_time = query['start_time']
-    end_time = query['end_time']
+    start_time = query.get('start_time', '')
+    end_time = query.get('end_time', '')
     #type = query['type']
 
     data = {
@@ -40,14 +41,15 @@ def get_data(url, y="domain"):
             item = [code, random.randint(1000000, 9000000)]
             data["data"].append(item)
     elif y == "time":
-        num = 13
-        start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
-        end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
-        increment = int((end_time.timestamp() - start_time.timestamp()) / num)
-        for i in range(1, num):
-            stamp = int(start_time.timestamp()) + i * increment
-            item = [time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp)), random.randint(100000000, 900000000)]
-            data["data"].append(item)
+        if len(start_time) > 0:
+            num = 13
+            start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
+            end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
+            increment = int((end_time.timestamp() - start_time.timestamp()) / num)
+            for i in range(1, num):
+                stamp = int(start_time.timestamp()) + i * increment
+                item = [time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp)), random.randint(100000000, 900000000)]
+                data["data"].append(item)
 
     data = json.dumps(data)
     return data

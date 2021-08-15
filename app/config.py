@@ -38,7 +38,7 @@ class Config(TraceMixinConfig):
     DOMAIN_PROXY = []
 
     # 不缓存的path
-    NO_CACHE_READ_PATH = ["*"]
+    NO_CACHE_READ_PATH = []
 
     # 忽略参数维度的url
     QUERY_PATH = []

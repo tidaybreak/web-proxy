@@ -1,6 +1,22 @@
 export APP_CONFIG=HaoMengAd
 export APP_CONFIG=Hnputihd
 
+
+docker stop web-proxy
+docker rm web-proxy
+docker run --name web-proxy -d \
+--restart=always \
+-e PYTHONUNBUFFERED=1 \
+-e TERM=linux \
+-e C_FORCE_ROOT=true \
+-e APP_CONFIG= \
+--net mynet \
+--ip 172.18.0.135 \
+--mount type=bind,source=/home/data/docker-volume/web-proxy/,target=/data/app \
+centos/python-36-centos7:latest \
+/bin/sh /data/app/run.sh
+
+
 # 关键字替换
 grep "友盟" * -R | awk -F: '{print $1}' | sort | uniq | xargs sed -i 's/友盟/昊盟/g'
 grep "盛赫" * -R | awk -F: '{print $1}' | sort | uniq | xargs sed -i 's/盛赫/昊盟/g'

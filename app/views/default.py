@@ -73,7 +73,7 @@ def catch_all():
     contain_query = True
     if request.path in cfg.QUERY_PATH:
         contain_query = False
-    cache_file, res_status, res_headers, res_cookies, res_data = 'skip ', 502, {}, None, b''
+    cache_file, res_status, res_headers, res_cookies, res_data = 'skip ', 502, {}, None, None
     if get_cache:
         cache_file, res_status, res_headers, res_cookies, res_data = get_cache_file(read_url, post_data_hash,
                                                                         contain_query=contain_query)
