@@ -12,7 +12,7 @@ class TraceMixinConfig:
     """
     用来映射trace流程模板中render详细信息的字典，不在这里配置的字典将会默认映射到common
     """
-    PORT = 5000
+    PORT = 8080
     DOMAIN = 'www.google.com'
     HTTP = "https://"
 
@@ -29,7 +29,7 @@ class TraceMixinConfig:
 
 
 class Config(TraceMixinConfig):
-    PORT = 5000
+    PORT = 8080
     PLUGIN = "cdnplus"
     DOMAIN = 'console.cdnplus.cn'
     HTTP = "https://"
@@ -51,7 +51,7 @@ class Config(TraceMixinConfig):
 
 
 class CdnConfig(TraceMixinConfig):
-    PORT = 5000
+    PORT = 8080
     PLUGIN = "cdnplus"
     DOMAIN = 'console.cdnplus.cn'
     HTTP = "https://"
@@ -73,7 +73,7 @@ class CdnConfig(TraceMixinConfig):
 
 
 class PccwConfig(TraceMixinConfig):
-    PORT = 5000
+    PORT = 8080
     PLUGIN = "pccw"
     DOMAIN = 'app.consoleconnect.com'
     HTTP = "https://"
