@@ -18,5 +18,5 @@ curr_dir=$(pwd)
 export PYTHONPATH=${PYTHONPATH}:${curr_dir}
 #echo "PYTHONPATH=${PYTHONPATH}" >> $file
 
-nohup python manage.py
-#/usr/bin/tail -f $file
+nohup python manage.py &
+/usr/bin/tail -f logging.log
