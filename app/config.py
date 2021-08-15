@@ -50,6 +50,28 @@ class Config(TraceMixinConfig):
     REMOVE_ARGS = []
 
 
+class CdnConfig(TraceMixinConfig):
+    PORT = 5000
+    PLUGIN = "cdnplus"
+    DOMAIN = 'console.cdnplus.cn'
+    HTTP = "https://"
+
+    # 代理域名 https://127.0.0.1/DOMAIN_PROXY/path?
+    DOMAIN_PROXY = []
+
+    # 不缓存的path
+    NO_CACHE_READ_PATH = []
+
+    # 忽略参数维度的url
+    QUERY_PATH = []
+
+    # 缓存指定状态
+    CACHE_CODES = [200]
+
+    # 移除特定参数 一般移除随机数用
+    REMOVE_ARGS = []
+
+
 class PccwConfig(TraceMixinConfig):
     PORT = 5000
     PLUGIN = "pccw"

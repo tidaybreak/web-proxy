@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 
 export C_FORCE_ROOT="true"
-export LOGFILE="/data/logs"
+export PYTHONUNBUFFERED=1
 #file=/data/logs/trading-`date +%Y-%m-%d-%H-%M-%S`
 touch logging.log
 
