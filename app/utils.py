@@ -55,11 +55,11 @@ def get_cache_file(url, post_data_hash, contain_query=True):
 
     # 文件路径，是否包含查询参数规则
     if contain_query:
-        file_path = f"{os.getcwd()}/../cache/{url.hostname}{url.path}/{query}"
+        file_path = f"{os.getcwd()}/{url.hostname}{url.path}/{query}"
         if len(query) == 0:
             file_path = file_path + 'index'
     else:
-        file_path = f"{os.getcwd()}/../cache/{url.hostname}{url.path}"
+        file_path = f"{os.getcwd()}/{url.hostname}{url.path}"
     if len(post_data_hash) > 0:
         file_path += '-' + post_data_hash
 
@@ -105,7 +105,7 @@ def save_cache_file(url, post_data_hash, data, status_code=200, header={}, cooki
     url_path = url.path
     if len(url.path) > 0 and url.path[-1] == '/':
         url_path = url.path[:-1]
-    file_path = f"{os.getcwd()}/../cache/{url.hostname}{url_path}"
+    file_path = f"{os.getcwd()}/{url.hostname}{url_path}"
     ext = os.path.splitext(file_path)[-1][1:]
     if ext in static_res:
         contain_query = False
