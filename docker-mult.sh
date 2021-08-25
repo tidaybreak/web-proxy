@@ -10,8 +10,6 @@ docker run --name web-proxy-$1 -d \
 -e TERM=linux \
 -e APP_CONFIG=$1 \
 --net mynet \
---ip 172.18.0.135 \
--p $2:8080 \
 --mount type=bind,source=/etc/resolv.conf,target=/etc/resolv.conf \
 --mount type=bind,source=$curr_dir,target=/opt/app-root/src \
 centos/python-36-centos7:latest \
