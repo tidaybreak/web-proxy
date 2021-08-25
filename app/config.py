@@ -94,20 +94,6 @@ class PccwConfig(TraceMixinConfig):
     REMOVE_ARGS = []
 
 
-class WaterConfig(TraceMixinConfig):
-    PORT = 5005
-    DOMAIN = 'bs08bw.axshare.com'
-    HTTP = "https://"
-    CACHE_CODES = [200]
-    # 移除特定参数 一般移除随机数用
-    REMOVE_ARGS = []
-    REMOVE_HEADER = []
-    # 请求后端时追加特定头
-    REQ_HEADER = {
-
-    }
-
-
 # http://game.wy2.com/platform/5f6d566180455950e496e0e7/real/overview
 class GameConfig(Config):
     PORT = 5001
@@ -122,9 +108,10 @@ class GameConfig(Config):
     }
 
 
+# http://127.0.0.1/home.html#/home/demolist
 # http://ad.wy2.com/demo.html
 class AdConfig(Config):
-    PORT = 5002
+    PLUGIN = "trackingio"
     DOMAIN = 'www.trackingio.com'
     HTTP = "https://"
     CACHE_CODES = [200]

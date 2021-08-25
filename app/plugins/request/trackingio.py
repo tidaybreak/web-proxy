@@ -15,6 +15,13 @@ from urllib.parse import urlparse
 
 @export("request_full_path")
 def request_full_path(full_path, *args, **kwargs):
+    url_args = args[0]
+    for v in ['r']:
+        val = url_args.get(v)
+        if val:
+            remove_args = v + '=' + val
+            full_path = full_path.replace('&' + remove_args, '')
+            full_path = full_path.replace(remove_args, '')
     return full_path
 
 

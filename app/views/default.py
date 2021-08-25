@@ -24,12 +24,7 @@ def catch_all():
 
     # 处理path 移除一些随机参数
     full_path = request.full_path
-    for args in cfg.REMOVE_ARGS:
-        val = request.args.get(args)
-        if val:
-            remove_args = args + '=' + val
-            full_path = full_path.replace('&' + remove_args, '')
-            full_path = full_path.replace(remove_args, '')
+    full_path = serv.main.hook_full_path(full_path, request.args)
 
     # 获取真实host host可能在path[1]
     real_host = request.values.get('real_host', cfg.DOMAIN)
@@ -44,7 +39,7 @@ def catch_all():
     if 'Origin' in headers:
         headers['Origin'] = cfg.HTTP + real_host
     headers['Referer'] = headers.get("Referer", '').replace(request.host_url, cfg.HTTP + real_host + '/')
-    read_url = cfg.HTTP + real_host + full_path
+    full_url = cfg.HTTP + real_host + full_path
 
     # byte或dict
     req_data = b''
@@ -75,12 +70,12 @@ def catch_all():
         contain_query = False
     cache_file, res_status, res_headers, res_cookies, res_data = 'skip ', 502, {}, None, None
     if get_cache:
-        cache_file, res_status, res_headers, res_cookies, res_data = get_cache_file(read_url, post_data_hash,
+        cache_file, res_status, res_headers, res_cookies, res_data = get_cache_file(full_url, post_data_hash,
                                                                         contain_query=contain_query)
     if res_data is None:
         # 获取数据
         try:
-            result = requests.request(request.method, read_url,
+            result = requests.request(request.method, full_url,
                                       data=req_data,
                                       headers=headers,
                                       allow_redirects=False,
@@ -90,14 +85,14 @@ def catch_all():
             res_headers = {k: result.headers.get(k) for k in result.headers}
             res_data = result.content
             if result.status_code in cfg.CACHE_CODES:
-                save_cache_file(read_url, post_data_hash, result.content,
+                save_cache_file(full_url, post_data_hash, result.content,
                                 status_code=result.status_code,
                                 header=result.headers,
                                 cookies=res_cookies,
                                 contain_query=contain_query)
         except Exception as error:
             res_data = b''
-            logging.error("error:%s  rul:%s" % (str(error), read_url))
+            logging.error("error:%s  rul:%s" % (str(error), full_url))
 
     # 改写数据
     res_headers, res_data = serv.main.hook_response(request.path, full_path, req_data, res_headers, res_data)
@@ -111,7 +106,7 @@ def catch_all():
             response.set_cookie(k, v)
 
     print(f"info:, {res_status}  {cache_file}  {res_cookies}")
-    # print(f"info:, {status_code}  {read_url}  {cookies}")
+    # print(f"info:, {status_code}  {full_url}  {cookies}")
 
     return response, res_status
 

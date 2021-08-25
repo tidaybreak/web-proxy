@@ -17,6 +17,11 @@ class MainService(BaseService):
         self.model = "main"
         super(MainService, self).__init__(app)
 
+    def hook_full_path(self, full_path, request_args):
+        # [表-操作]过滤&加工data
+        full_path = self.plugins['request'].get("request_full_path", lambda x, _: x)(full_path, (request_args))
+        return full_path
+
     def hook_request(self, host, headers, data):
         # 不移除有些会返回403 如：https://wechat.gyfyy.com/gy1yqlc/user/Images/doc/007403.jpg
         headers.pop("If-None-Match", None)
