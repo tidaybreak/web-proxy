@@ -108,7 +108,7 @@ class GameConfig(Config):
     }
 
 
-# http://127.0.0.1/home.html#/home/demolist
+# http://ad.wy2.com/home.html#/home/demolist
 # http://ad.wy2.com/demo.html
 class AdConfig(Config):
     PLUGIN = "trackingio"
