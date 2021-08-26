@@ -47,6 +47,7 @@ class MainService(BaseService):
         for k in remove_list:
             del res_headers[k]
 
+        res_data = self.plugins['response'].get("response_global", lambda x, _: x)(res_data, (full_path, req_data))
         res_data = self.plugins['response'].get(path, lambda x, _: x)(res_data, (full_path, req_data))
         return res_headers, res_data
 
