@@ -36,7 +36,7 @@ def console_out(logFilename):
 
 
 def create_app(conf=None):
-    console_out('logging-' + os.getenv('APP_CONFIG', "") + '.log')
+    console_out('logging-' + os.getenv('APP_CONFIG', "def") + '.log')
 
     app = Flask(__name__)
     app.config['JSON_AS_ASCII'] = False
