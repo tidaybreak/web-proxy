@@ -104,6 +104,15 @@ class AdConfig(Config):
     CACHE_CODES = [200]
 
 
+# 管理后台：http://qj.vlsdk.com/admin
+# 演示账号：xigusdk  密码：houtai723
+class VlsdkConfig(Config):
+    PLUGIN = "vlsdk"
+    DOMAIN = 'qj.vlsdk.com'
+    HTTP = "http://"
+    CACHE_CODES = [200]
+
+
 # http://man.wy2.com/admin/index/index
 class HnputihdConfig(Config):
     DOMAIN = 'kptcenter.hnputihd.com'
