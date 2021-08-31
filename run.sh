@@ -22,4 +22,4 @@ export PYTHONPATH=${PYTHONPATH}:${curr_dir}
 #echo "PYTHONPATH=${PYTHONPATH}" >> $file
 
 nohup python manage.py &
-/usr/bin/tail -f logging.log
+/usr/bin/tail -f logging-${APP_CONFIG}.log
