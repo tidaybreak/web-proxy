@@ -22,4 +22,5 @@ export PYTHONPATH=${PYTHONPATH}:${curr_dir}
 #echo "PYTHONPATH=${PYTHONPATH}" >> $file
 
 nohup python manage.py &
+touch logging-${APP_CONFIG}.log
 /usr/bin/tail -f logging-${APP_CONFIG}.log

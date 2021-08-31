@@ -5,6 +5,7 @@ import sys
 import time
 import logging
 import traceback
+import os
 from flask import Flask
 from app.ext import init_ext
 
@@ -35,7 +36,7 @@ def console_out(logFilename):
 
 
 def create_app(conf=None):
-    console_out('logging.log')
+    console_out('logging-' + os.getenv('APP_CONFIG', "") + '.log')
 
     app = Flask(__name__)
     app.config['JSON_AS_ASCII'] = False
