@@ -103,7 +103,7 @@ def get_cache_file(url, post_data_hash, contain_query=True):
                 except Exception as error:
                     print("error eval:", c, str(error))
             return file_path, h['status_code'], h, c, data[2]
-    return 'no ' + file_path, 404, {}, None, None
+    return 'no err' + file_path, 404, {}, None, None
 
 
 def save_cache_file(url, post_data_hash, data, status_code=200, header={}, cookies={}, contain_query=True):
