@@ -86,23 +86,30 @@ def get_cache_file(url, post_data_hash, contain_query=True):
     if ext in static_res:
         return file_path, 200, static_res[ext], {}, data
     else:
-        data = data.split(b"\r\n\r\n", 2)
-        if len(data) == 3:
-            str_h = str(data[0], encoding='utf-8')
+        sp = "\r\n"
+        new_data = data.split(b"\r\n\r\n", 2)
+        if len(new_data) != 3:
+            sp = "\n"
+            new_data = data.split(b"\n\n", 2)
+        if len(new_data) == 3:
+            str_h = str(new_data[0], encoding='utf-8')
             h = dict()
             if str_h != '':
-                h = '{\'' + str_h.replace("\r\n", "', '").replace(": ", "': '") + '\'}'
-                h = eval(h)
-            str_c = str(data[1], encoding='utf-8')
+                h = '{\'' + str_h.replace(sp, "', '").replace(": ", "': '") + '\'}'
+                try:
+                    h = eval(h)
+                except Exception as error:
+                    print("error eval:", h, str(error))
+            str_c = str(new_data[1], encoding='utf-8')
             c = dict()
             if str_c != '':
-                s = str_c.strip("\r\n").replace("\r\n", "', '").replace(": ", "': '")
+                s = str_c.strip(sp).replace(sp, "', '").replace(": ", "': '")
                 c = '{\'' + s + '\'}'
                 try:
                     c = eval(c)
                 except Exception as error:
                     print("error eval:", c, str(error))
-            return file_path, h['status_code'], h, c, data[2]
+            return file_path, h['status_code'], h, c, new_data[2]
     return 'no err' + file_path, 404, {}, None, None
 
 
