@@ -87,7 +87,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 
 
     
-        <script type="text/javascript">var menus=[
+<script type="text/javascript">var menus=[
 	{
 		"name": "服务器",
 		"icon": "fa fa-server",
@@ -234,7 +234,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 		"codename": "statistic.view_billing",
 		"_weight": 5,
 		"eid": 1016
-	},	
+	},
 	{
 		"name": "套餐管理",
 		"icon": "fa fa-shopping-cart",
@@ -294,7 +294,6 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 		"eid": 1031
 	}
 ]</script>
-
 
 
 
