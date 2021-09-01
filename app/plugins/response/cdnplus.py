@@ -5,12 +5,38 @@ __author__ = 'ti'
 
 import time
 import os
+import copy
 import datetime
 import json
 import random
 import urllib.parse
 from app.utils import export
 from urllib.parse import urlparse
+
+
+@export("/admin/node/nodeinfo/")
+def nodeinfo(data, *args, **kwargs):
+    globals = {
+        'true': True,
+        'false': False
+    }
+    try:
+        data = eval(data, globals)
+    except Exception as error:
+        return data
+
+    data["data"]["rows"][0]["remarks"] = ""
+    node = copy.deepcopy(data["data"]["rows"][0])
+    data["data"]["rows"].append(node)
+    data["data"]["rows"].append(node)
+    data["data"]["rows"].append(node)
+    data["data"]["rows"][0]["stationname"] = "潮汕联通节点1"
+    data["data"]["rows"][1]["stationname"] = "潮汕联通节点2"
+    data["data"]["rows"][2]["stationname"] = "潮汕电信节点1"
+    data["data"]["rows"][3]["stationname"] = "潮汕移动节点1"
+
+    data = json.dumps(data)
+    return bytes(data, encoding='utf-8')
 
 
 def get_data(url, y="domain"):
@@ -149,4 +175,4 @@ def statistic_query_hit(data, *args, **kwargs):
 @export("/statistic/query-ip-ranking/")
 def statistic_query_ip_ranking(data, *args, **kwargs):
     data = get_data(args[0][0], y="domain")
-    return bytes(data, encoding='utf-8')
+    return 
