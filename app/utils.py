@@ -86,6 +86,7 @@ def get_cache_file(url, post_data_hash, contain_query=True):
     if ext in static_res:
         return file_path, 200, static_res[ext], {}, data
     else:
+        # 为了兼容windows
         sp = "\r\n"
         new_data = data.split(b"\r\n\r\n", 2)
         if len(new_data) != 3:
