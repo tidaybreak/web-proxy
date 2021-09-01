@@ -56,12 +56,20 @@ def get_cache_file(url, post_data_hash, contain_query=True):
     # 文件路径，是否包含查询参数规则
     if contain_query:
         file_path = f"{os.getcwd()}/cache/{url.hostname}{url.path}/{query}"
+        modify_file_path = f"{os.getcwd()}/modify/{url.hostname}{url.path}/{query}"
         if len(query) == 0:
             file_path = file_path + 'index'
+            modify_file_path = modify_file_path + 'index'
     else:
         file_path = f"{os.getcwd()}/cache/{url.hostname}{url.path}"
+        modify_file_path = f"{os.getcwd()}/modify/{url.hostname}{url.path}"
+
     if len(post_data_hash) > 0:
         file_path += '-' + post_data_hash
+        modify_file_path += '-' + post_data_hash
+
+    if os.path.isfile(modify_file_path):
+        file_path = modify_file_path
 
     # 如果是目录，要移除，可能和之前生成规则冲突
     if os.path.isdir(file_path):

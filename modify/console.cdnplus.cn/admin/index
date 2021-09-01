@@ -1,0 +1,1479 @@
+status_code: 200
+Server: openresty
+Date: Wed, 01 Sep 2021 13:48:03 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Expires: Wed, 01 Sep 2021 13:48:03 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: csrftoken=KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk; expires=Wed, 31 Aug 2022 13:48:03 GMT; Max-Age=31449600; Path=/; SameSite=Lax, sessionid=r922rl3cgtsm9lahffw4r605xwwv0eia; expires=Wed, 15 Sep 2021 13:48:03 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax
+Content-Encoding: gzip
+
+
+csrftoken: KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk
+sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
+
+<!DOCTYPE html>
+
+
+
+<!--
+   The project use: django-simpleui
+   source code：
+   https://github.com/newpanjing/simpleui
+-->
+<html lang="zh-hans" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    
+        <title>CDNPlus</title>
+    
+
+    
+    
+
+
+    
+    
+    
+        
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/elementui/theme-chalk/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css">
+
+        <link rel="stylesheet" href="/static/admin/simpleui-x/css/index.css?_=3.2">
+        <link rel="stylesheet" href="/static/admin/simpleui-x/waves/waves.min.css?_=2.1">
+    
+    <link rel="stylesheet" href="/static/admin/simplepro/css/index.css?_=2.0">
+    <link rel="stylesheet" href="/static/admin/simplepro/nprogress/nprogress.css">
+
+    <link rel="stylesheet" href="/static/admin/simplepro/css/index.css?_=2.0">
+    <link rel="stylesheet" href="/static/admin/simplepro/nprogress/nprogress.css">
+    <link rel="stylesheet" type="text/css" href='/static/custom/css/font-awesome.min.css'>
+    <style>
+    .logo-wrap img {
+        max-width: 30px;
+        margin-bottom: -7px;
+    }
+    </style>
+
+    
+
+    
+</head>
+<body>
+<style type="text/css">
+    .el-tabs__nav .el-tabs__item:nth-child(1) .el-icon-close {
+        display: none;
+    }
+
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    [v-block] {
+        display: none;
+    }
+</style>
+
+
+
+
+
+
+    
+        <script type="text/javascript">var menus=[
+	{
+		"name": "服务器",
+		"icon": "fa fa-server",
+		"models": [
+			{
+				"name": "节点",
+				"url": "/admin/node/nodeinfo/",
+				"codename": "node.view_nodeinfo",
+				"eid": 1002
+			},
+			{
+				"name": "分组",
+				"url": "/admin/node/nodezone/",
+				"codename": "node.view_nodezone",
+				"eid": 1003
+			}
+		],
+		"_weight": 0,
+		"eid": 1001
+	},
+	{
+		"name": "CDN加速",
+		"icon": "fa fa-globe",
+		"models": [
+			{
+				"name": "域名加速",
+				"url": "/admin/domain/domainsiteinfo/",
+				"icon": "fas fa-globe-americas",
+				"codename": "domain.view_domainsiteinfo",
+				"eid": 1005
+			},
+			{
+				"name": "四层加速",
+				"url": "/admin/domain/proxyinfo/",
+				"icon": "fa fa-paper-plane-o",
+				"codename": "domain.view_proxyinfo",
+				"eid": 1006
+			},
+			{
+				"name": "SSL证书",
+				"url": "/admin/domain/domainssl/",
+				"icon": "fa fa-expeditedssl",
+				"codename": "domain.view_domainssl",
+				"eid": 1007
+			},
+			{
+				"name": "免费证书申请",
+				"url": "/admin/acme/acme/",
+				"codename": "acme.view_acme",
+				"eid": 1008
+			}
+		],
+		"_weight": 1,
+		"eid": 1004
+	},
+	{
+		"name": "缓存配置",
+		"icon": "fa fa-cog",
+		"models": [
+			{
+				"name": "全局配置",
+				"url": "/admin/dsetting/globaloptions/global_setting_page/",
+				"codename": "dsetting.view_globaloptions",
+				"eid": 1010
+			},
+			{
+				"name": "缓存配置",
+				"url": "/admin/dsetting/options/",
+				"addUrl": "/admin/dsetting/options/add/",
+				"codename": "dsetting.view_options",
+				"eid": 1011
+			},
+			{
+				"name": "匹配规则",
+				"url": "/admin/dsetting/locations/",
+				"addUrl": "/admin/dsetting/locations/add/",
+				"codename": "dsetting.view_locations",
+				"eid": 1012
+			}
+		],
+		"_weight": 2,
+		"eid": 1009
+	},
+	{
+		"name": "刷新/预加载",
+		"icon": "fa fa-tasks",
+		"models": [
+			{
+				"name": "刷新任务",
+				"url": "/admin/cache/purgecache/",
+				"addUrl": "/admin/cache/purgecache/add/",
+				"codename": "cache.view_purgecache",
+				"eid": 1014
+			},
+			{
+				"name": "预加载任务",
+				"url": "/admin/cache/eagerloading/",
+				"addUrl": "/admin/cache/eagerloading/add/",
+				"codename": "cache.view_eagerloading",
+				"eid": 1015
+			}
+		],
+		"_weight": 4,
+		"eid": 1013
+	},
+	{
+		"name": "统计分析",
+		"icon": "fa fa-bar-chart",
+		"models": [
+			{
+				"name": "概览",
+				"url": "/statistic/",
+				"eid": 1018
+			},
+			{
+				"name": "地区排行",
+				"url": "/statistic/domain-ranking/",
+				"eid": 1019
+			},
+			{
+				"name": "状态码",
+				"url": "/statistic/domain-status-code/",
+				"eid": 1020
+			},
+			{
+				"name": "命中率",
+				"url": "/statistic/domain-hit/",
+				"eid": 1021
+			},
+			{
+				"name": "运营商",
+				"url": "/statistic/ip-ranking/",
+				"eid": 1022
+			}
+		],
+		"_weight": 6,
+		"eid": 1017
+	},
+	/*
+	{
+		"name": "域名流量",
+		"icon": "fa fa-area-chart",
+		"url": "/admin/statistic/billing/",
+		"codename": "statistic.view_billing",
+		"_weight": 5,
+		"eid": 1016
+	},	
+	{
+		"name": "套餐管理",
+		"icon": "fa fa-shopping-cart",
+		"models": [
+			{
+				"name": "选购套餐",
+				"url": "/admin/sale/service/show_service_view/",
+				"codename": "sale.view_service",
+				"eid": 1024
+			},
+			{
+				"name": "已购套餐",
+				"url": "/admin/sale/servicesale/",
+				"codename": "sale.view_servicesale",
+				"eid": 1025
+			},
+			{
+				"name": "支付订单",
+				"url": "/admin/sale/salestate/",
+				"codename": "sale.view_salestate",
+				"eid": 1026
+			}
+		],
+		"_weight": 7,
+		"eid": 1023
+	},
+	{
+		"name": "授权管理",
+		"icon": "fa fa-diamond",
+		"models": [],
+		"_weight": 8,
+		"eid": 1027
+	},*/
+	{
+		"name": "系统设置",
+		"models": [
+			{
+				"name": "个人信息",
+				"url": "/admin/auth/user/personal_view/",
+				"icon": "fa fa-user",
+				"eid": 1029
+			},
+			{
+				"name": "修改密码",
+				"url": "/admin/password_change/",
+				"eid": 1030
+			}
+		],
+		"_weight": 13,
+		"eid": 1028
+	},
+	{
+		"name": "通知信息",
+		"url": "/admin/notify/message/",
+		"codename": "notify.view_message",
+		"_weight": 14,
+		"eid": 1031
+	}
+]</script>
+
+
+
+
+
+    
+
+<div id="main" @click="mainClick($event)" v-block>
+    
+    
+<link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+
+<link v-else rel="stylesheet" type="text/less" href="/static/admin/simpleui-x/theme/default.less">
+
+
+    <el-drawer
+            class="lite-menus"
+            title="CDNPlus"
+            :visible.sync="drawer"
+            :show-close="false"
+            size="50%"
+            direction="ltr">
+        <el-menu unique-opened="true" :default-active="menuActive">
+            <div v-for="(item,i) in menus" :key="item">
+                <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+                    <i :class="item.icon"></i>
+                    <span slot="title" v-text="item.name"></span>
+                </el-menu-item>
+
+
+                <el-submenu v-else :index="item.eid+''">
+                    <template slot="title">
+                        <i :class="item.icon"></i>
+                        <span slot="title" v-text="item.name"></span>
+                    </template>
+
+                    <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                        <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
+                            <i :class="sub.icon"></i>
+                            <span slot="title" v-text="sub.name"></span>
+                        </el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
+
+            </div>
+        </el-menu>
+    </el-drawer>
+
+    <el-container :style="{height: height+'px'}">
+
+        <el-aside v-if="!mobile" width="auto" class="menu"  :style="!fold?'width: 256px':'auto'" >
+            
+    <div class="logo-wrap" v-if="!fold">
+        <div class="float-wrap">
+            <div class="left">
+                
+                    <img src="/static/custom/img/logo.png">
+                
+            </div>
+            <div class="left">
+                <span>CDNPlus</span>
+            </div>
+        </div>
+    </div>
+
+
+            <el-menu unique-opened="true" :default-active="menuActive" :collapse="fold">
+                <div v-for="(item,i) in menus" :key="item">
+                    <el-menu-item v-if="!item.models" :index="item.eid+''" @click="openTab(item,item.eid)">
+                        <i :class="item.icon"></i>
+                        <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
+                    </el-menu-item>
+
+
+                    <el-submenu v-else :index="item.eid+''">
+                        <template slot="title">
+                            <i :class="item.icon"></i>
+                            <span v-if="menuTextShow" slot="title" v-text="item.name"></span>
+                        </template>
+
+                        <el-menu-item-group v-for="(sub,j) in item.models" :title="sub.name" :key="sub.name">
+                            <el-menu-item :index="sub.eid+''" @click="openTab(sub,item.eid)">
+                                <i :class="sub.icon"></i>
+                                <span slot="title" v-text="sub.name"></span>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+
+                </div>
+            </el-menu>
+
+        </el-aside>
+
+        <el-container>
+            
+    
+<el-header class="navbar" style="font-size: 12px;padding: 10px;height: auto">
+    <div class="float-wrap">
+        <div class="left">
+
+            <el-button v-waves circle style="border: none"
+                       @click="foldClick()">
+                <span style="font-size: 20px" :class="!fold?'el-icon-s-fold':'el-icon-s-unfold'"></span>
+            </el-button>
+
+            <el-breadcrumb v-if="!mobile" style="display: inline-block;" separator="/">
+                
+                    <el-breadcrumb-item><i :class="menus[0].icon"
+                                           :key="menus[0].name"></i>{{ menus[0].name }}
+                    </el-breadcrumb-item>
+                    <el-breadcrumb-item v-for="item in breadcrumbs"
+                                        :key="item">
+                        <span :class="getIcon(item.name,item.icon)"></span>
+                        <span v-text="item.name"></span>
+                    </el-breadcrumb-item>
+                
+            </el-breadcrumb>
+        </div>
+
+        <div class="right">
+            <search :data="menus"></search>
+
+
+           <el-button
+                       @click="goZoom()" circle>
+
+               <svg v-if="!this.zoom" t="1597832501585" class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2099" data-spm-anchor-id="a313x.7781069.0.i0"><path d="M605.555 383.998l233.656-233.656 33.942 33.941L639.496 417.94z" p-id="2100"></path><path d="M650.68 120.68h252.05v48H650.68z" p-id="2101"></path><path d="M854.82 120.77h48v252.05h-48zM150.34 184.786l33.94-33.941L417.938 384.5l-33.941 33.941z" p-id="2102"></path><path d="M120.68 121.27h48v252.05h-48z" p-id="2103"></path><path d="M120.77 121.18h252.05v48H120.77zM150.847 839.716L384 606.56l33.941 33.942-233.154 233.154z" p-id="2104"></path><path d="M121.27 855.32h252.05v48H121.27z" p-id="2105"></path><path d="M121.18 651.18h48v252.05h-48zM605.378 638.82l33.94-33.942 234.336 234.335-33.941 33.942z" p-id="2106"></path><path d="M855.32 650.68h48v252.05h-48z" p-id="2107"></path><path d="M651.18 854.82h252.05v48H651.18z" p-id="2108"></path></svg>
+               <svg v-else t="1597832737843" class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2358" data-spm-anchor-id="a313x.7781069.0.i2"><path d="M588.402 393.102l281.6-281.6 40.22 40.22-281.6 281.6z m281.6 514.845l-281.6-281.6 40.22-40.22 281.6 281.6z m-713.728 2.275l-40.22-40.22 281.6-281.6 40.163 40.22z" fill="#73777A" p-id="2359"></path><path d="M568.889 426.667v28.444h284.444v-56.889H625.778V170.667h-56.89z m0 170.666V568.89h284.444v56.889H625.778v227.555h-56.89zM111.502 153.998l40.22-40.22 281.6 281.6-40.277 40.22z" fill="#73777A" p-id="2360"></path><path d="M455.111 426.667v28.444H170.667v-56.889h227.555V170.667h56.89z m0 170.666V568.89H170.667v56.889h227.555v227.555h56.89z" fill="#73777A" p-id="2361"></path></svg>
+           </el-button>
+
+            <el-dropdown>
+                <el-button v-waves>
+                    <i class="el-icon-user"></i>
+                    demo
+                    <i class="el-icon-arrow-down el-icon--right"></i>
+                </el-button>
+
+                    <el-dropdown-menu slot="dropdown">
+
+                        <el-dropdown-item icon="el-icon-house" @click.native="goIndex('https://console.cdnplus.cn')">查看主页</el-dropdown-item>
+                        
+                        <el-dropdown-item icon="el-icon-setting" @click.native="themeDialogVisible=true">界面设置</el-dropdown-item>
+
+                        
+                        <el-popover
+                            placement="left-start"
+                            content="页面显示错乱的时候可以选择重置页面缓存数据。"
+                            width="50"
+                            trigger="hover">
+                                    <el-dropdown-item slot="reference" icon="el-icon-delete" @click.native="clearCache()">重置页面</el-dropdown-item>
+                          </el-popover>
+
+                        <el-dropdown-item icon="el-icon-tickets">
+                            <timeline-btn>最近动作</timeline-btn>
+                        </el-dropdown-item>
+                        
+                            <el-dropdown-item v-waves icon="far fa-edit" @click.native="changePassword()" divided>{{ language.change_password }}</el-dropdown-item>
+                            <el-dropdown-item icon="el-icon-close" @click.native="logout()" divided>{{ language.logout }}</el-dropdown-item>
+                        
+                    </el-dropdown-menu>
+            </el-dropdown>
+        </div>
+    </div>
+</el-header>
+
+
+            <el-main>
+                <el-tabs v-model="tabModel" type="border-card"  editable
+                         :style="isResize?'height:100%':'height: calc(100% - 97px)'" @edit="handleTabsEdit"
+                         @tab-click="tabClick">
+
+                    <el-tab-pane v-for="(item,index) in tabs" :closable="index!=0" :label="item.name" :name="item.id"
+                                 :key="item.id" lazy="true">
+
+                        
+                        
+                            <span slot="label" @contextmenu.prevent="contextmenu(item,$event)">
+                        
+
+                        
+    <span v-refresh="item">
+         <a v-if="item.hover" href="javascript:;" class="tab-refresh">
+            <i class="el-icon-refresh"></i>
+         </a>
+         <i v-else :class="item.loading?'el-icon-loading':item.icon"></i>
+        <span v-text="item.name"></span>
+    </span>
+
+                        </span>
+
+                        <div v-if="index==0" style="height:100%">
+                            
+    <!-- 判断 -->
+    
+    
+        
+    <!-- 判断 -->
+    
+    
+        
+                                
+                                    
+<link rel="stylesheet" href="/static/admin/simplepro/css/home.css">
+<script type="text/javascript" src="/static/admin/simplepro/echarts/echarts.min.js"></script>
+<div class="home-body">
+    
+        <el-alert title="通知：个人版套餐将暂停出售，需要续费的用户请联系管理员，无违规内容的站点才会被允许通过。此举措延续无限期！！！" type="error" style="margin-bottom:10px;"></el-alert>
+    
+        <el-alert title="通知：官网后台添加的域名，会定期地检查审核站点内容，请不要放不合规的内容。" type="warning" style="margin-bottom:10px;"></el-alert>
+    
+    
+        
+
+
+
+<script type="text/javascript">
+    var quick_colors = ['rgb(105, 192, 255)', 'rgb(149, 222, 100)', 'rgb(255, 156, 110)', 'rgb(179, 127, 235)', 'rgb(255, 214, 102)', 'rgb(92, 219, 211)', 'rgb(255, 133, 192)', 'rgb(255, 192, 105)'];
+    window.color_mappers = window.color_mappers || {};
+    function getColor(id) {
+        var val = color_mappers[id];
+        if(val){
+            return val;
+        }
+        var color ='color: '+ quick_colors[Math.floor(Math.random() * quick_colors.length)];
+        color_mappers[id] = color;
+        return color;
+    }
+    
+        var showMenu = ['节点', '域名加速', '四层加速', 'SSL证书', '缓存配置', '已购套餐', '选购套餐', '授权节点', '通知信息', '修改密码', '常见问题'];
+    
+</script>
+<div class="clearfix">
+    <div v-for="(c,j) in models" :key="c.name" class="quick-wrap" v-if="showMenu.indexOf(c.name)!=-1">
+        <a href="javascript:;" @click="openTab(c,(j+1)+'')">
+            <span class="icon" :class="c.icon" :style="getColor(c.eid)"></span>
+            <span class="card-name" v-text="c.name"></span>
+        </a>
+    </div>
+</div>
+
+
+    
+
+    
+    
+        
+            
+                
+<div class="charts">
+    <div class="col">
+        <div class="wrap">
+            <div class="title">
+                访问次数
+                <span class="date"
+                      style="background: rgb(246, 255, 237);border-color: rgb(183, 235, 143);color:rgb(82, 196, 26);">小时</span>
+            </div>
+            <div class="body">
+                <div class="data" id="count">0</div>
+            </div>
+            <div class="bottom">24小时总访问<span id="day_count" class="date"
+                      style="background: rgb(246, 255, 237);border-color: rgb(183, 235, 143);color:rgb(82, 196, 26);">0</span>次</div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="wrap">
+            <div class="title">
+                平均命中率
+                <span class="date"
+                      style="background: rgb(230, 247, 255);border-color: rgb(145, 213, 255);color: rgb(24, 144, 255)">小时</span>
+            </div>
+            <div class="body">
+                <div class="data" id="hit_rate">100%</div>
+                <div>
+                    <el-progress :text-inside="true" :stroke-width="26" :percentage="70"></el-progress>
+                </div>
+            </div>
+            <div class="bottom">24小时平均命中率<span id="day_hit_rate" class="date"
+                      style="background: rgb(230, 247, 255);border-color: rgb(145, 213, 255);color: rgb(24, 144, 255)">0</span></div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="wrap">
+            <div class="title">
+                流量
+                <span class="date"
+                      style="background: #fff8ef;border-color: #f3debe;color: #e6a23c;">小时</span>
+            </div>
+            <div class="body">
+                <div class="data" id="flow">0 MB</div>
+
+            </div>
+            <div class="bottom">24小时总流量<span id="day_flow" class="date"
+                      style="background: #fff8ef;border-color: #f3debe;color: #e6a23c;">0</span></div>
+        </div>
+    </div>
+        <div class="col">
+        <div class="wrap">
+            <div class="title">
+                最大带宽
+                <span class="date"
+                      style="background: rgb(255, 241, 240);border-color: rgb(255, 163, 158);color: rgb(245, 34, 45);">小时</span>
+            </div>
+            <div class="body">
+                <div class="data" id="max_bandwidth">0 Mbps</div>
+            </div>
+            <div class="bottom">24小时最大带宽<span id="day_max_bandwidth" class="date"
+                      style="background: rgb(230, 247, 255);border-color: rgb(145, 213, 255);color: rgb(24, 144, 255)">0</span></div>
+        </div>
+    </div>
+</div>
+<script src="/static/user/js/jquery.min.js"></script>
+<script type="text/javascript">
+    function dateFormat(fmt, date) {
+    let ret;
+    const opt = {
+        "Y+": date.getFullYear().toString(),        // 年
+        "m+": (date.getMonth() + 1).toString(),     // 月
+        "d+": date.getDate().toString(),            // 日
+        "H+": date.getHours().toString(),           // 时
+        "M+": date.getMinutes().toString(),         // 分
+        "S+": date.getSeconds().toString()          // 秒
+        // 有其他格式化字符需求可以继续添加，必须转化成字符串
+    };
+    for (let k in opt) {
+        ret = new RegExp("(" + k + ")").exec(fmt);
+        if (ret) {
+            fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+        };
+    };
+    return fmt;
+    }
+
+    var summary = function(_params, func){
+          $.getJSON('/statistic/summary/', _params).done(func)
+        }
+    summary({}, function(res){
+            var data = res.data;
+            $('#count').text(data.count);
+            $('#hit_rate').text(data.hit_rate);
+            $('#max_bandwidth').text(data.max_bindwidth);
+            $('#flow').text(data.flow);
+            var num = data.hit_rate.replace(' ', '')
+            $('.el-progress-bar__inner').css('width', num)
+            $('.el-progress-bar__innerText').text(data.hit_rate)
+          });
+    var today = new Date();
+    var yestoday = new Date(today.getTime()-24*60*60*1000);
+    var start_time = dateFormat("YYYYmmddHHMM", yestoday);
+    var end_time = dateFormat("YYYYmmddHHMM", today);
+    var params = {'start_time': start_time, 'end_time': end_time};
+    summary(params, function(res){
+            var data = res.data;
+            $('#day_count').text(data.count);
+            $('#day_hit_rate').text(data.hit_rate);
+            $('#day_max_bandwidth').text(data.max_bindwidth);
+            $('#day_flow').text(data.flow);
+          });
+</script>
+            
+        
+    
+
+    
+        
+            
+<div class="card">
+    <div class="title">访问统计图</div>
+    <div class="body">
+        <el-row>
+        <el-col :md="24" :lg="18" :xl="18">
+        <div class="grid-content bg-purple-light"><div id="flot_overview" class="chart_b" style="height: 550px;"></div></div>
+        </el-col>
+        <el-col :md="24" :lg="6" :xl="6">
+        <div class="grid-content bg-purple">
+            <el-row>
+            <el-col :span="24">
+            <div class="grid-content bg-purple-light"><div id="chart_pie" class="chart_a" style="height: 250px;"></div></div>
+            </el-col>
+            <el-col :span="24">
+            <div class="grid-content bg-purple-light"><div id="chart_ranking" class="chart_a" style="height: 300px;"></div></div>
+            </el-col>
+        </el-row>
+        </div>
+        </el-col>
+        </el-row>
+    </div>
+</div>
+    <script src="/static/user/js/lib/echarts/echarts.min.js"></script>
+    <script src="/static/user/js/lib/echarts/shine.js"></script>
+    <script src="/static/user/js/lib/echarts/macarons.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var timeText = '1小时';
+        var line_option = {
+                      title : [
+                          {
+                            text: '带宽图',
+                            subtext: '近 '+timeText,
+                            left: '90%',
+                            top: '1%'
+                          },
+                        {
+                          text: '单位：Mbps',
+                          borderColor: '#999',
+                          borderWidth: 1,
+                          textStyle: {
+                            fontSize: 12
+                          },
+                          left: '2%',
+                          top: '3%'
+                        }],
+                      tooltip : {
+                        trigger: 'axis',
+                        axisPointer: {
+                          type: 'cross',
+                          animation: false,
+                          label: {
+                            backgroundColor: '#505765'
+                          }
+                        }
+                      },
+                      legend: {
+                        data:['带宽'],
+                        x: 'left'
+                      },
+                      dataZoom: [
+                        {
+                          show: true,
+                          realtime: true,
+                          start: 0,
+                          end: 1000
+                        },
+                        {
+                          type: 'inside',
+                          realtime: true,
+                          start: 0,
+                          end: 1000
+                        }
+                      ],
+                      xAxis : {
+                          type : 'category',
+                          boundaryGap : true,
+                          axisLine: {onZero: false},
+                        },
+                      yAxis: [
+                        {
+                          splitNumber: 7,
+                          type: 'value'
+                        }
+                      ],
+                      series:
+                        {
+                          name:'带宽(Mbps)',
+                          type:'line',
+                          animation: false,
+                          smooth:true,
+                          areaStyle: {
+                            normal: {},
+                            color:'rgba(0,190,0,0.7)'
+                          },
+                          itemStyle : {
+                            normal : {
+                              type: 'default',
+                              areaStyle:{
+                                color:'rgb(0, 94, 170)'
+                              },
+                              lineStyle: {
+                                color: 'blue',
+                                width: 2,
+                                shadowColor : 'rgba(0, 94, 170, 0.3)',
+                                shadowBlur: 10,
+                                shadowOffsetX: 8,
+                                shadowOffsetY: 8
+                              }
+                            }
+                          },
+                          lineStyle: {
+                            normal: {
+                              width: 1,
+                              color: 'rgba(0, 94, 170, 0.9)',
+                              shadowColor : 'rgba(0,0,0,0.6)',
+                            },
+                          },
+                          markArea: {
+                            silent: true,
+                            data: [[{
+                              xAxis: '2009/9/12\n7:00'
+                            }, {
+                              xAxis: '2009/9/22\n7:00'
+                            }]]
+                          },
+                        },
+                    };
+        var params = {};
+        if(document.getElementById('flot_overview')){
+            var chart = echarts.init(document.getElementById('flot_overview'), 'shine')
+            chart.showLoading({'effect': 'bubble'});
+            $.getJSON('/statistic/node-flow/', params).done(function(res){
+                chart.hideLoading();
+                var times = [];
+                var values = [];
+                res.data.map(function(value, index){
+                    times.push(value[0]);
+                    values.push(value[1]);
+                })
+
+                //判别单位
+                var max_value = Math.max.apply(null, values);
+                if(max_value < 1024){
+                    var uint = '字节';
+                    var uint_num = 1;
+                }else if( 1024 <= max_value && max_value <= 1024*1024 ){
+                    var uint = 'KB';
+                    var uint_num = 1024;
+                }else{
+                    var uint = 'MB';
+                    var uint_num = 1024 * 1024;
+                }
+                line_option.xAxis.data = times;
+                line_option.title = [
+                    {
+                        text: '流量图',
+                        subtext: '近'+timeText,
+                        left: '90%',
+                        top: '1%'
+                    },
+                    {
+                        text: '单位：' + uint,
+                        borderColor: '#999',
+                        borderWidth: 1,
+                        textStyle: {
+                            fontSize: 12
+                        },
+                        left: '2%',
+                        top: '3%'
+                    }];
+                line_option.series.name = '流量(' + uint + ')'
+
+                var data = [];
+                for(var index in values){
+                    data.push((values[index]/uint_num).toFixed(1))
+                }
+                line_option.series.data = data;
+                chart.setOption(line_option)
+            })
+        }
+
+
+        var bar_option = {
+                      title: [{
+                        text: '节点排行',
+                        subtext: '近'+timeText,
+                        left: '80%',
+                        top: '1%'
+                      },
+                        {
+                          text: '节点(个)',
+                          borderColor: '#999',
+                          borderWidth: 1,
+                          textStyle: {
+                            fontSize: 12
+                          },
+                          left: '2%',
+                          top: '3%'
+                        }],
+                      tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                          type: 'shadow'
+                        }
+                      },
+                      legend: {
+                        data: ['200', '206', '301', '302', '304', '305', '400', '403',
+                          '404', '416', '499', '500', '502', '503', '504'],
+                      },
+                      grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                      },
+                      xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.1]
+                      },
+                      yAxis: {
+                        type: 'category',
+                        data: []
+                      },
+                      series:
+                        {
+                          name: '节点',
+                          type: 'bar',
+                          itemStyle : {
+                            normal : {
+                              type: 'default',
+                            }
+                          },
+                          data: []
+                        }
+                    };
+        var pie_option = {
+                      title: [{
+                        text: '状态码',
+                        subtext: '近'+timeText,
+                        left: '80%',
+                        top: '1%'
+                      }],
+                    tooltip : {
+                      trigger: 'item',
+                      formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    series:{
+                      name: '状态码统计',
+                      type: 'pie',
+                      radius : '55%',
+                      center:['50%','66%'],
+                      data: [{name: 200, value: 1000}, {name: 404, value: 200}],
+                    minAngle: 3,
+                    avoidLabelOverlap: true,
+                    label: {
+                        normal: {
+                            textStyle: {
+                                fontSize: 14,
+                                color: '#333'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: '#235894'
+                            }
+                        }
+                    },
+                    }};
+
+        if(document.getElementById('chart_ranking')){
+        var bar = echarts.init(document.getElementById('chart_ranking'), 'shine');
+        $.getJSON('/statistic/query-domain-ranking/', params).done(function(res) {
+            bar.hideLoading();
+            var x_values = [];
+            var y_values = [];
+            res.data.map(function (value, index) {
+                x_values.push(value[1]);
+                y_values.push(value[0])
+            })
+            var max_value = Math.max.apply(null, x_values);
+            if (max_value < 1024) {
+                var uint = 'B';
+                var uint_num = 1;
+            } else if (1024 <= max_value && max_value <= 1024 * 1024) {
+                var uint = 'KB';
+                var uint_num = 1024;
+            } else {
+                var uint = 'MB';
+                var uint_num = 1024 * 1024;
+            }
+            var data = [];
+            for (var index in x_values) {
+                data.push(parseInt(x_values[index] / uint_num))
+            }
+            bar_option.title = [
+                {
+                    text: '域名流量排名',
+                    subtext: '近' + timeText,
+                    left: '90%',
+                    top: '1%'
+                },
+                {
+                    text: '单位：' + uint,
+                    borderColor: '',
+                    borderWidth: 1,
+                    textStyle: {
+                        fontSize: 12
+                    },
+                    left: '2%',
+                    top: '3%'
+                }];
+            bar_option.yAxis.data = y_values;
+            bar_option.series.data = data;
+            bar_option.series.name = '流量(' + uint + ')';
+            bar_option.series.color = 'rgb(124,202,98)';
+            bar.setOption(bar_option);
+        })
+        }
+
+        var codeColor = {
+                '200': 'rgba(212,94,237,0.6)',
+                '206': 'rgba(241,84,51,0.6)',
+                '301': 'rgba(243,198,159,0.6)',
+                '302': 'rgba(2,190,199,0.6)',
+                '304': 'rgba(255,149,128,0.6)',
+                '305': 'rgba(149,116,203,0.6)',
+                '400': 'rgba(129,224,220,0.6)',
+                '403': 'rgba(252,115,185,0.6)',
+                '404': 'rgba(255,186,36,0.6)',
+                '416': 'rgba(240,144,143,0.6)',
+                '499': 'rgba(189,213,151,0.6)',
+                '500': 'rgba(87,108,241,0.6)',
+                '502': 'rgba(133,147,253,0.6)',
+                '503': 'rgba(85,172,238,0.6)',
+                '504': 'rgba(130,195,69,0.6)',
+                '其他':'rgba(98,188,160,0.6)'
+            };
+        if(document.getElementById('chart_pie')){
+        var bar_pie = echarts.init(document.getElementById('chart_pie'), 'shine');
+        $.getJSON('/statistic/query-code-ranking/', params).done(function(res){
+                bar.hideLoading();
+                var color_values = [];
+                var pie_data = [];
+                res.data.map(function(value, index){
+
+                  var color = codeColor[value[0]];
+                  if(color){
+                    color_values.push(codeColor[value[0]]);
+                  }else{
+                    color_values.push(codeColor['其它']);
+                  }
+                  pie_data.push({name: value[0], value: value[1]})
+                })
+
+                pie_option.title[0].subtext = '近'+timeText;
+                pie_option.series.data = pie_data;
+                pie_option.color = color_values;
+                bar_pie.setOption(pie_option);
+              })
+        }
+
+    })
+
+    </script>
+        
+    
+
+    <div style="height: 80px"></div>
+</div>
+<el-backtop target=".home-body"></el-backtop>
+
+                                
+                            
+    
+
+    
+
+                        </div>
+                        <div v-else class="iframe-wrap">
+                            <iframe :src="item.url" :id="item.id" @load="iframeLoad(item,$event)"></iframe>
+                            
+                                <div v-if="loading" class="loading" @dblclick="loading=false">
+                                    <div class="center">
+                                        <span class="el-icon-loading"></span>
+                                        <span>loading...</span>
+                                    </div>
+                                </div>
+                            
+
+                        </div>
+                    </el-tab-pane>
+
+
+                </el-tabs>
+            </el-main>
+        </el-container>
+    </el-container>
+
+    <ul v-if="popup.show" class="el-dropdown-menu el-popper" ref="popupmenu"
+        :style="{position: 'absolute',top: popup.top+'px',left: popup.left+'px'}" x-placement="top-end">
+        <li v-for="(item,index) in popup.menus" tabindex="-1" class="el-dropdown-menu__item"
+            @click="item.handler(popup.tab,item)"><i :class="item.icon"></i><span
+                v-text="item.text"></span>
+        </li>
+    </ul>
+    <el-dialog title="修改密码" :visible.sync="pwdDialog.show">
+        <iframe frameborder="0" :src="pwdDialog.url" width="100%" height="500"></iframe>
+    </el-dialog>
+
+    
+    
+    <el-drawer
+            title="设置"
+            :visible.sync="themeDialogVisible"
+            direction="rtl"
+            :size="fold?'50%':'25%'">
+        <div class="drawer-body">
+            <el-card shadow="hover"  class="setting-card">
+                <div slot="header" class="clearfix">
+                    <span v-text="getLanuage('Change theme')"></span>
+                    <el-button style="float: right; padding: 3px 0" type="text" @click="showCustomTheme()">自定义主题</el-button>
+                </div>
+                <div class="change-theme clearfix">
+                    <div v-waves :class="{'theme-item':true,active:themeName==item.text}" v-for="(item,i) in themes"
+                         :style="{backgroundColor:item.main}"
+                         :key="item.text"
+                         :title="getLanuage(item.text)" @click="setTheme(item)">
+                        <div class="theme-menu" :style="{background:item.menu}">
+                            <div class="theme-logo" :style="{background: item.logo}"></div>
+                        </div>
+                        <div class="theme-top" :style="{background: item.top}"></div>
+                    </div>
+                </div>
+            </el-card>
+
+            <el-card shadow="hover" class="setting-card">
+                <div slot="header" class="clearfix">
+                    <div v-text="getLanuage('Set the font')"></div>
+                </div>
+                <el-slider v-model="fontSlider" :min="12" :max="30" input-size="mini" show-input
+                           @change="fontSlideChange"></el-slider>
+                <div style="text-align: right;padding-top: 20px">
+                    <el-button type="primary" @click="reset()" v-text="getLanuage('Reset')"></el-button>
+                </div>
+            </el-card>
+
+            
+            
+            
+
+
+        </div>
+    </el-drawer>
+
+
+
+    
+</div>
+
+    <script type="text/javascript">
+        
+            var home = {
+                id: '0',
+                index: '1',
+                eid: '1',
+                name: "首页",
+                icon: 'fas fa-home'
+            };
+        
+        menus.unshift(home);
+        window.language = {
+            change_password: '修改密码',
+            logout: '注销',
+            yes: '是',
+            no: '否',
+            confirm: '你确定吗？'
+        }
+        window.themeUrl = '/static/admin/simpleui-x/theme/';
+        window.urls = {
+            changePassword: "/admin/password_change/",
+            logout: "/admin/logout/"
+        }
+        var lanuageCode = 'zh-hans';
+
+        function localeError(e) {
+            console.warn("Please add the zh-hans.js language file to the '/simpleui-x/theme' directory.")
+            console.log("See simpleui i18n:https://github.com/newpanjing/simpleui/blob/master/i18n.md")
+            console.log("或者加入QQ群:786576510 (Join QQ Group.)")
+
+        }
+    </script>
+
+    
+
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/vue.min.js?_=2020.9.26"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/elementui/index.js?_=2020.9.26"></script>
+
+
+    <script type="text/javascript">
+        __simpleui_version = '2020.9.26';
+    </script>
+    <script type="text/javascript"
+            src="/static/admin/simpleui-x/automatic/dicts.js?_=2020.9.26"></script>
+    <script type="text/javascript"
+            src="/static/admin/simpleui-x/automatic/segment.js?_=2020.9.26"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/locale/en-us.js?_=2020.9.26"></script>
+    <script type="text/javascript"
+            src="/static/admin/simpleui-x/locale/zh-hans.js?_=2020.9.26"
+            onerror="localeError()"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/cookie.js?_=2020.9.26"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/theme/theme.js?_=2020.9.26"></script>
+    <script type="text/javascript"
+            src="/static/admin/simpleui-x/waves/waves.min.js?_=2020.9.26"></script>
+    
+    
+         
+
+ <script type="text/html" id="timeline">
+     <el-drawer
+                title="最近动作"
+                :visible.sync="show"
+                direction="rtl"
+                size="30%">
+
+            
+            
+            
+                <div class="block" v-if="timeline">
+                    <el-timeline>
+                        
+                        <el-timeline-item timestamp="2021年8月11日 15:57" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月11日 15:57</p>
+                                <h4>缓存配置: 已经添加了 &quot;www.aaa.com&quot;.</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月5日 14:47" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月5日 14:47</p>
+                                <h4>全局配置: 修改了 &quot;全局配置&quot; - 已修改error_page_list。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 16:21" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 16:21</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的need_sync。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 16:20" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 16:20</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的global_ip。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 15:56</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;91.193.100.243&quot;的global_ip。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 15:56</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 15:55" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 15:55</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 14:33" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 14:33</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 14:27</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 14:27</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;192.168.40.147&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                    </el-timeline>
+                </div>
+            
+</script>
+    
+
+    
+        <template id="custom_theme">
+    <el-dialog title="自定义主题" :visible.sync="visible">
+        <el-form size="small" ref="form" :model="form" label-width="180px">
+            <el-form-item v-for="(item,key) in props" :label="item.text" :key="key">
+                <el-input style="width: 100px" v-model="item.value" type="color"></el-input>
+              </el-form-item>
+        </el-form>
+         <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="apply()">应用</el-button>
+        </div>
+    </el-dialog>
+</template>
+    
+
+    <script type="text/javascript" src="/static/admin/simplepro/js/chart.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/timeline.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/search.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/index.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/axios.min.js"></script>
+    <input type="hidden" name="csrfmiddlewaretoken" value="w7C5graCVhDSBKUdLS8eDWZdVOYPAQrtnTSGYOOa7We4ZQfrOFnGdUSjsg9619CQ">
+    <script type="text/javascript">
+        var less_url = '';
+        
+            less_url = "/static/admin/simplepro/js/less.min.js";
+        
+        var js_callback_url = '/static/admin/simplepro/js/callback.js?_=2.0';
+
+        window.addEventListener('message', function (event) {
+            if (event.data.type !== 'saveData') {
+                return;
+            }
+            //用ajax 存起来
+            let formData = new FormData();
+            formData.append('data', event.data.data);
+            formData.append('csrfmiddlewaretoken', document.querySelector('[name="csrfmiddlewaretoken"]').value);
+            axios.post('/sp/bawa/save', formData).then(res => {
+
+                if (res.data.success) {
+                    app.$message.success(res.data.msg);
+                } else {
+                    app.$message.error(res.data.msg);
+                }
+
+            }).catch(err => console.error(err));
+        });
+
+    </script>
+    
+    
+         
+
+ <script type="text/html" id="timeline">
+     <el-drawer
+                title="最近动作"
+                :visible.sync="show"
+                direction="rtl"
+                size="30%">
+
+            
+            
+            
+                <div class="block" v-if="timeline">
+                    <el-timeline>
+                        
+                        <el-timeline-item timestamp="2021年8月11日 15:57" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月11日 15:57</p>
+                                <h4>缓存配置: 已经添加了 &quot;www.aaa.com&quot;.</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月5日 14:47" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月5日 14:47</p>
+                                <h4>全局配置: 修改了 &quot;全局配置&quot; - 已修改error_page_list。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 16:21" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 16:21</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的need_sync。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 16:20" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 16:20</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的global_ip。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 15:56</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;91.193.100.243&quot;的global_ip。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 15:56</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 15:55" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 15:55</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 14:33" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 14:33</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 14:27</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                        <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
+                            <el-card>
+                                <p>demo 2021年8月3日 14:27</p>
+                                <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;192.168.40.147&quot;。</h4>
+                            </el-card>
+                        </el-timeline-item>
+                        
+                    </el-timeline>
+                </div>
+            
+</script>
+    
+
+    
+        <template id="custom_theme">
+    <el-dialog title="自定义主题" :visible.sync="visible">
+        <el-form size="small" ref="form" :model="form" label-width="180px">
+            <el-form-item v-for="(item,key) in props" :label="item.text" :key="key">
+                <el-input style="width: 100px" v-model="item.value" type="color"></el-input>
+              </el-form-item>
+        </el-form>
+         <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="apply()">应用</el-button>
+        </div>
+    </el-dialog>
+</template>
+    
+
+    <script type="text/javascript" src="/static/admin/simplepro/js/chart.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/timeline.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/search.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/index.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/axios.min.js"></script>
+    <input type="hidden" name="csrfmiddlewaretoken" value="w7C5graCVhDSBKUdLS8eDWZdVOYPAQrtnTSGYOOa7We4ZQfrOFnGdUSjsg9619CQ">
+    <script type="text/javascript">
+        var less_url = '';
+        
+            less_url = "/static/admin/simplepro/js/less.min.js";
+        
+        var js_callback_url = '/static/admin/simplepro/js/callback.js?_=2.0';
+
+        window.addEventListener('message', function (event) {
+            if (event.data.type !== 'saveData') {
+                return;
+            }
+            //用ajax 存起来
+            let formData = new FormData();
+            formData.append('data', event.data.data);
+            formData.append('csrfmiddlewaretoken', document.querySelector('[name="csrfmiddlewaretoken"]').value);
+            axios.post('/sp/bawa/save', formData).then(res => {
+
+                if (res.data.success) {
+                    app.$message.success(res.data.msg);
+                } else {
+                    app.$message.error(res.data.msg);
+                }
+
+            }).catch(err => console.error(err));
+        });
+
+    </script>
+    
+        <script type="text/javascript" src="/static/admin/simpleui-x/js/index.js?_=2020.9.26"></script>
+    
+
+
+    
+
+    
+
+
+
+    <script type="text/javascript" src="/static/admin/simplepro/nprogress/nprogress.js"></script>
+    <script type="text/javascript">
+        NProgress.start();
+    </script>
+
+</body>
+</html>

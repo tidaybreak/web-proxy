@@ -58,14 +58,29 @@ def get_data(url, y="domain"):
         ]
     }
 
+    def takeSecond(elem):
+        return elem[1]
+
     if y == "domain":
         for domain in domains:
             item = [domain, random.randint(100000000, 900000000)]
             data["data"].append(item)
+        data["data"].sort(key=takeSecond)
     elif y == "code":
         for code in [200, 301, 404, 500]:
             item = [code, random.randint(1000000, 9000000)]
             data["data"].append(item)
+        data["data"].sort(key=takeSecond)
+    elif y == "idc":
+        for idc in ['中国电信', '中国移动', '中国联通', '中国广电', '中信网络', '教育网', '其他']:
+            item = [idc, random.randint(100000000, 900000000)]
+            data["data"].append(item)
+        data["data"].sort(key=takeSecond)
+    elif y == "area":
+        for idc in ['河北省', '山西省', '辽宁省', '吉林省', '黑龙江省', '江苏省', '浙江省', '安徽省', '福建省', '江西省', '山东省', '河南省', '湖北省', '湖南省', '广东省', '海南省', '四川省', '贵州省', '云南省', '陕西省', '甘肃省', '青海省', '台湾省']:
+            item = [idc, random.randint(100000000, 900000000)]
+            data["data"].append(item)
+        data["data"].sort(key=takeSecond)
     elif y == "time":
         if len(start_time) > 0:
             num = 13
@@ -149,7 +164,7 @@ def statistic_query_domain_ranking(data, *args, **kwargs):
 
 @export("/statistic/query-domain-url-ranking/")
 def statistic_query_domain_url_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0])
+    data = get_data(args[0][0], y="area")
     return bytes(data, encoding='utf-8')
 
 
@@ -174,5 +189,5 @@ def statistic_query_hit(data, *args, **kwargs):
 
 @export("/statistic/query-ip-ranking/")
 def statistic_query_ip_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0], y="domain")
-    return 
+    data = get_data(args[0][0], y="idc")
+    return bytes(data, encoding='utf-8')
