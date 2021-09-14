@@ -1,0 +1,321 @@
+status_code: 200
+Server: openresty
+Date: Wed, 01 Sep 2021 01:48:18 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Frame-Options: SAMEORIGIN
+Vary: Cookie
+Set-Cookie: csrftoken=KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk; expires=Wed, 31 Aug 2022 01:48:18 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+Content-Encoding: gzip
+
+
+csrftoken: KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk
+
+
+
+<html lang="zh-hans" >
+<head>
+    <meta charset="UTF-8">
+    <title>域名流量-域名流量</title>
+
+    
+        
+            <link rel="stylesheet"
+                  href="/static/admin/simpleui-x/elementui/theme-chalk/index.css?_=2.0">
+            <link rel="stylesheet"
+                  href="/static/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css?_=2.0">
+        
+        <link rel="stylesheet" href="/static/admin/simplepro/css/list.css?_=2.0">
+    
+    
+        
+            <link rel="stylesheet" href="/static/custom/css/font-awesome.min.css">
+        
+            <link rel="stylesheet" href="/static/custom/css/domain_multi_changelist.css">
+        
+    
+</head>
+<body class="body">
+
+    <script type="text/javascript">
+        if (parent.progress) {
+            parent.progress.start();
+        }
+    </script>
+
+
+<div id="theme">
+    <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+    
+</div>
+<input type="hidden" name="csrfmiddlewaretoken" value="iUkyN7SzYrOvrlUTXgPonb0M4clDxD7C9GA9vuw7a6pHPrf7034QX9TSBEwUYWiZ">
+<script type="text/javascript">
+    var searchModels =["time"];
+    var tz = '+08:00';
+    var messages =[];
+    var has_editor = 'False';
+    var _version = '2.0'
+</script>
+<div id="app" v-cloak>
+    
+        
+            <el-collapse-transition>
+                <div class="panel"  v-if="form.show">
+                    <div class="panel-body">
+                        <!-- search form -->
+                        
+
+ 
+<el-form :inline="true" :model="formInline" class="simple-form-inline">
+    
+        
+            <el-form-item label="时间" size="small">
+                <el-date-picker class="simpleui-form-item"
+                        v-model="search.filters.time"
+                        @change="changeDate($event,'time','datetime')"
+                        type="datetimerange"
+                        start-placeholder="时间"
+                        end-placeholder="时间">
+                </el-date-picker>
+            </el-form-item>
+
+        
+
+    
+
+  <el-form-item style="line-height: initial">
+    <el-button size="small" type="success" @click="onSubmit" icon="el-icon-search">查询</el-button>
+    <el-button size="small" type="warning" @click="refreshData" icon="el-icon-delete">重置</el-button>
+  </el-form-item>
+
+</el-form>
+ 
+                    </div>
+                </div>
+            </el-collapse-transition>
+        
+    
+    <div class="panel">
+        <div class="panel-body">
+            
+                <!-- toolbar -->
+                
+<div class="toolbar">
+        <div class="left">
+              
+
+              
+
+              
+
+                <template  v-for="(btn,key) in toolbars.customButtons">
+
+                    <el-select :disabled="toolbars.isActive" style="width: 80px;" size="small" v-if="btn.isExport" v-model="exportFormat" placeholder="请选择">
+                        <el-option
+                          v-for="item in btn.formats"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
+
+                    <el-button :eid="btn.eid" :key="btn.eid"
+                           :icon="btn.icon" :style="btn.style"
+                           :type="btn.type" :data-name="key" size="small" :disabled="(!btn.enable)&&!btn.action_type&&toolbars.isActive" @click="customButtonClick(btn,key)">
+                           
+                            {{btn.label}}
+                           
+                    </el-button>
+                </template>
+
+
+                <!-- el-icon-check  -->
+              <el-button v-if="toolbars.showAll" :type="search.all==0?'danger':'warning'" plain :icon="search.all==0?'el-icon-check':'el-icon-close'" size="small" @click="selectAllBtnClick">
+                    
+                    <span v-if="search.all==0">选择全部{{paginator.count}}条数据</span>
+                    <span v-else>清除选中全部</span>
+                    
+              </el-button>
+
+        </div>
+       <div class="right">
+          <el-button-group>
+              <el-tooltip content="刷新表格" placement="bottom">
+                  <el-button :disabled="loading" :icon="loading?'el-icon-loading':'el-icon-refresh'" size="small" @click="refreshData"></el-button>
+              </el-tooltip>
+
+              <el-button size="small" @click="showDropdown($event)">
+                <el-dropdown trigger="click" :hide-on-click="false">
+                  <span class="el-dropdown-link">
+
+                      <svg t="1597836639815" class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5855"><path d="M885.3 957.3H140.7c-42.2 0-76.5-34.3-76.5-76.5V136.3c0-42.2 34.3-76.5 76.5-76.5h744.6c42.2 0 76.5 34.3 76.5 76.5v744.6c-0.1 42.1-34.3 76.4-76.5 76.4z m-744.6-851c-16.5 0-29.9 13.4-29.9 29.9v744.6c0 16.5 13.4 29.9 29.9 29.9h744.6c16.5 0 29.9-13.4 29.9-29.9V136.3c0-16.5-13.4-29.9-29.9-29.9H140.7z" fill="#7D7D7D" p-id="5856"></path><path d="M938.5 315.8h-851V91.1c0-4.4 3.6-8 8-8h835c4.4 0 8 3.6 8 8v224.7z" fill="#CBCBCB" p-id="5857"></path><path d="M961.7 339H64.3V136.3c0-42.2 34.3-76.5 76.5-76.5h744.6c42.2 0 76.5 34.3 76.5 76.5V339z m-850.9-46.5h804.4V136.3c0-16.5-13.4-29.9-29.9-29.9H140.7c-16.5 0-29.9 13.4-29.9 29.9v156.2zM938.5 644.8h-851c-12.9 0-23.3-10.4-23.3-23.3 0-12.8 10.4-23.3 23.3-23.3h851c12.9 0 23.3 10.4 23.3 23.3-0.1 12.9-10.5 23.3-23.3 23.3z" fill="#7D7D7D" p-id="5858"></path><path d="M363.4 957.3c-12.9 0-23.3-10.4-23.3-23.3V315.8c0-12.8 10.4-23.3 23.3-23.3s23.3 10.4 23.3 23.3V934c0 12.9-10.4 23.3-23.3 23.3zM662.6 957.3c-12.9 0-23.3-10.4-23.3-23.3V315.8c0-12.8 10.4-23.3 23.3-23.3s23.3 10.4 23.3 23.3V934c0 12.9-10.5 23.3-23.3 23.3z" fill="#7D7D7D" p-id="5859"></path></svg>
+                  </span>
+                  <el-dropdown-menu slot="dropdown" :style="table.headers.length>10?'max-height: 50%;overflow-y: auto;':''">
+                    <el-dropdown-item v-for="item in table.headers" :key="item.name"><el-checkbox :label="item.label" v-model="item.show"></el-checkbox></el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+
+              </el-button>
+              
+              
+
+              
+                  <el-tooltip content="显示/隐藏搜索" placement="bottom">
+                    <el-button icon="el-icon-search" size="small" @click="form.show=!form.show"></el-button>
+                  </el-tooltip>
+              
+            </el-button-group>
+        </div>
+
+        <!-- export form -->
+
+        <form :action="form.exportAction" method="post" id="export_form" style="display: none">
+            <input type="hidden" name="csrfmiddlewaretoken" value="iUkyN7SzYrOvrlUTXgPonb0M4clDxD7C9GA9vuw7a6pHPrf7034QX9TSBEwUYWiZ">
+            <input name="action" value="export_admin_action">
+            <input name="select_across" :value="toolbars.showAll ? 1 : 0">
+            <input name="file_format" :value="exportFormat">
+
+            <input v-for="item in table.selection" name="_selected_action" :value="item._id">
+
+        </form>
+</div>
+                <!-- table -->
+                <el-alert v-if="table.selection.length!=0" class="table-tips"
+type="success"
+show-icon>
+    <div slot="title">
+        <span>已选择 <strong v-text="table.selection.length">0</strong> 项</span>
+        <el-link style="margin-top: -3px;" type="primary" @click="clearSelect()">清空</el-link>
+    </div>
+</el-alert>
+<el-alert v-if="showError"
+    style="margin-bottom: 5px"
+    :title="errorMsg?errorMsg:'加载数据报错，请检查statistic.BillingAdmin中的代码。'"
+    type="error"
+    :closable="false"
+    show-icon>
+  </el-alert>
+
+<transition name="el-fade-in-linear">
+<el-table
+   v-if="table.headers.length!=0"
+   ref="table"
+  :data="table.rows"
+  stripe
+  border
+  v-loading="loading"
+  @sort-change="sortChange"
+  @select="select"
+  @select-all="selectAll"
+
+   
+   :summary-method="getSummaries"
+   :show-summary="table.summaries&&table.summaries.length!=0"
+    
+  
+  :header-row-class-name="'default-header'"
+  size="mini"
+  style="width: 100%">
+
+   <el-table-column
+      type="selection"
+      align="center"
+      fixed="left"
+      width="45">
+    </el-table-column>
+
+    <template v-for="h in table.headers">
+        <el-table-column v-if="h.name == 'id' && exts.showId && h.show"
+        :prop="h.name"
+        :label="h.label"
+        :sortable="h.sortable"
+        :align="h.align||'center'"
+        :width="h.width"
+        :min-width="h.min_width"
+        :resizable="h.resizable"
+        :class-name="h.class_name"
+        :label-class-name="h.label_class_name"
+        :fixed="h.fixed"
+        >
+             <template slot-scope="scope">
+                <div class="cell-body" v-html="scope.row[h.name]"></div>
+            </template>
+      </el-table-column>
+
+      <el-table-column v-else-if="h.show"
+        :prop="h.name"
+        :label="h.label"
+        :sortable="h.sortable"
+        :align="h.align||'center'"
+        :width="h.width"
+         :min-width="h.min_width"
+        :resizable="h.resizable"
+        :class-name="h.class_name"
+        :label-class-name="h.label_class_name"
+        :fixed="h.fixed"
+        >
+             <template slot-scope="scope">
+                <el-switch disabled v-if="typeof scope.row[h.name]=='boolean'" v-model="scope.row[h.name]" > </el-switch>
+                <div class="cell-body" v-else-if="h.name=='show_multi'" v-html="scope.row[h.name]" @click="jumpTo(scope)" ></div>
+                <div class="cell-body" v-else-if="h.name=='setting_detail'" v-html="scope.row[h.name]" @click="jumpTo(scope)" ></div>
+                <div class="cell-body" v-else v-html="scope.row[h.name]"></div>
+            </template>
+      </el-table-column>
+  </template>
+  
+</el-table>
+</transition>
+                <!-- pagination -->
+                <div v-if="paginator.page_count>1" class="paginator">
+    <el-pagination
+            background
+            layout="sizes,total,prev, pager, next,jumper"
+            :page-size="paginator.page_size"
+            :current-page="search.current_page"
+            @current-change="pageChange"
+            :page-sizes="pageSizes"
+            :page-size="search.page_size"
+            @size-change="handleSizeChange"
+            :total="paginator.count">
+    </el-pagination>
+</div>
+
+            
+        </div>
+    </div>
+
+    <el-dialog @closed="dialogClose" title="编辑" :visible.sync="dialog.visible">
+        <iframe ref="editorFrame" :src="dialog.url" frameborder="0" height="50%" width="100%"></iframe>
+        <span slot="footer" class="dialog-footer">
+                <el-button @click="dialog.visible = false">取 消</el-button>
+                <el-button type="primary" @click="iframeSubmit()">确 定</el-button>
+              </span>
+    </el-dialog>
+
+</div>
+
+
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/cookie.js?_=2.0"></script>
+    
+        <script type="text/javascript" src="/static/admin/simpleui-x/js/vue.min.js"></script>
+        <script type="text/javascript" src="/static/admin/simpleui-x/elementui/index.js"></script>
+    
+    <script type="text/javascript"
+            src="/static/admin/simplepro/js/axios.min.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/list.js?_=2.0"></script>
+    <script type="text/javascript" src="/static/admin/simplepro/js/gotop.js?_=2.0"></script>
+    <div id="gotop">
+        <gotop></gotop>
+    </div>
+    <script type="text/javascript">
+        window.addEventListener('load', __ => {
+            new Vue({el: '#gotop'});
+            if(parent.addEvent){
+                parent.addEvent('title','域名流量');
+            }
+        });
+    </script>
+
+</body>
+</html>

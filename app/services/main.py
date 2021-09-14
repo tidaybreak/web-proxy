@@ -32,7 +32,7 @@ class MainService(BaseService):
         data = self.plugins['request'].get("request_data", lambda x, _: x)(data, (host))
         return headers, data
 
-    def hook_response(self, path, full_path, req_data, res_headers, res_data):
+    def hook_response(self, path, full_path, req_data, res_status, res_headers, res_data):
         # [表-操作]过滤&加工data
         remove_headers = ["connection",     # 穗康码 sk.gzonline.gov.cn
                           "transfer-encoding",
@@ -48,7 +48,13 @@ class MainService(BaseService):
             del res_headers[k]
 
         res_data = self.plugins['response'].get("response_global", lambda x, _: x)(res_data, (full_path, req_data))
-        res_data = self.plugins['response'].get(path, lambda x, _: x)(res_data, (full_path, req_data))
-        return res_headers, res_data
+        result = self.plugins['response'].get(path, lambda x, _: x)(res_data, (full_path, req_data, res_status, res_headers))
+        if type(result) == tuple:
+            res_status = result[0]
+            res_headers = result[1]
+            res_data = result[2]
+        else:
+            res_data = result
+        return res_status, res_headers, res_data
 
 

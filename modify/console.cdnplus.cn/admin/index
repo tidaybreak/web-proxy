@@ -89,7 +89,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
     
 <script type="text/javascript">var menus=[
 	{
-		"name": "服务器",
+		"name": "节点管理",
 		"icon": "fa fa-server",
 		"models": [
 			{
@@ -113,7 +113,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 		"icon": "fa fa-globe",
 		"models": [
 			{
-				"name": "域名加速",
+				"name": "业务加速",
 				"url": "/admin/domain/domainsiteinfo/",
 				"icon": "fas fa-globe-americas",
 				"codename": "domain.view_domainsiteinfo",
@@ -194,6 +194,14 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 		"eid": 1013
 	},
 	{
+		"name": "带宽流量",
+		"icon": "fa fa-area-chart",
+		"url": "/admin/statistic/billing/",
+		"codename": "statistic.view_billing",
+		"_weight": 5,
+		"eid": 1016
+	},	
+	{
 		"name": "统计分析",
 		"icon": "fa fa-bar-chart",
 		"models": [
@@ -203,7 +211,12 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 				"eid": 1018
 			},
 			{
-				"name": "地区排行",
+				"name": "源站统计",
+				"url": "/statistic/source/",
+				"eid": 1023
+			},
+			{
+				"name": "区域/运营商",
 				"url": "/statistic/domain-ranking/",
 				"eid": 1019
 			},
@@ -216,25 +229,12 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 				"name": "命中率",
 				"url": "/statistic/domain-hit/",
 				"eid": 1021
-			},
-			{
-				"name": "运营商",
-				"url": "/statistic/ip-ranking/",
-				"eid": 1022
 			}
 		],
 		"_weight": 6,
 		"eid": 1017
 	},
 	/*
-	{
-		"name": "域名流量",
-		"icon": "fa fa-area-chart",
-		"url": "/admin/statistic/billing/",
-		"codename": "statistic.view_billing",
-		"_weight": 5,
-		"eid": 1016
-	},
 	{
 		"name": "套餐管理",
 		"icon": "fa fa-shopping-cart",
@@ -499,12 +499,8 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 <script type="text/javascript" src="/static/admin/simplepro/echarts/echarts.min.js"></script>
 <div class="home-body">
     
-        <el-alert title="通知：个人版套餐将暂停出售，需要续费的用户请联系管理员，无违规内容的站点才会被允许通过。此举措延续无限期！！！" type="error" style="margin-bottom:10px;"></el-alert>
-    
-        <el-alert title="通知：官网后台添加的域名，会定期地检查审核站点内容，请不要放不合规的内容。" type="warning" style="margin-bottom:10px;"></el-alert>
-    
-    
-        
+
+
 
 
 

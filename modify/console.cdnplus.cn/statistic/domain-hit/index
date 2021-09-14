@@ -1,6 +1,6 @@
 status_code: 200
 Server: openresty
-Date: Wed, 01 Sep 2021 01:43:02 GMT
+Date: Wed, 01 Sep 2021 01:43:10 GMT
 Content-Type: text/html; charset=utf-8
 Transfer-Encoding: chunked
 Connection: keep-alive
@@ -15,7 +15,7 @@ Content-Encoding: gzip
 
 <html lang="zh-hans" >
 <head>
-    <title> 域名URL排行页 | CDNPlus</title>
+    <title> 命中率页 | CDNPlus</title>
 
     
 
@@ -33,8 +33,6 @@ Content-Encoding: gzip
 
     <script type="text/javascript" src="/static/admin/simpleui-x/js/vue.min.js?_=2020.9.26"></script>
     <script type="text/javascript" src="/static/admin/simpleui-x/elementui/index.js?_=2020.9.26"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.26.0/ramda.min.js"></script>
-
 
 
     <script type="text/javascript" src="/static/admin/simpleui-x/js/language.js?_=2.1.2"></script>
@@ -231,6 +229,7 @@ Content-Encoding: gzip
         
     
     <div id="content-main">
+
         <!-- main content -->
         <div class="row">
             <div class="col-md-3 col-sm-6 clearfix" style="display:none">
@@ -267,63 +266,60 @@ Content-Encoding: gzip
                         
                 </select>
             </div>
-            <!--<div class="col-md-5 col-sm-10">
+            <div class="col-md-5 col-sm-10">
                 <div class="row">
                     <div class="col-sm-7 btn-group no-padding">
-                        <button type="button" class="btn btn-default btn-success" onclick="setCacheHit(this, null)">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setCacheHit(this, 1)">命中</button>
-                        <button type="button" class="btn btn-default" onclick="setCacheHit(this, 0)">未命中</button>
+                        <button type="button" class="btn btn-default btn-success" onclick="setTime(this, 202109010843, 202109010943)">1小时</button>
+                        <button type="button" class="btn btn-default" onclick="setTime(this, 202109010000, 202109010943)">今天</button>
+                        <button type="button" class="btn btn-default" onclick="setTime(this, 202108310943, 202109010943)">24小时</button>
+                        <button type="button" class="btn btn-default" onclick="setTime(this, 202108250943, 202109010943)">7天</button>
+                        <button type="button" class="btn btn-default" onclick="setTime(this, 202108020943, 202109010943)">1个月</button>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 no-padding" >
+                        <a data-toggle="modal" href="#tp_modal" id="customTime" class="btn btn-default" style="overflow:hidden;max-width: 250px;">自定义时间</a>
+                        <div class="modal fade" id="tp_modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">自定义时间</h4>
+                                    </div>
+                                    <div class="modal-body overflow_visible">
+                                        <div class="row">
+                                            <div class="col-sm-12 form_sep">
+                                                <label for="reg_input_name" class="req">开始时间</label>
+                                                <input class="form-control" type="text" placeholder="开始日期" id="dpStart" data-date-autoclose="true">
+                                            </div>
+                                            <div class="col-sm-12 form_sep">
+                                                <label for="reg_input_name" class="req">结束时间</label>
+                                                <input class="form-control" type="text" placeholder="结束日期" id="dpEnd" data-date-autoclose="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="setCustomTime()">确定</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-1 col-sm-2">
                 <button type="button" class="btn btn-success" onclick="btnSearch()">查询</button>
-            </div>-->
-        </div>
-        <div class="row" id="search_type">
-            <div class="col-md-9 col-sm-12">
-                <div class="col-sm-2">
-                    <button type="button" class="btn btn-md btn-default" onclick="bandwith_init(this)">流量</button>
-                </div>
-                <div class="col-md-offset-1 col-sm-2">
-                    <button type="button" class="btn btn-md btn-default" onclick="flow_init(this)">峰值带宽</button>
-                </div>
-                <div class="col-md-offset-1 col-sm-2">
-                    <button type="button" class="btn btn-md btn-default" onclick="visit_init(this)">请求数量</button>
-                </div>
             </div>
         </div>
-        <!--<div class="row" style="margin-bottom: 40px;">
+        <div class="row" style="margin-bottom: 40px;">
             <div class="col-sm-12">
                 <div class="panel panel-default">
-                    <div id="status_code_line" class="chart_b" style="height: 400px;">
+                    <div id="hit_rate_overview" class="chart_b" style="height: 600px;">
                 </div>
                 </div>
             </div>
 
         </div>
-		
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div id="chart_ranking" class="chart_a" style="height: 400px;"></div>
-                </div>
-            </div>
-        </div>-->
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div id="chart_map" class="chart_a" style="height: 400px;"></div>
-                </div>
-            </div>
-        </div>		
-		<div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-default">
-                    <div id="chart_idc" class="chart_a" style="height: 400px;"></div>
-                </div>
-            </div>
-        </div>	
+
     </div>
 
     
@@ -347,11 +343,9 @@ Content-Encoding: gzip
         <script src="/static/user/js/retina.min.js"></script>
 
         <script src="/static/user/js/lib/echarts/echarts.min.js"></script>
-		<script src="/static/echarts-china-map-master/js/map/china.js"></script>
         <script src="/static/user/js/lib/echarts/shine.js"></script>
         <script src="/static/user/js/lib/echarts/macarons.js"></script>
     
-
     <script>
 
 	$(function() {
@@ -438,142 +432,153 @@ Content-Encoding: gzip
         });
       }
       var timeText = '1小时';
-      var colorList = ['rgb(15,111,198)', 'rgb(0,157,217)', 'rgb(11,208,207)', 'rgb(16,207,155)',
-                    'rgb(124,202,98)', 'rgb(244,145,0)'];
-	  
-	  map_option = {
-					title: [{
-						text: '访问区域-',
-						subtext: '近'+timeText,
-						left: 'center',
-						top: '1%'
+	  line_option = {
+                  title : [
+                      {
+                        text: '命中率曲线图',
+                        subtext: '近 '+timeText,
+                        left: '90%',
+                        top: '1%'
+                      },
+                    {
+                      text: '单位：百分比',
+                      borderColor: '#999',
+                      borderWidth: 1,
+                      textStyle: {
+                        fontSize: 12
+                      },
+                      left: '2%',
+                      top: '3%'
                     }],
-					tooltip: {
-							formatter:function(params,ticket, callback){
-								return params.seriesName+'<br />'+params.name+'：'+params.value
-							}//数据格式化
-						},
-					visualMap: {
-						min: 0,
-						max: 1500,
-						left: 'left',
-						top: 'bottom',
-						text: ['高','低'],//取值范围的文字
-						inRange: {
-							color: ['#e0ffff', '#006edd']//取值范围的颜色
-						},
-						show:true//图注
-					},
-					geo: {
-						map: 'china',
-						roam: true,//不开启缩放和平移
-						zoom:1.23,//视角缩放比例
-						label: {
-							normal: {
-								show: true,
-								fontSize:'10',
-								color: 'rgba(0,0,0,0.7)'
-							}
-						},
-						itemStyle: {
-							normal:{
-								borderColor: 'rgba(0, 0, 0, 0.2)'
-							},
-							emphasis:{
-								areaColor: '#F3B329',//鼠标选择区域颜色
-								shadowOffsetX: 0,
-								shadowOffsetY: 0,
-								shadowBlur: 20,
-								borderWidth: 0,
-								shadowColor: 'rgba(0, 0, 0, 0.5)'
-							}
-						}
-					},
-					series : [
-						{
-							name: '信息量',
-							type: 'map',
-							geoIndex: 0,
-							data:[],
-							layoutCenter: ['70%', '50%'],
-							layoutSize: 450
-						}
-					]
-	  };
-  
-	function randomValue() {
-		return Math.round(Math.random()*1000);
-	}
-	function randomNum(minNum,maxNum){ 
-		switch(arguments.length){ 
-			case 1: 
-				return parseInt(Math.random()*minNum+1,10); 
-			break; 
-			case 2: 
-				return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
-			break; 
-				default: 
-					return 0; 
-				break; 
-		} 
-	}			
+                  tooltip : {
+                    trigger: 'axis',
+                    axisPointer: {
+                      type: 'cross',
+                      animation: false,
+                      label: {
+                        backgroundColor: '#505765'
+                      }
+                    }
+                  },
+                  legend: {
+                    data:['带宽'],
+                    x: 'left'
+                  },
+                  dataZoom: [
+                    {
+                      show: true,
+                      realtime: true,
+                      start: 0,
+                      end: 1000
+                    },
+                    {
+                      type: 'inside',
+                      realtime: true,
+                      start: 0,
+                      end: 1000
+                    }
+                  ],
+                  xAxis : {
+                      type : 'category',
+                      boundaryGap : true,
+                      axisLine: {onZero: false},
+                    },
+                  yAxis: [
+                    {
+                      splitNumber: 7,
+                      type: 'value'
+                    }
+                  ],
+                  series:
+                    {
+                      name:'命中率',
+                      type:'line',
+                      animation: false,
+                      smooth:true,
+                      areaStyle: {
+                        normal: {},
+                        color:'rgba(0,190,0,0.7)'
+                      },
+                      itemStyle : {
+                        normal : {
+                          type: 'default',
+                          areaStyle:{
+                            color:'rgb(0, 94, 170)'
+                          },
+                          lineStyle: {
+                            color: 'blue',
+                            width: 2,
+                            shadowColor : 'rgba(0, 94, 170, 0.3)',
+                            shadowBlur: 10,
+                            shadowOffsetX: 8,
+                            shadowOffsetY: 8
+                          }
+                        }
+                      },
+                      lineStyle: {
+                        normal: {
+                          width: 1,
+                          color: 'rgba(0, 94, 170, 0.9)',
+                          shadowColor : 'rgba(0,0,0,0.6)',
+                        },
+                      },
+                      markArea: {
+                        silent: true,
+                        data: [[{
+                          xAxis: '2009/9/12\n7:00'
+                        }, {
+                          xAxis: '2009/9/22\n7:00'
+                        }]]
+                      },
+                    },
+                };
+	  overview = {
+	    hit_rate: function (){
+			    var chart = echarts.init(document.getElementById('hit_rate_overview'), 'shine')
+			    chart.showLoading({'effect': 'bubble'});
+			    $.getJSON('/statistic/query-hit/', params).done(function(res){
+			        chart.hideLoading();
+			        var times = [];
+			        var values = [];
+			        res.data.map(function(value, index){
+			          times.push(value[0]);
+			          values.push(value[1]);
+                    })
 
-	  function map_data(vmin, vmax) {
+			        //判别单位
+                    var max_value = Math.max.apply(null, values);
+                    line_option.xAxis.data = times;
+                    line_option.title = [
+                        {
+                        text: '命中率',
+                        subtext: '近'+timeText,
+                        left: '90%',
+                        top: '1%'
+                      },
+                      {
+                      text: '单位：百分比',
+                      borderColor: '#999',
+                      borderWidth: 1,
+                      textStyle: {
+                        fontSize: 12
+                      },
+                      left: '2%',
+                      top: '3%'
+                    }];
+                    line_option.series.name = '命中率';
 
-		var dataList=[]
-		province = ['广东', '江苏', '山东', '浙江', '河南', '四川', '福建', '湖北', '湖南', '上海', '安徽', '河北', '北京', '陕西', '江西', '辽宁', '重庆', '云南', '广西', '贵州', '山西', '内蒙古', '天津', '新疆', '黑龙江', '吉林', '甘肃', '海南', '宁夏', '青海', '西藏', '南海诸岛']
-		
-		var last_rand = randomNum(vmin, vmax)
-		for (var i=0;i<province.length;i++)
-		{
-			dataList.push({name: province[i], value: last_rand});
-			last_rand = Math.floor(last_rand * randomNum(80, 100) / 100)
-		}
-		return dataList;
-	  }
-			
-	overview = {
-        map_info: function(name, unit, vmin, vmax){
-			var bar = echarts.init(document.getElementById('chart_map'));
-			bar.showLoading({'effect': 'bubble'});
-			params.type = 'visit';
-			$.getJSON('/statistic/query-domain-ranking/', params).done(function(res){
-				bar.hideLoading();
-				var x_values = [];
-				var y_values = [];
-				res.data.map(function(value, index){
-				  x_values.push(value[1]);
-				  y_values.push(value[0])
-				})
-				map_option['title'][0]['text'] += name
-				map_option['series'][0]['data'] = map_data(vmin, vmax)
-				map_option['series'][0]['name'] = unit;
-				bar.setOption(map_option);
-			})
-
-        }
+			        line_option.series.data = values;
+			        chart.setOption(line_option)
+                })
+		},
       };
 	  //按钮点击事件
-      bandwith_init = function(e){
-        overview.map_info('流量', '流量(GB)', 800, 999);
-        $(e).parent().parent().find('button').removeClass('btn-success');
-        $(e).addClass('btn-success');
+      hit_rate_init = function(e){
+        overview.hit_rate();
       }
-      flow_init = function(e){
-		overview.map_info('峰值带宽', '速率(Mbit/s)', 800, 999);
-        $(e).parent().parent().find('button').removeClass('btn-success');
-        $(e).addClass('btn-success');
-      }
-      visit_init = function(e){
-		overview.map_info('请求数量', '万次', 800, 999);
-        $(e).parent().parent().find('button').removeClass('btn-success');
-        $(e).addClass('btn-success');
-      }
-      //触发默认数据
-      $('#search_type button').eq(0).click();
       //搜索按钮
       btnSearch = function(){
-        $('#search_type button.btn-success').click();
+        hit_rate_init();
       }
       //赋值时间
       setTime = function(e, start, end){
@@ -602,86 +607,13 @@ Content-Encoding: gzip
         btnSearch();
         timeText = '自定义';
         $('.summaryTime').text(timeText);
+        //自定义去掉样式
+        $('#customTime').removeClass('btn-success');		
       }
-      // 设置过滤条件
-      setCacheHit = function(e, hit){
-        $(e).parent().parent().find('button').removeClass('btn-success');
-        $(e).addClass('btn-success');
-        params.hit = hit;
-        btnSearch();
-        timeText = $(e).text()
-      }
-	  
-	  
-	var chartDom = document.getElementById('chart_idc');
-	var myChart = echarts.init(chartDom);
-	var option;
-
-	var dataList=[]
-	province = ['中国联通', '中国电信', '中国移动', '教育网', '长城宽带', '中国铁通', '其他']
-	var last_rand = randomNum(800, 999)
-	for (var i=0;i<province.length;i++)
-	{
-		dataList.push({name: province[i], value: last_rand, rate: last_rand});
-		if (i === 2) {
-			last_rand = Math.floor(last_rand * randomNum(10, 20) / 100)
-		} else {
-			last_rand = Math.floor(last_rand * randomNum(80, 100) / 100)
-		}
-	}
-	option = {
-		title: {
-			text: '运营商统计',
-			subtext: '近1小时',
-			left: 'center'
-		},
-		tooltip: {
-			trigger: 'item'
-		},
-		legend: {
-		  orient: "horization", // 垂直排列
-		  top: 40,
-		  left: 40,
-		  itemGap: 14, // 调整每项之前的间距
-		  textStyle: {
-			color: "#808080", // 文本颜色
-		  },
-		  formatter: function(name) {
-			let rate = R.propOr(0, "rate", R.find(R.propEq("name", name))(dataList));
-			//rate = (rate * 100).toFixed(1);
-			// 显示名称+百分比
-			return `${name} ${rate}GB`;
-		  },
-		},
-		series: [
-			{
-				name: 'GB',
-				type: 'pie',
-				radius: '50%',
-				data: [
-					{value: 1048, name: '搜索引擎'},
-					{value: 735, name: '直接访问'},
-					{value: 580, name: '邮件营销'},
-					{value: 484, name: '联盟广告'},
-					{value: 300, name: '视频广告'}
-				],
-				emphasis: {
-					itemStyle: {
-						shadowBlur: 10,
-						shadowOffsetX: 0,
-						shadowColor: 'rgba(0, 0, 0, 0.5)'
-					}
-				}
-			}
-		]
-	};
-
-	option["series"][0]["data"] = dataList
-		
-	option && myChart.setOption(option);
+      //触发默认数据
+      $('button.btn-success').eq(0).click();
     })
     </script>
-
 
 
         

@@ -95,7 +95,7 @@ def catch_all():
             logging.error("error:%s  rul:%s" % (str(error), full_url))
 
     # 改写数据
-    res_headers, res_data = serv.main.hook_response(request.path, full_path, req_data, res_headers, res_data)
+    res_status, res_headers, res_data = serv.main.hook_response(request.path, full_path, req_data, res_status, res_headers, res_data)
 
     response = make_response(res_data)
     for k in res_headers:

@@ -1,0 +1,2355 @@
+status_code: 200
+Server: openresty
+Date: Wed, 01 Sep 2021 06:24:29 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Expires: Wed, 01 Sep 2021 06:24:29 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: csrftoken=KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk; expires=Wed, 31 Aug 2022 06:24:29 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+Content-Encoding: gzip
+
+
+csrftoken: KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk
+
+<!DOCTYPE html>
+
+
+<html lang="zh-hans" >
+<head>
+    <title>修改 节点 | CDNPlus</title>
+
+    
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/elementui/theme-chalk/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css?_=2.7">
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/css/base.css?_=2.7">
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/theme/simpleui.css">
+
+
+
+    
+
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/vue.min.js?_=2020.9.26"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/elementui/index.js?_=2020.9.26"></script>
+
+
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/language.js?_=2.1.2"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/locale/en-us.js?_=2.1.2"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/locale/zh-hans.js"></script>
+
+    
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/cookie.js"></script>
+    
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css"/>
+<link rel="stylesheet" href="/static/custom/css/font-awesome.min.css">
+
+    
+    
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<link href="/static/custom/css/domain_multi_changelist.css" type="text/css" media="/custom/css/domain_multi_changelist.css" rel="stylesheet">
+<link href="/static/custom/css/font-awesome.min.css" type="text/css" media="/custom/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/inlines.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css?_=20180905"/>
+    
+    
+    
+    <meta name="robots" content="NONE,NOARCHIVE"/>
+    
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.min.js"></script>
+</head>
+
+
+<body class=""
+      data-admin-utc-offset=" 28800">
+
+
+
+
+<div id="theme">
+    <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+
+    
+</div>
+<script type="text/javascript">
+
+    var fontConfig = new Vue({
+        data: {
+            fontSize: null
+        },
+        watch: {
+            fontSize: function (newValue) {
+                if (newValue != 0) {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (!fontStyle) {
+                        fontStyle = document.createElement('style');
+                        fontStyle.id = 'fontStyle';
+                        fontStyle.type = 'text/css';
+                        document.head.append(fontStyle);
+                    }
+                    fontStyle.innerHTML = '*{font-size:' + newValue + 'px!important;}'
+
+                } else {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (fontStyle) {
+                        fontStyle.remove();
+                    }
+                }
+            }
+        },
+        created: function () {
+            var val = getCookie('fontSize');
+            if (val) {
+                this.fontSize = parseInt(val);
+            } else {
+                this.fontSize = 0;
+            }
+        },
+        methods: {}
+    });
+
+
+    new Vue({
+        el: '#theme',
+        data: {
+            theme: '',
+        },
+        created: function () {
+            this.theme = getCookie('theme');
+
+            var self = this;
+            //向父组件注册事件
+            if (parent.addEvent) {
+                parent.addEvent('theme', function (theme) {
+                    self.theme = theme;
+                });
+
+                parent.addEvent('font', function (font) {
+                    fontConfig.fontSize = font;
+                });
+                // 注释掉它，避免菜单出现问题
+
+
+
+            }
+
+        }
+    })
+    window.addEventListener('beforeunload', () => {
+        if (window.beforeLoad) {
+            window.beforeLoad();
+        }
+    });
+
+</script>
+<!-- Container -->
+<div id="container">
+
+    
+    
+    <script id="out_message" type="text/javascript">var messages=[]</script>
+    
+    <script type="text/javascript">
+
+        new Vue({
+            created: function () {
+                var self = this;
+
+                messages.forEach(item => {
+                    setTimeout(function () {
+                        self.$notify({
+                            title: getLanuage('Tips'),
+                            message: item.msg,
+                            type: item.tag,
+                            dangerouslyUseHTMLString: true
+                        });
+                    }, 200);
+                });
+
+            }
+        })
+    </script>
+
+    
+
+    <div class="menu-content">
+        
+    </div>
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        
+
+        
+        
+        
+        <div style="display: none">修改 节点</div>
+        
+        
+        
+<style type="text/css">
+    .inline-group .tabular td.original p {
+        margin-top: -50px;
+        height: 1.2em;
+    }
+
+    .page-header {
+        padding: 10px;
+    }
+    fieldset > legend{
+        margin: 10px 0 20px;
+        border-width: 1px 0 0;
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+</style>
+<div id="content-main" class="form-main">
+    
+    
+    <div class="page-header">
+        <el-page-header @back="goBack" content="修改 节点"/>
+    </div>
+    
+    
+    
+    
+    <ul class="object-tools">
+        
+        <li>
+            <el-dialog title="历史" :visible.sync="dialogTableVisible">
+            <iframe frameborder="0" :src="url" width="100%" height="300"></iframe>
+            </el-dialog>
+            
+
+            <el-button @click="go_url('/admin/node/nodeinfo/2546/history/')" class="historylink"
+                       icon="fas fa-history">历史
+            </el-button>
+        </li>
+        
+        
+    </ul>
+    
+    
+    <form action="" method="post"
+          id="nodeinfo_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="cwdzjZP7u7ElZvEiiqfTc3GAp9KxzQm33ita1mtFGMfxnBZwldulM1zGWBVO09xq">
+        <div>
+            
+            
+            
+            <div id="alert">
+                
+                
+                
+            </div>
+            
+    
+
+            
+    
+    <div id="tabs">
+        <el-tabs :tab-position="tabPosition">
+            
+                
+                    <el-tab-pane label="基本信息">
+                        <fieldset class="module aligned suit-tab suit-tab-general">
+    
+    <fieldset>
+        <legend style="font-size: 18px;margin:10px 0 10px;">
+            基本信息
+        </legend>
+    </fieldset>
+    
+    
+    
+        <div class="form-row field-stationname">
+            
+            
+                <div>
+                    
+                    
+                        <label>节点名称:</label>
+                        
+                            <div class="readonly">localhost.localdomain</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-os_icon">
+            
+            
+                <div>
+                    
+                    
+                        <label>系统:</label>
+                        
+                            <div class="readonly"><i class="fa fa-linux" aria-hidden="true" style="font-size:18px;" title="linux"></i></div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-os_detail">
+            
+            
+                <div>
+                    
+                    
+                        <label>系统版本:</label>
+                        
+                            <div class="readonly">Linux CentOS Linux 7.6.1810 Core</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-is_online">
+            
+            
+                <div>
+                    
+                    
+                        <label>在线:</label>
+                        
+                            <div class="readonly"><i class="fa fa-cloud" aria-hidden="true" style="color:#dd4646;font-size:16px;" title="连接超时"></i></div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-center_mq">
+            
+            
+                <div>
+                    
+                    
+                        <label>中心下发状态:</label>
+                        
+                            <div class="readonly"><img src="/static/admin/img/icon-no.svg" alt="False"></div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-desc_isalive">
+            
+            
+                <div>
+                    
+                    
+                        <label>启用状态:</label>
+                        
+                            <div class="readonly"><i class="fa fa-play" aria-hidden="true" style="color:#70bf2b;font-size:16px;"></i></div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-token">
+            
+            
+                <div>
+                    
+                    
+                        <label>Token:</label>
+                        
+                            <div class="readonly">d26860dfb10103252fc05ed0c8d0a94b</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-created">
+            
+            
+                <div>
+                    
+                    
+                        <label>创建时间:</label>
+                        
+                            <div class="readonly">2020年8月24日 16:31</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-updated">
+            
+            
+                <div>
+                    
+                    
+                        <label>更新时间:</label>
+                        
+                            <div class="readonly">2021年8月3日 20:37</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-auto_update">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_auto_update">DDoS清洗:</label>
+                        
+                            <select name="auto_update" id="id_auto_update">
+  <option value="True" selected>开启</option>
+
+  <option value="False">关闭</option>
+
+</select>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-remarks">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_remarks">备注信息:</label>
+                        
+                            <input type="text" name="remarks" value="" class="vTextField" maxlength="50" id="id_remarks">
+                        
+                    
+                    
+                        <div class="help">添加自定义信息，方便搜索查询</div>
+                    
+                </div>
+            
+        </div>
+    
+
+</fieldset>
+
+<!--<script type="text/javascript" src="/static/admin/js/image_pro.js"></script>-->
+<!--<script type="text/javascript" src="/static/admin/js/imagePreview.js"></script>-->
+<script type="text/javascript">
+
+
+    /**
+ * Created by hucf on 2019/11/20.
+ */
+var ImagePreview = {
+    default_params:{},
+    init:function (param) {
+        if (param) {
+            $.extend(this.default_params, param);
+        }
+        ip_global_img_list = [];
+        var id = this.default_params.id;
+        if (typeof id == 'string') {
+            if ((ip_global_img_list = $("#"+id).find("img")).length == 0) {
+                return;
+            }
+        } else if (typeof id == 'object' && id != null) {
+            ip_global_img_list = $(id);
+        }
+        this.fnGenerateHtml();
+        this.fnBindEvent(ip_global_img_list);
+    },
+    fnBindEvent:function (ip_global_img_list) {
+        if (ip_global_img_list.length == 0) {
+            return;
+        }
+        $(ip_global_img_list).on("click", this.onClickEvent);
+        this.onDragEvent($("#ip-img-preview"));
+        $("#ip-img-preview").on('mousewheel DOMMouseScroll', this.onMouseScrollEvent);
+
+        $('#ip-img-floatshadow').on("click", function () {
+            $('#ip-img-preview').hide();
+            $("#ip-left").hide();
+            $("#ip-right").hide();
+            $('#ip-img-floatshadow').hide();
+            $('#ip-img-preview').attr("src", "");
+        });
+        $("#ip-left").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnPrev);
+        $("#ip-right").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnNext);
+    },
+    fnGenerateHtml:function () {
+        $("body").append('<img id="ip-img-preview" style="position: fixed;left: 50%;top: 50%;transform: translate(-50%, -50%);z-index: 19941206;cursor: move;display: none"/><div id="ip-img-floatshadow" style="z-index: 19941205;background-color: #000;opacity: .5;top: 0;left: 0;width: 100%;height: 100%;position: fixed;display: none" title="点击空白处关闭"></div>');
+        $("body").append('<div id="ip-left" style="display: none; width: 100px; height: 100px;left: 5px; top: 50%; position:fixed;z-index:19941207; cursor: pointer;">' +
+            '<div style="left:-30px;border: 50px solid;border-color: transparent #1CB9C4 transparent transparent;position: absolute;"></div></div>');
+        $("body").append('<div id="ip-right" style="display: none; width: 100px; height: 100px; right: 5px; top: 50%; position:fixed; z-index:19941207;cursor: pointer;">' +
+            '<div style="left:30px;border: 50px solid;border-color: transparent transparent transparent #1CB9C4;position: absolute;"></div></div>');
+    },
+    fnMouseOver:function () {
+        $(this).css("background", "rgb(134, 134, 134)");
+        $(this).css("border", "1px solid rgb(111, 111, 111)");
+    },
+    fnMouseOut:function () {
+        $(this).css("background", "");
+        $(this).css("border", "");
+    },
+    fnPrev:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur>0) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"48%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[--ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"50.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnNext:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur<ip_global_img_list.length-1) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"52%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[++ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"49.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnGetIndexOfCurImg:function (cur) {
+        for (var i=0; i<ip_global_img_list.length; i++) {
+            if ($(ip_global_img_list[i]).is(cur)) {
+                return i;
+            }
+        }
+    },
+    onClickEvent:function (e) {
+        ImagePreview.fnReset();
+        $("#ip-img-preview").attr("src", $(this).attr("src"));
+        ImagePreview.fnAdjustMaxWidth();
+        ip_global_cur = ImagePreview.fnGetIndexOfCurImg($(this));
+        $("#ip-img-floatshadow").fadeIn();
+        $("#ip-img-preview").fadeIn();
+        $("#ip-left").fadeIn();
+        $("#ip-right").fadeIn();
+    },
+    fnAdjustMaxWidth:function () {
+        //最长边判定，避免超出屏幕画幅的展示
+        var widthFlag = true;
+        var max = $("#ip-img-preview").width();
+        if (max < $("#ip-img-preview").height()) {
+            widthFlag = false;
+            max = $("#ip-img-preview").height();
+        }
+        if (widthFlag && $(window).width() < max) {
+            $("#ip-img-preview").css("width","75%");
+        } else if (!widthFlag && $(window).height() < max) {
+            $("#ip-img-preview").css("height","75%");
+        }
+    },
+    fnReset:function () {
+        $("#ip-img-preview").css("left","50%");
+        $("#ip-img-preview").css("top","50%");
+        $("#ip-img-preview").css("width","");
+        $("#ip-img-preview").css("height","");
+    },
+    onMouseScrollEvent:function (e) {
+        e.preventDefault();
+        var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        var delta = Math.max(-1, Math.min(1, wheel));
+        if (delta < 0) { //向下滚动
+            $(this).width($(this).width() / 1.1);
+            $(this).height($(this).height() / 1.1);
+        } else { //向上滚动
+            $(this).width($(this).width() * 1.1);
+            $(this).height($(this).height() * 1.1);
+        }
+    },
+    onDragEvent:function (obj) {
+        obj.bind("mousedown", start);
+        function start(event) {
+            if (event.button == 0) {
+                gapX = event.clientX - obj.offset().left;
+                gapY = event.clientY - obj.offset().top;
+                $(document).bind("mousemove", move);
+                $(document).bind("mouseup", stop);
+            }
+            return false;
+        }
+        function move(event) {
+            obj.css({
+                "left": (event.clientX - gapX + obj.width() / 2) + "px",
+                "top": (event.clientY - gapY + obj.height() / 2) + "px"
+            });
+            return false;
+        }
+        function stop() {
+            $(document).unbind("mousemove", move);
+            $(document).unbind("mouseup", stop);
+        }
+    }
+};
+
+
+    var image_document = document.getElementsByTagName("a");
+    for (var i = 0; i < image_document.length; i++) {
+        let text_list = image_document[i].href.split('.')
+        
+        let image_list = ["jpg", "png"]
+        for (let j = 0; j <image_list.length ; j++) {
+            
+            
+            if (text_list[text_list.length-1] == image_list[j] )
+            {
+                
+                var herf = image_document[i].href
+                
+                var image_html = image_document[i].outerHTML
+                image_document[i].outerHTML = '<div id="imgBox"><img style="width: 200px" id="img" src="' + herf + '"/></div>'
+            }
+        }
+    }
+    // ImagePreview.init({id:"imgBox"});
+    ImagePreview.init({id:$("#imgBox img")});
+
+
+</script>
+
+
+<style type="text/css">
+    #imgs img {
+        width: 24%;
+    }
+</style>
+                    </el-tab-pane>
+                
+            
+            <el-tab-pane label="客户端状态">
+                <fieldset class="module aligned ">
+    <fieldset>
+        <legend >
+            客户端运行状态
+        </legend>
+    </fieldset>
+    
+    
+    <div class="form-row field-_agent_version">
+        <div>
+            <label>Agent版本:</label>
+            <div class="readonly">2.1.0</div>
+        </div>
+    </div>
+    <div class="form-row field-_agent_valid_status">
+        <div>
+            <label>运行状态:</label>
+            <div class="readonly">
+                <img src="/static/admin/img/icon-no.svg" alt="False">
+            </div>
+        </div>
+    </div>
+    <div class="form-row field-_agent_valid_mq_status">
+        <div>
+            <label>MQ在线状态:</label>
+            <div class="readonly">
+                <img src="/static/admin/img/icon-no.svg" alt="False">
+            </div>
+        </div>
+    </div>
+    <div class="form-row field-_agent_valid_report_status">
+        <div>
+            <label>上报状态:</label>
+            <div class="readonly">
+                <img src="/static/admin/img/icon-no.svg" alt="False">
+            </div>
+        </div>
+    </div>
+    <div class="form-row field-_agent_valid_nginx_status">
+        <div>
+            <label>Nginx状态:</label>
+            <div class="readonly">
+                <img src="/static/admin/img/icon-no.svg" alt="False">
+            </div>
+        </div>
+    </div>
+    <div class="form-row field-_agent_valid_nginx_config_status">
+        <div>
+            <label>Nginx配置测试状态:</label>
+            <div class="readonly">
+                
+                    <img src="/static/admin/img/icon-no.svg" alt="False">Test config success.
+                
+            </div>
+        </div>
+    </div>
+    <div class="form-row field-_agent_last_distribute_time">
+        <div>
+            <label>上次任务分发时间:</label>
+            <div class="readonly">2021年8月5日 14:47</div>
+        </div>
+    </div>
+    <div class="form-row field-valid_uptime">
+        <div>
+            <label>运行时长:</label>
+            <div class="readonly">未知</div>
+        </div>
+    </div>
+    
+    
+</fieldset>
+            </el-tab-pane>
+            <el-tab-pane label="系统负载">
+                <fieldset class="module aligned ">
+    
+    <fieldset>
+        <legend >
+            系统负载
+        </legend>
+    </fieldset>
+    <div class="form-row field-_status_cpu">
+        <div>
+            <label>CPU使用率:</label>
+            <div class="readonly">5.0%</div>
+        </div>
+    </div>
+    <div class="form-row field-_status_phymem">
+        <div>
+            <label>物理内存使用率:</label>
+            <div class="readonly">52.2%</div>
+        </div>
+    </div>
+    <div class="form-row field-_status_swapmem">
+        <div>
+            <label>虚拟内存使用率:</label>
+            <div class="readonly">3.2%</div>
+        </div>
+    </div>
+    <div class="form-row field-_status_uptime_human">
+        <div>
+            <label>系统已启动:</label>
+            <div class="readonly">1 天 13 小时 47 分钟 3 秒</div>
+        </div>
+    </div>
+    
+</fieldset>
+            </el-tab-pane>
+            <el-tab-pane label="硬件信息">
+                <fieldset class="module aligned ">
+    
+    <fieldset>
+        <legend >
+            硬件信息
+        </legend>
+    </fieldset>
+    <div class="form-row field-_hd_cpu">
+        <div>
+            <label>CPU:</label>
+            <div class="readonly">Physical Cpu:4 Logical Cpu:8 CPU Family: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz</div>
+        </div>
+    </div>
+    <div class="form-row field-_hd_phymem">
+        <div>
+            <label>物理内存:</label>
+            <div class="readonly">2.92G</div>
+        </div>
+    </div>
+    <div class="form-row field-_hd_swapmem">
+        <div>
+            <label>虚拟内存:</label>
+            <div class="readonly">2.00G</div>
+        </div>
+    </div>
+    <div class="form-row field-_hd_disk">
+        <div>
+            <label>磁盘:</label>
+            <div class="readonly">/dev/mapper/centos-root(26.98G)|/dev/sda1(1014.00M)</div>
+        </div>
+    </div>
+    
+</fieldset>
+            </el-tab-pane>
+
+            
+                
+                    <el-tab-pane label="缓存设置">
+                        
+<div class="js-inline-admin-formset inline-group suit-form module aligned suit-tab suit-tab-cache"
+     id="cache-group"
+     data-inline-type="stacked"
+     data-inline-formset="{&quot;name&quot;: &quot;#cache&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;cache&quot;, &quot;addText&quot;: &quot;\u6dfb\u52a0\u53e6\u4e00\u4e2a \u7f13\u5b58&quot;, &quot;deleteText&quot;: &quot;\u5220\u9664&quot;}}">
+<fieldset class="module ">
+    <fieldset>
+        <legend >
+            缓存设置
+        </legend>
+    </fieldset>
+<input type="hidden" name="cache-TOTAL_FORMS" value="1" id="id_cache-TOTAL_FORMS"><input type="hidden" name="cache-INITIAL_FORMS" value="1" id="id_cache-INITIAL_FORMS"><input type="hidden" name="cache-MIN_NUM_FORMS" value="0" id="id_cache-MIN_NUM_FORMS"><input type="hidden" name="cache-MAX_NUM_FORMS" value="1" id="id_cache-MAX_NUM_FORMS">
+
+
+<div class="inline-related has_original" id="cache-empty">
+  
+  
+    <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-cache_path">
+            
+            
+                <div>
+                    
+                    
+                        <label>缓存目录:</label>
+                        
+                            <div class="readonly">cache</div>
+                        
+                    
+                    
+                        <div class="help">默认为cache，手动设置只能是绝对路径，且以cache为子结尾.如:Windows设置为D:\cache，Linux设置为/home/cache</div>
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-cache_size">
+            
+            
+                <div>
+                    
+                    
+                        <label>最大缓存空间:</label>
+                        
+                            <div class="readonly"></div>
+                        
+                    
+                    
+                        <div class="help">单位G。不设置，表示不限制(但超出后可能引发问题)。超出后，自动清空过期旧数据</div>
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-cache_file">
+            
+            
+                <div>
+                    
+                    
+                        <label>最大缓存文件数量:</label>
+                        
+                            <div class="readonly">800000</div>
+                        
+                    
+                    
+                        <div class="help">1M内存可缓存8k个文件索引</div>
+                    
+                </div>
+            
+        </div>
+    
+
+</fieldset>
+
+<!--<script type="text/javascript" src="/static/admin/js/image_pro.js"></script>-->
+<!--<script type="text/javascript" src="/static/admin/js/imagePreview.js"></script>-->
+<script type="text/javascript">
+
+
+    /**
+ * Created by hucf on 2019/11/20.
+ */
+var ImagePreview = {
+    default_params:{},
+    init:function (param) {
+        if (param) {
+            $.extend(this.default_params, param);
+        }
+        ip_global_img_list = [];
+        var id = this.default_params.id;
+        if (typeof id == 'string') {
+            if ((ip_global_img_list = $("#"+id).find("img")).length == 0) {
+                return;
+            }
+        } else if (typeof id == 'object' && id != null) {
+            ip_global_img_list = $(id);
+        }
+        this.fnGenerateHtml();
+        this.fnBindEvent(ip_global_img_list);
+    },
+    fnBindEvent:function (ip_global_img_list) {
+        if (ip_global_img_list.length == 0) {
+            return;
+        }
+        $(ip_global_img_list).on("click", this.onClickEvent);
+        this.onDragEvent($("#ip-img-preview"));
+        $("#ip-img-preview").on('mousewheel DOMMouseScroll', this.onMouseScrollEvent);
+
+        $('#ip-img-floatshadow').on("click", function () {
+            $('#ip-img-preview').hide();
+            $("#ip-left").hide();
+            $("#ip-right").hide();
+            $('#ip-img-floatshadow').hide();
+            $('#ip-img-preview').attr("src", "");
+        });
+        $("#ip-left").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnPrev);
+        $("#ip-right").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnNext);
+    },
+    fnGenerateHtml:function () {
+        $("body").append('<img id="ip-img-preview" style="position: fixed;left: 50%;top: 50%;transform: translate(-50%, -50%);z-index: 19941206;cursor: move;display: none"/><div id="ip-img-floatshadow" style="z-index: 19941205;background-color: #000;opacity: .5;top: 0;left: 0;width: 100%;height: 100%;position: fixed;display: none" title="点击空白处关闭"></div>');
+        $("body").append('<div id="ip-left" style="display: none; width: 100px; height: 100px;left: 5px; top: 50%; position:fixed;z-index:19941207; cursor: pointer;">' +
+            '<div style="left:-30px;border: 50px solid;border-color: transparent #1CB9C4 transparent transparent;position: absolute;"></div></div>');
+        $("body").append('<div id="ip-right" style="display: none; width: 100px; height: 100px; right: 5px; top: 50%; position:fixed; z-index:19941207;cursor: pointer;">' +
+            '<div style="left:30px;border: 50px solid;border-color: transparent transparent transparent #1CB9C4;position: absolute;"></div></div>');
+    },
+    fnMouseOver:function () {
+        $(this).css("background", "rgb(134, 134, 134)");
+        $(this).css("border", "1px solid rgb(111, 111, 111)");
+    },
+    fnMouseOut:function () {
+        $(this).css("background", "");
+        $(this).css("border", "");
+    },
+    fnPrev:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur>0) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"48%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[--ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"50.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnNext:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur<ip_global_img_list.length-1) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"52%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[++ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"49.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnGetIndexOfCurImg:function (cur) {
+        for (var i=0; i<ip_global_img_list.length; i++) {
+            if ($(ip_global_img_list[i]).is(cur)) {
+                return i;
+            }
+        }
+    },
+    onClickEvent:function (e) {
+        ImagePreview.fnReset();
+        $("#ip-img-preview").attr("src", $(this).attr("src"));
+        ImagePreview.fnAdjustMaxWidth();
+        ip_global_cur = ImagePreview.fnGetIndexOfCurImg($(this));
+        $("#ip-img-floatshadow").fadeIn();
+        $("#ip-img-preview").fadeIn();
+        $("#ip-left").fadeIn();
+        $("#ip-right").fadeIn();
+    },
+    fnAdjustMaxWidth:function () {
+        //最长边判定，避免超出屏幕画幅的展示
+        var widthFlag = true;
+        var max = $("#ip-img-preview").width();
+        if (max < $("#ip-img-preview").height()) {
+            widthFlag = false;
+            max = $("#ip-img-preview").height();
+        }
+        if (widthFlag && $(window).width() < max) {
+            $("#ip-img-preview").css("width","75%");
+        } else if (!widthFlag && $(window).height() < max) {
+            $("#ip-img-preview").css("height","75%");
+        }
+    },
+    fnReset:function () {
+        $("#ip-img-preview").css("left","50%");
+        $("#ip-img-preview").css("top","50%");
+        $("#ip-img-preview").css("width","");
+        $("#ip-img-preview").css("height","");
+    },
+    onMouseScrollEvent:function (e) {
+        e.preventDefault();
+        var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        var delta = Math.max(-1, Math.min(1, wheel));
+        if (delta < 0) { //向下滚动
+            $(this).width($(this).width() / 1.1);
+            $(this).height($(this).height() / 1.1);
+        } else { //向上滚动
+            $(this).width($(this).width() * 1.1);
+            $(this).height($(this).height() * 1.1);
+        }
+    },
+    onDragEvent:function (obj) {
+        obj.bind("mousedown", start);
+        function start(event) {
+            if (event.button == 0) {
+                gapX = event.clientX - obj.offset().left;
+                gapY = event.clientY - obj.offset().top;
+                $(document).bind("mousemove", move);
+                $(document).bind("mouseup", stop);
+            }
+            return false;
+        }
+        function move(event) {
+            obj.css({
+                "left": (event.clientX - gapX + obj.width() / 2) + "px",
+                "top": (event.clientY - gapY + obj.height() / 2) + "px"
+            });
+            return false;
+        }
+        function stop() {
+            $(document).unbind("mousemove", move);
+            $(document).unbind("mouseup", stop);
+        }
+    }
+};
+
+
+    var image_document = document.getElementsByTagName("a");
+    for (var i = 0; i < image_document.length; i++) {
+        let text_list = image_document[i].href.split('.')
+        
+        let image_list = ["jpg", "png"]
+        for (let j = 0; j <image_list.length ; j++) {
+            
+            
+            if (text_list[text_list.length-1] == image_list[j] )
+            {
+                
+                var herf = image_document[i].href
+                
+                var image_html = image_document[i].outerHTML
+                image_document[i].outerHTML = '<div id="imgBox"><img style="width: 200px" id="img" src="' + herf + '"/></div>'
+            }
+        }
+    }
+    // ImagePreview.init({id:"imgBox"});
+    ImagePreview.init({id:$("#imgBox img")});
+
+
+</script>
+
+
+<style type="text/css">
+    #imgs img {
+        width: 24%;
+    }
+</style>
+  
+  <input type="hidden" name="cache-0-id" value="2546" id="id_cache-0-id">
+  <input type="hidden" name="cache-0-node" value="2546" id="id_cache-0-node">
+</div>
+</fieldset>
+</div>
+
+                    </el-tab-pane>
+                
+                    <el-tab-pane label="磁盘信息">
+                        
+<div class="js-inline-admin-formset inline-group" id="disk_set-group"
+     data-inline-type="tabular"
+     data-inline-formset="{&quot;name&quot;: &quot;#disk_set&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;disk_set&quot;, &quot;addText&quot;: &quot;\u6dfb\u52a0\u53e6\u4e00\u4e2a \u78c1\u76d8&quot;, &quot;deleteText&quot;: &quot;\u5220\u9664&quot;}}">
+  <div class="tabular inline-related ">
+<input type="hidden" name="disk_set-TOTAL_FORMS" value="10" id="id_disk_set-TOTAL_FORMS"><input type="hidden" name="disk_set-INITIAL_FORMS" value="10" id="id_disk_set-INITIAL_FORMS"><input type="hidden" name="disk_set-MIN_NUM_FORMS" value="0" id="id_disk_set-MIN_NUM_FORMS"><input type="hidden" name="disk_set-MAX_NUM_FORMS" value="0" id="id_disk_set-MAX_NUM_FORMS">
+<fieldset class="module ">
+    <fieldset>
+        <legend >
+            磁盘信息
+        </legend>
+    </fieldset>
+   
+   <table>
+     <thead><tr>
+       <th class="original"></th>
+     
+       
+         <th class="column-path">盘符
+         
+         </th>
+       
+     
+       
+         <th class="column-total">存储总量
+         
+         </th>
+       
+     
+       
+         <th class="column-percent">已使用(%)
+         
+         </th>
+       
+     
+     
+     </tr></thead>
+
+     <tbody>
+     
+        
+        <tr class="form-row row1 has_original"
+             id="disk_set-0">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-0-id" value="15611" id="id_disk_set-0-id">
+          <input type="hidden" name="disk_set-0-node" value="2546" id="id_disk_set-0-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>27G</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>88.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row2 has_original"
+             id="disk_set-1">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-1-id" value="15617" id="id_disk_set-1-id">
+          <input type="hidden" name="disk_set-1-node" value="2546" id="id_disk_set-1-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/mnt/hgfs</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>201G</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>79.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row1 has_original"
+             id="disk_set-2">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-2-id" value="15616" id="id_disk_set-2-id">
+          <input type="hidden" name="disk_set-2-node" value="2546" id="id_disk_set-2-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/boot</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>1014M</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>23.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row2 has_original"
+             id="disk_set-3">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-3-id" value="15614" id="id_disk_set-3-id">
+          <input type="hidden" name="disk_set-3-node" value="2546" id="id_disk_set-3-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/run</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>1.5G</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>2.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row1 has_original"
+             id="disk_set-4">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-4-id" value="15613" id="id_disk_set-4-id">
+          <input type="hidden" name="disk_set-4-node" value="2546" id="id_disk_set-4-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/dev/shm</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>1.5G</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>1.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row2 has_original"
+             id="disk_set-5">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-5-id" value="15618" id="id_disk_set-5-id">
+          <input type="hidden" name="disk_set-5-node" value="2546" id="id_disk_set-5-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/run/user/42</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>394M</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>1.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row1 has_original"
+             id="disk_set-6">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-6-id" value="15620" id="id_disk_set-6-id">
+          <input type="hidden" name="disk_set-6-node" value="2546" id="id_disk_set-6-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/run/user/1000</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>299M</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>1.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row2 has_original"
+             id="disk_set-7">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-7-id" value="15615" id="id_disk_set-7-id">
+          <input type="hidden" name="disk_set-7-node" value="2546" id="id_disk_set-7-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/sys/fs/cgroup</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>1.5G</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>0.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row1 has_original"
+             id="disk_set-8">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-8-id" value="15612" id="id_disk_set-8-id">
+          <input type="hidden" name="disk_set-8-node" value="2546" id="id_disk_set-8-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/dev</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>1.5G</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>0.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+        
+        <tr class="form-row row2 has_original"
+             id="disk_set-empty">
+        <td class="original">
+          <p>
+          
+
+          
+          
+          
+            </p>
+          <input type="hidden" name="disk_set-9-id" value="15619" id="id_disk_set-9-id">
+          <input type="hidden" name="disk_set-9-node" value="2546" id="id_disk_set-9-node">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-path">
+              
+                  <p>/run/user/0</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-total">
+              
+                  <p>394M</p>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-percent">
+              
+                  <p>0.0</p>
+              
+              </td>
+              
+            
+          
+        
+        
+        </tr>
+     
+     </tbody>
+   </table>
+</fieldset>
+  </div>
+</div>
+
+                    </el-tab-pane>
+                
+                    <el-tab-pane label="网卡信息">
+                        
+<div class="js-inline-admin-formset inline-group"
+     id="ip_set-group"
+     data-inline-type="stacked"
+     data-inline-formset="{&quot;name&quot;: &quot;#ip_set&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;ip_set&quot;, &quot;addText&quot;: &quot;\u6dfb\u52a0\u53e6\u4e00\u4e2a \u7f51\u5361&quot;, &quot;deleteText&quot;: &quot;\u5220\u9664&quot;}}">
+<fieldset class="module ">
+    <fieldset>
+        <legend >
+            网卡信息
+        </legend>
+    </fieldset>
+<input type="hidden" name="ip_set-TOTAL_FORMS" value="1" id="id_ip_set-TOTAL_FORMS"><input type="hidden" name="ip_set-INITIAL_FORMS" value="1" id="id_ip_set-INITIAL_FORMS"><input type="hidden" name="ip_set-MIN_NUM_FORMS" value="0" id="id_ip_set-MIN_NUM_FORMS"><input type="hidden" name="ip_set-MAX_NUM_FORMS" value="1000" id="id_ip_set-MAX_NUM_FORMS">
+
+
+<div class="inline-related has_original" id="ip_set-0">
+  <h3><b>网卡:</b>&nbsp;<span class="inline_label">192.168.40.147
+</span>
+      
+    <span class="delete"><input type="checkbox" name="ip_set-0-DELETE" id="id_ip_set-0-DELETE"> <label class="vCheckboxLabel inline" for="id_ip_set-0-DELETE">删除</label></span>
+  </h3>
+  
+  
+    <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-ip">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_ip_set-0-ip">Ip:</label>
+                        
+                            <input type="text" name="ip_set-0-ip" value="192.168.122.1" readonly="readonly" disabled id="id_ip_set-0-ip">
+                        
+                    
+                    
+                        <div class="help">不可修改，仅显示用</div>
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-global_ip">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_ip_set-0-global_ip">外网IP:</label>
+                        
+                            <input type="text" name="ip_set-0-global_ip" value="192.168.40.147" id="id_ip_set-0-global_ip">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-netspeed_in">
+            
+            
+                <div>
+                    
+                    
+                        <label>下载带宽:</label>
+                        
+                            <div class="readonly">0.0Bbps</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-netspeed_out">
+            
+            
+                <div>
+                    
+                    
+                        <label>上传带宽:</label>
+                        
+                            <div class="readonly">0.0Bbps</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-need_sync">
+            
+            
+                <div class="checkbox-row">
+                    
+                    
+                        <input type="checkbox" name="ip_set-0-need_sync" id="id_ip_set-0-need_sync"><label class="vCheckboxLabel" for="id_ip_set-0-need_sync">同步DNS</label>
+                    
+                    
+                        <div class="help">标记是否需要同步IP到DNS</div>
+                    
+                </div>
+            
+        </div>
+    
+
+</fieldset>
+
+<!--<script type="text/javascript" src="/static/admin/js/image_pro.js"></script>-->
+<!--<script type="text/javascript" src="/static/admin/js/imagePreview.js"></script>-->
+<script type="text/javascript">
+
+
+    /**
+ * Created by hucf on 2019/11/20.
+ */
+var ImagePreview = {
+    default_params:{},
+    init:function (param) {
+        if (param) {
+            $.extend(this.default_params, param);
+        }
+        ip_global_img_list = [];
+        var id = this.default_params.id;
+        if (typeof id == 'string') {
+            if ((ip_global_img_list = $("#"+id).find("img")).length == 0) {
+                return;
+            }
+        } else if (typeof id == 'object' && id != null) {
+            ip_global_img_list = $(id);
+        }
+        this.fnGenerateHtml();
+        this.fnBindEvent(ip_global_img_list);
+    },
+    fnBindEvent:function (ip_global_img_list) {
+        if (ip_global_img_list.length == 0) {
+            return;
+        }
+        $(ip_global_img_list).on("click", this.onClickEvent);
+        this.onDragEvent($("#ip-img-preview"));
+        $("#ip-img-preview").on('mousewheel DOMMouseScroll', this.onMouseScrollEvent);
+
+        $('#ip-img-floatshadow').on("click", function () {
+            $('#ip-img-preview').hide();
+            $("#ip-left").hide();
+            $("#ip-right").hide();
+            $('#ip-img-floatshadow').hide();
+            $('#ip-img-preview').attr("src", "");
+        });
+        $("#ip-left").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnPrev);
+        $("#ip-right").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnNext);
+    },
+    fnGenerateHtml:function () {
+        $("body").append('<img id="ip-img-preview" style="position: fixed;left: 50%;top: 50%;transform: translate(-50%, -50%);z-index: 19941206;cursor: move;display: none"/><div id="ip-img-floatshadow" style="z-index: 19941205;background-color: #000;opacity: .5;top: 0;left: 0;width: 100%;height: 100%;position: fixed;display: none" title="点击空白处关闭"></div>');
+        $("body").append('<div id="ip-left" style="display: none; width: 100px; height: 100px;left: 5px; top: 50%; position:fixed;z-index:19941207; cursor: pointer;">' +
+            '<div style="left:-30px;border: 50px solid;border-color: transparent #1CB9C4 transparent transparent;position: absolute;"></div></div>');
+        $("body").append('<div id="ip-right" style="display: none; width: 100px; height: 100px; right: 5px; top: 50%; position:fixed; z-index:19941207;cursor: pointer;">' +
+            '<div style="left:30px;border: 50px solid;border-color: transparent transparent transparent #1CB9C4;position: absolute;"></div></div>');
+    },
+    fnMouseOver:function () {
+        $(this).css("background", "rgb(134, 134, 134)");
+        $(this).css("border", "1px solid rgb(111, 111, 111)");
+    },
+    fnMouseOut:function () {
+        $(this).css("background", "");
+        $(this).css("border", "");
+    },
+    fnPrev:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur>0) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"48%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[--ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"50.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnNext:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur<ip_global_img_list.length-1) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"52%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[++ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"49.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnGetIndexOfCurImg:function (cur) {
+        for (var i=0; i<ip_global_img_list.length; i++) {
+            if ($(ip_global_img_list[i]).is(cur)) {
+                return i;
+            }
+        }
+    },
+    onClickEvent:function (e) {
+        ImagePreview.fnReset();
+        $("#ip-img-preview").attr("src", $(this).attr("src"));
+        ImagePreview.fnAdjustMaxWidth();
+        ip_global_cur = ImagePreview.fnGetIndexOfCurImg($(this));
+        $("#ip-img-floatshadow").fadeIn();
+        $("#ip-img-preview").fadeIn();
+        $("#ip-left").fadeIn();
+        $("#ip-right").fadeIn();
+    },
+    fnAdjustMaxWidth:function () {
+        //最长边判定，避免超出屏幕画幅的展示
+        var widthFlag = true;
+        var max = $("#ip-img-preview").width();
+        if (max < $("#ip-img-preview").height()) {
+            widthFlag = false;
+            max = $("#ip-img-preview").height();
+        }
+        if (widthFlag && $(window).width() < max) {
+            $("#ip-img-preview").css("width","75%");
+        } else if (!widthFlag && $(window).height() < max) {
+            $("#ip-img-preview").css("height","75%");
+        }
+    },
+    fnReset:function () {
+        $("#ip-img-preview").css("left","50%");
+        $("#ip-img-preview").css("top","50%");
+        $("#ip-img-preview").css("width","");
+        $("#ip-img-preview").css("height","");
+    },
+    onMouseScrollEvent:function (e) {
+        e.preventDefault();
+        var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        var delta = Math.max(-1, Math.min(1, wheel));
+        if (delta < 0) { //向下滚动
+            $(this).width($(this).width() / 1.1);
+            $(this).height($(this).height() / 1.1);
+        } else { //向上滚动
+            $(this).width($(this).width() * 1.1);
+            $(this).height($(this).height() * 1.1);
+        }
+    },
+    onDragEvent:function (obj) {
+        obj.bind("mousedown", start);
+        function start(event) {
+            if (event.button == 0) {
+                gapX = event.clientX - obj.offset().left;
+                gapY = event.clientY - obj.offset().top;
+                $(document).bind("mousemove", move);
+                $(document).bind("mouseup", stop);
+            }
+            return false;
+        }
+        function move(event) {
+            obj.css({
+                "left": (event.clientX - gapX + obj.width() / 2) + "px",
+                "top": (event.clientY - gapY + obj.height() / 2) + "px"
+            });
+            return false;
+        }
+        function stop() {
+            $(document).unbind("mousemove", move);
+            $(document).unbind("mouseup", stop);
+        }
+    }
+};
+
+
+    var image_document = document.getElementsByTagName("a");
+    for (var i = 0; i < image_document.length; i++) {
+        let text_list = image_document[i].href.split('.')
+        
+        let image_list = ["jpg", "png"]
+        for (let j = 0; j <image_list.length ; j++) {
+            
+            
+            if (text_list[text_list.length-1] == image_list[j] )
+            {
+                
+                var herf = image_document[i].href
+                
+                var image_html = image_document[i].outerHTML
+                image_document[i].outerHTML = '<div id="imgBox"><img style="width: 200px" id="img" src="' + herf + '"/></div>'
+            }
+        }
+    }
+    // ImagePreview.init({id:"imgBox"});
+    ImagePreview.init({id:$("#imgBox img")});
+
+
+</script>
+
+
+<style type="text/css">
+    #imgs img {
+        width: 24%;
+    }
+</style>
+  
+  <input type="hidden" name="ip_set-0-id" value="3717" id="id_ip_set-0-id">
+  <input type="hidden" name="ip_set-0-node" value="2546" id="id_ip_set-0-node">
+</div><div class="inline-related empty-form last-related" id="ip_set-empty">
+  <h3><b>网卡:</b>&nbsp;<span class="inline_label">#2</span>
+      
+    
+  </h3>
+  
+  
+    <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-ip">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_ip_set-__prefix__-ip">Ip:</label>
+                        
+                            <input type="text" name="ip_set-__prefix__-ip" value="127.0.0.1" readonly="readonly" disabled id="id_ip_set-__prefix__-ip">
+                        
+                    
+                    
+                        <div class="help">不可修改，仅显示用</div>
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-global_ip">
+            
+            
+                <div>
+                    
+                    
+                        <label for="id_ip_set-__prefix__-global_ip">外网IP:</label>
+                        
+                            <input type="text" name="ip_set-__prefix__-global_ip" id="id_ip_set-__prefix__-global_ip">
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-netspeed_in">
+            
+            
+                <div>
+                    
+                    
+                        <label>下载带宽:</label>
+                        
+                            <div class="readonly"></div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-netspeed_out">
+            
+            
+                <div>
+                    
+                    
+                        <label>上传带宽:</label>
+                        
+                            <div class="readonly"></div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-need_sync">
+            
+            
+                <div class="checkbox-row">
+                    
+                    
+                        <input type="checkbox" name="ip_set-__prefix__-need_sync" id="id_ip_set-__prefix__-need_sync" checked><label class="vCheckboxLabel" for="id_ip_set-__prefix__-need_sync">同步DNS</label>
+                    
+                    
+                        <div class="help">标记是否需要同步IP到DNS</div>
+                    
+                </div>
+            
+        </div>
+    
+
+</fieldset>
+
+<!--<script type="text/javascript" src="/static/admin/js/image_pro.js"></script>-->
+<!--<script type="text/javascript" src="/static/admin/js/imagePreview.js"></script>-->
+<script type="text/javascript">
+
+
+    /**
+ * Created by hucf on 2019/11/20.
+ */
+var ImagePreview = {
+    default_params:{},
+    init:function (param) {
+        if (param) {
+            $.extend(this.default_params, param);
+        }
+        ip_global_img_list = [];
+        var id = this.default_params.id;
+        if (typeof id == 'string') {
+            if ((ip_global_img_list = $("#"+id).find("img")).length == 0) {
+                return;
+            }
+        } else if (typeof id == 'object' && id != null) {
+            ip_global_img_list = $(id);
+        }
+        this.fnGenerateHtml();
+        this.fnBindEvent(ip_global_img_list);
+    },
+    fnBindEvent:function (ip_global_img_list) {
+        if (ip_global_img_list.length == 0) {
+            return;
+        }
+        $(ip_global_img_list).on("click", this.onClickEvent);
+        this.onDragEvent($("#ip-img-preview"));
+        $("#ip-img-preview").on('mousewheel DOMMouseScroll', this.onMouseScrollEvent);
+
+        $('#ip-img-floatshadow').on("click", function () {
+            $('#ip-img-preview').hide();
+            $("#ip-left").hide();
+            $("#ip-right").hide();
+            $('#ip-img-floatshadow').hide();
+            $('#ip-img-preview').attr("src", "");
+        });
+        $("#ip-left").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnPrev);
+        $("#ip-right").hover(this.fnMouseOver,this.fnMouseOut).click(this.fnNext);
+    },
+    fnGenerateHtml:function () {
+        $("body").append('<img id="ip-img-preview" style="position: fixed;left: 50%;top: 50%;transform: translate(-50%, -50%);z-index: 19941206;cursor: move;display: none"/><div id="ip-img-floatshadow" style="z-index: 19941205;background-color: #000;opacity: .5;top: 0;left: 0;width: 100%;height: 100%;position: fixed;display: none" title="点击空白处关闭"></div>');
+        $("body").append('<div id="ip-left" style="display: none; width: 100px; height: 100px;left: 5px; top: 50%; position:fixed;z-index:19941207; cursor: pointer;">' +
+            '<div style="left:-30px;border: 50px solid;border-color: transparent #1CB9C4 transparent transparent;position: absolute;"></div></div>');
+        $("body").append('<div id="ip-right" style="display: none; width: 100px; height: 100px; right: 5px; top: 50%; position:fixed; z-index:19941207;cursor: pointer;">' +
+            '<div style="left:30px;border: 50px solid;border-color: transparent transparent transparent #1CB9C4;position: absolute;"></div></div>');
+    },
+    fnMouseOver:function () {
+        $(this).css("background", "rgb(134, 134, 134)");
+        $(this).css("border", "1px solid rgb(111, 111, 111)");
+    },
+    fnMouseOut:function () {
+        $(this).css("background", "");
+        $(this).css("border", "");
+    },
+    fnPrev:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur>0) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"48%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[--ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"50.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnNext:function () {
+        if (typeof(ip_global_cur) == "number" && ip_global_cur<ip_global_img_list.length-1) {
+            ImagePreview.fnReset();
+            $("#ip-img-preview").animate({left:"52%"}, 100);
+            $("#ip-img-preview").attr("src", ip_global_img_list[++ip_global_cur].src);
+            $("#ip-img-preview").animate({left:"49.5%"}, 100);
+            $("#ip-img-preview").animate({left:"50%"}, 100);
+            ImagePreview.fnAdjustMaxWidth();
+        }
+    },
+    fnGetIndexOfCurImg:function (cur) {
+        for (var i=0; i<ip_global_img_list.length; i++) {
+            if ($(ip_global_img_list[i]).is(cur)) {
+                return i;
+            }
+        }
+    },
+    onClickEvent:function (e) {
+        ImagePreview.fnReset();
+        $("#ip-img-preview").attr("src", $(this).attr("src"));
+        ImagePreview.fnAdjustMaxWidth();
+        ip_global_cur = ImagePreview.fnGetIndexOfCurImg($(this));
+        $("#ip-img-floatshadow").fadeIn();
+        $("#ip-img-preview").fadeIn();
+        $("#ip-left").fadeIn();
+        $("#ip-right").fadeIn();
+    },
+    fnAdjustMaxWidth:function () {
+        //最长边判定，避免超出屏幕画幅的展示
+        var widthFlag = true;
+        var max = $("#ip-img-preview").width();
+        if (max < $("#ip-img-preview").height()) {
+            widthFlag = false;
+            max = $("#ip-img-preview").height();
+        }
+        if (widthFlag && $(window).width() < max) {
+            $("#ip-img-preview").css("width","75%");
+        } else if (!widthFlag && $(window).height() < max) {
+            $("#ip-img-preview").css("height","75%");
+        }
+    },
+    fnReset:function () {
+        $("#ip-img-preview").css("left","50%");
+        $("#ip-img-preview").css("top","50%");
+        $("#ip-img-preview").css("width","");
+        $("#ip-img-preview").css("height","");
+    },
+    onMouseScrollEvent:function (e) {
+        e.preventDefault();
+        var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        var delta = Math.max(-1, Math.min(1, wheel));
+        if (delta < 0) { //向下滚动
+            $(this).width($(this).width() / 1.1);
+            $(this).height($(this).height() / 1.1);
+        } else { //向上滚动
+            $(this).width($(this).width() * 1.1);
+            $(this).height($(this).height() * 1.1);
+        }
+    },
+    onDragEvent:function (obj) {
+        obj.bind("mousedown", start);
+        function start(event) {
+            if (event.button == 0) {
+                gapX = event.clientX - obj.offset().left;
+                gapY = event.clientY - obj.offset().top;
+                $(document).bind("mousemove", move);
+                $(document).bind("mouseup", stop);
+            }
+            return false;
+        }
+        function move(event) {
+            obj.css({
+                "left": (event.clientX - gapX + obj.width() / 2) + "px",
+                "top": (event.clientY - gapY + obj.height() / 2) + "px"
+            });
+            return false;
+        }
+        function stop() {
+            $(document).unbind("mousemove", move);
+            $(document).unbind("mouseup", stop);
+        }
+    }
+};
+
+
+    var image_document = document.getElementsByTagName("a");
+    for (var i = 0; i < image_document.length; i++) {
+        let text_list = image_document[i].href.split('.')
+        
+        let image_list = ["jpg", "png"]
+        for (let j = 0; j <image_list.length ; j++) {
+            
+            
+            if (text_list[text_list.length-1] == image_list[j] )
+            {
+                
+                var herf = image_document[i].href
+                
+                var image_html = image_document[i].outerHTML
+                image_document[i].outerHTML = '<div id="imgBox"><img style="width: 200px" id="img" src="' + herf + '"/></div>'
+            }
+        }
+    }
+    // ImagePreview.init({id:"imgBox"});
+    ImagePreview.init({id:$("#imgBox img")});
+
+
+</script>
+
+
+<style type="text/css">
+    #imgs img {
+        width: 24%;
+    }
+</style>
+  
+  <input type="hidden" name="ip_set-__prefix__-id" id="id_ip_set-__prefix__-id">
+  <input type="hidden" name="ip_set-__prefix__-node" value="2546" id="id_ip_set-__prefix__-node">
+</div>
+</fieldset>
+</div>
+
+                    </el-tab-pane>
+                
+
+            
+        </el-tabs>
+    </div>
+    
+
+
+
+            
+
+            
+<div class="submit-row">
+    
+        <el-button type="button" icon="el-icon-arrow-left" onclick="prev()"
+                   style="float: left;margin-right: 10px;margin-bottom: 10px;">
+            <span v-text="getLanuage('Go back')"></span>
+        </el-button>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <input type="submit" class="el-button el-button--primary" value="保存" name="_save">
+    
+    <input type="hidden" name="actionName" value="actionValue" id="actionName">
+</div>
+<script type="text/javascript">
+    var submitrows=document.getElementsByClassName('submit-row');
+    function del(url){
+         window.location.href = url;
+    }
+    function prev() {
+         window.location.href='/admin/node/nodeinfo/'
+    }
+
+    for(var i=0;i<submitrows.length;i++){
+        new Vue({
+        el: submitrows[i],
+        data: {},
+        methods: {
+            formSubmit: function (name, v, e) {
+                $("#actionName").attr('name', name).val(v);
+                $("form").submit();
+            }
+        }
+    })
+    }
+
+</script>
+
+            
+            <script type="text/javascript"
+                    id="django-admin-form-add-constants"
+                    src="/static/admin/js/change_form.js"
+                    >
+            </script>
+            
+
+            
+            
+<script type="text/javascript"
+        id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: '#tabs',
+        data: function (){
+            return {tabPosition: 'left'}
+        },
+        methods: {
+            goBack: function () {
+                window.location.href = '/admin/node/nodeinfo/'
+            }
+        }
+    })
+    new Vue({
+        el: '.page-header',
+        methods: {
+            goBack: function () {
+                window.location.href = '/admin/node/nodeinfo/'
+            }
+        }
+    })
+    if ($(".object-tools").length != 0) {
+        new Vue({
+            el: '.object-tools',
+            data: {
+                dialogTableVisible: false,
+                url: ''
+            },
+            methods: {
+                go_url: function (url) {
+                    this.url = url;
+                    this.dialogTableVisible = true;
+                }
+            }
+        })
+    }
+    if (document.getElementById('alert')) {
+        new Vue({
+            el: '#alert'
+        })
+    }
+</script>
+
+        
+        <br class="clear"/>
+    </div>
+    <!-- END Content -->
+
+    
+    <div id="footer"></div>
+    
+</div>
+<!-- END Container -->
+</body>
+</html>

@@ -13,33 +13,133 @@ import urllib.parse
 from app.utils import export
 from urllib.parse import urlparse
 
+eval_globals = {
+    'true': True,
+    'false': False,
+    'null': ''
+}
 
 @export("/admin/node/nodeinfo/")
 def nodeinfo(data, *args, **kwargs):
-    globals = {
-        'true': True,
-        'false': False
-    }
     try:
-        data = eval(data, globals)
+        data = eval(data, eval_globals)
     except Exception as error:
         return data
 
     data["data"]["rows"][0]["remarks"] = ""
-    node = copy.deepcopy(data["data"]["rows"][0])
-    data["data"]["rows"].append(node)
-    data["data"]["rows"].append(node)
-    data["data"]["rows"].append(node)
-    data["data"]["rows"][0]["stationname"] = "潮汕联通节点1"
-    data["data"]["rows"][1]["stationname"] = "潮汕联通节点2"
-    data["data"]["rows"][2]["stationname"] = "潮汕电信节点1"
-    data["data"]["rows"][3]["stationname"] = "潮汕移动节点1"
+    data["data"]["rows"][0]["is_online"] = '<i class="fa fa-cloud" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="连接正常"></i>'
+    data["data"]["rows"][0]["ng_status"] = '<i class="fa fa-internet-explorer" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="监控正常"></i>'
+    data["data"]["rows"][0]["sync"] = '<i class="fa fa-times-circle" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="DNS同步正常"></i>'
+
+    stationname = ["联通节点1", "联通节点2", "移动节点1", "移动节点2", "移动节点1", "移动节点2", "铁通节点1", "铁通节点2", "广电节点1", "广电节点2", "联通节点3"]
+    for i in range(10):
+        node = copy.deepcopy(data["data"]["rows"][0])
+        node["stationname"] = stationname[i]
+        node["node_ip"] = "192.168.100." + str(i + 10)
+
+        mem_usage = str(random.randint(20, 90))
+        node["mem_usage"] = '<div style="position:relative; z-index:1; width:100px; text-align:center; background:#01c571; border:#444444 1px solid; ">'
+        node["mem_usage"] += mem_usage
+        node["mem_usage"] += '%<div style="position:absolute;top: 0;left: 0;background: #88fb45;width: '
+        node["mem_usage"] += mem_usage
+        node["mem_usage"] += 'px;opacity: 0.6;max-width: 100%;">&nbsp;&nbsp;&nbsp;</div></div>'
+
+        network_usage1 = str(random.randint(100, 300))
+        network_usage2 = str(random.randint(100, 300))
+        node["network_usage"] = '<div class="" style="list-style: none;padding-left: 2px;"><table><tr style="border:0"><td style="border:0" title="进服务器的带宽">' +\
+        network_usage1 + 'Mbps</td><td style="border:0">	&nbsp;/&nbsp;	</td><td style="border:0" title="出服务器的带宽">' +\
+        network_usage2 + 'Mbps</td></tr></table></div>'
+
+        data["data"]["rows"].append(node)
 
     data = json.dumps(data)
     return bytes(data, encoding='utf-8')
 
 
-def get_data(url, y="domain"):
+@export("/admin/node/nodezone/")
+def nodezone(data, *args, **kwargs):
+    try:
+        data = eval(data, eval_globals)
+    except Exception as error:
+        return data
+    data["data"]["rows"][0]["display_cdn_prefix"] = "cdn209.com.cn"
+    data = json.dumps(data)
+    return bytes(data, encoding='utf-8')
+
+
+@export("/admin/domain/domainsiteinfo/")
+def domainsiteinfo(data, *args, **kwargs):
+    try:
+        data = data.replace(b'cdnplus', b'cdn')
+        data = eval(data, eval_globals)
+    except Exception as error:
+        return data
+
+    data["data"]["headers"][0]["label"] = "加速类型"
+    cdntype = ["静态加速", "动态加速", "文件下载加速", "静态加速", "动态加速", "文件下载加速", "流媒体点播加速", "流媒体直播"]
+    i = 0
+    for item in data["data"]["rows"]:
+        item["full_domain"] = cdntype[i]
+        i += 1
+
+    data = json.dumps(data)
+    return bytes(data, encoding='utf-8')
+
+
+# 带宽流量
+@export("/admin/statistic/billing/")
+def billing(data, *args, **kwargs):
+    try:
+        data = eval(data, eval_globals)
+    except Exception as error:
+        return data
+
+    for item in data["data"]["headers"]:
+        if item["label"] == "域名":
+            data["data"]["headers"].remove(item)
+
+    for item in data["data"]["headers"]:
+        if item["label"] == "流量":
+            item["label"] = "流量(GB)"
+        elif item["label"] == "最大带宽":
+            item["label"] = "最大带宽(GB)"
+        elif item["label"] == "命中次数":
+            item["label"] = "命中率(%)"
+
+    start_time = datetime.datetime.now() - datetime.timedelta(days=1)
+    end_time = datetime.datetime.now()
+    if "filters" in args[0][1]:
+        filters_times = args[0][1]["filters"].split('"')
+        time_gte = filters_times[3].replace(' 08:00', '')
+        time_lte = filters_times[7].replace(' 08:00', '')
+        start_time = datetime.datetime.strptime(time_gte, "%Y-%m-%d %H:%M:%S")
+        end_time = datetime.datetime.strptime(time_lte, "%Y-%m-%d %H:%M:%S")
+    num = int((end_time.timestamp() - start_time.timestamp()) / 86400)
+    increment = 86400
+    max_bandwidth_unit_total = 0
+    count_total = 0
+    for i in range(1, num):
+        stamp = int(start_time.timestamp()) + i * increment
+        max_bandwidth_unit = random.randint(100, 150)
+        max_bandwidth_unit_total += max_bandwidth_unit
+        hit_count = random.randint(100000, 900000)
+        count_total += hit_count
+        data["data"]["rows"].append({
+            "time": time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp)),
+            "flow_unit": random.randint(100 * 1000, 150 * 1000),
+            "max_bandwidth_unit": max_bandwidth_unit,
+            "count": hit_count,
+            "hit_count": random.randint(90, 100)
+        })
+    data["data"]["summaries"][3] = str(max_bandwidth_unit_total) + "(Byte)"
+    data["data"]["summaries"][4] = str(count_total) + "字节"
+    del data["data"]["summaries"]
+
+    data = json.dumps(data)
+    return bytes(data, encoding='utf-8')
+
+
+def get_data(url, y="domain", min=100000000, max=900000000):
     url = url.replace('[]', '')
     query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(url).query))
     domains = url.split('&domain%5B%5D=')
@@ -83,13 +183,13 @@ def get_data(url, y="domain"):
         data["data"].sort(key=takeSecond)
     elif y == "time":
         if len(start_time) > 0:
-            num = 13
+            num = 30
             start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
             end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
             increment = int((end_time.timestamp() - start_time.timestamp()) / num)
             for i in range(1, num):
                 stamp = int(start_time.timestamp()) + i * increment
-                item = [time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp)), random.randint(100000000, 900000000)]
+                item = [time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stamp)), random.randint(min, max)]
                 data["data"].append(item)
 
     data = json.dumps(data)
@@ -98,31 +198,32 @@ def get_data(url, y="domain"):
 
 @export("/statistic/summary/")
 def statistic_summary(data, *args, **kwargs):
-    # data = eval(data)
+    url = args[0][0].replace('[]', '')
+    query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(url).query))
+    start_time = query.get('start_time', '')
+    end_time = query.get('end_time', '')
+    start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
+    end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
+    increment = (end_time.timestamp() - start_time.timestamp()) / 86400
 
-    # data = str(data)
-
-    data = '''{
+    data = {
             "code": 0,
             "message": "",
             "data": {
-                "count": 10,
-                "hit_rate": "20.00%",
-                "max_bindwidth": "320\xa0bps",
-                "flow": "30字节"
+                "count": int(random.randint(500, 1500) * increment),
+                "hit_rate": str(random.randint(90, 99)) + "%",
+                "max_bindwidth": str(random.randint(100, 150)) + "GB",
+                "flow": str(random.randint(500, 1000)) + "\xa0bps"
             }
         }
-    '''
 
-    # content = str(result.content, encoding='utf-8')
-    # content = content.replace('友盟', '昊盟')
-    # content = bytes(content, encoding='utf-8')
+    data = json.dumps(data)
     return bytes(data, encoding='utf-8')
 
 
 @export("/statistic/domain-bandwidth/")
 def statistic_domain_bandwidth(data, *args, **kwargs):
-    data = get_data(args[0][0], "time")
+    data = get_data(args[0][0], y="time", min=100, max=160)
     return bytes(data, encoding='utf-8')
 
 
@@ -134,7 +235,7 @@ def statistic_node_bandwidth_ranking(data, *args, **kwargs):
 
 @export("/statistic/node-flow/")
 def statistic_node_flow(data, *args, **kwargs):
-    data = get_data(args[0][0], "time")
+    data = get_data(args[0][0], y="time", min=10000, max=15000)
     return bytes(data, encoding='utf-8')
 
 
@@ -144,10 +245,10 @@ def statistic_node_flow_ranking(data, *args, **kwargs):
     return bytes(data, encoding='utf-8')
 
 
-@export("/statistic/node-visit/")
+@export("/statistic/source-fail/")
 def statistic_node_visit(data, *args, **kwargs):
-    data = get_data(args[0][0], "time")
-    return bytes(data, encoding='utf-8')
+    data = get_data(args[0][0], y='time', min=90, max=100)
+    return 200, args[0][3], bytes(data, encoding='utf-8')
 
 
 @export("/statistic/node-visit-ranking/")
@@ -156,10 +257,22 @@ def statistic_node_visit_ranking(data, *args, **kwargs):
     return bytes(data, encoding='utf-8')
 
 
+@export("/statistic/node-visit/")
+def statistic_node_visit_ranking(data, *args, **kwargs):
+    data = get_data(args[0][0], y="time")
+    return bytes(data, encoding='utf-8')
+
+
 @export("/statistic/query-domain-ranking/")
 def statistic_query_domain_ranking(data, *args, **kwargs):
     data = get_data(args[0][0])
     return bytes(data, encoding='utf-8')
+
+
+@export("/statistic/source-data/")
+def statistic_source(data, *args, **kwargs):
+    data = get_data(args[0][0], y='time')
+    return 200, args[0][3], bytes(data, encoding='utf-8')
 
 
 @export("/statistic/query-domain-url-ranking/")
@@ -183,7 +296,7 @@ def statistic_query_code_ranking(data, *args, **kwargs):
 
 @export("/statistic/query-hit/")
 def statistic_query_hit(data, *args, **kwargs):
-    data = get_data(args[0][0], y="time")
+    data = get_data(args[0][0], y="time", min=90, max=100)
     return bytes(data, encoding='utf-8')
 
 

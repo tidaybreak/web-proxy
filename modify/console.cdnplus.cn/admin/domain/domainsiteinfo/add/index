@@ -1,0 +1,975 @@
+status_code: 200
+Server: openresty
+Date: Mon, 06 Sep 2021 06:29:13 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Expires: Mon, 06 Sep 2021 06:29:13 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: csrftoken=KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk; expires=Mon, 05 Sep 2022 06:29:13 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+Content-Encoding: gzip
+
+
+csrftoken: KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk
+
+<!DOCTYPE html>
+
+
+<html lang="zh-hans" >
+<head>
+    <title>增加 域名加速 | CDNPlus</title>
+
+    
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/elementui/theme-chalk/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/fontawesome-free-5.8.1-web/css/all.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css?_=2.7">
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/css/base.css?_=2.7">
+    <link rel="stylesheet" type="text/css" href="/static/admin/simpleui-x/theme/simpleui.css">
+
+
+
+    
+
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/vue.min.js?_=2020.9.26"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/elementui/index.js?_=2020.9.26"></script>
+
+
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/language.js?_=2.1.2"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/locale/en-us.js?_=2.1.2"></script>
+    <script type="text/javascript" src="/static/admin/simpleui-x/locale/zh-hans.js"></script>
+
+    
+    <script type="text/javascript" src="/static/admin/simpleui-x/js/cookie.js"></script>
+    
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css"/>
+<link rel="stylesheet" href="/static/custom/css/font-awesome.min.css">
+
+    
+    
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<link href="/static/custom/css/domain_multi_changelist.css" type="text/css" media="/custom/css/domain_multi_changelist.css" rel="stylesheet">
+<link href="/static/custom/css/font-awesome.min.css" type="text/css" media="/custom/css/font-awesome.min.css" rel="stylesheet">
+<link href="/static/easy_select2/vendor/select2/css/select2.min.css" type="text/css" media="screen" rel="stylesheet">
+<link href="/static/easy_select2/css/easy_select2.css" type="text/css" media="screen" rel="stylesheet">
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/easy_select2/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/easy_select2/js/init.js"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/easy_select2/js/easy_select2.js"></script>
+<script type="text/javascript" src="/static/admin/js/inlines.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/easy_select2/vendor/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css?_=20180905"/>
+    
+    
+    
+    <meta name="robots" content="NONE,NOARCHIVE"/>
+    
+    <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.min.js"></script>
+</head>
+
+
+<body class=""
+      data-admin-utc-offset=" 28800">
+
+
+
+
+<div id="theme">
+    <link v-if="theme && theme!=''" rel="stylesheet" :href="theme">
+
+    
+</div>
+<script type="text/javascript">
+
+    var fontConfig = new Vue({
+        data: {
+            fontSize: null
+        },
+        watch: {
+            fontSize: function (newValue) {
+                if (newValue != 0) {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (!fontStyle) {
+                        fontStyle = document.createElement('style');
+                        fontStyle.id = 'fontStyle';
+                        fontStyle.type = 'text/css';
+                        document.head.append(fontStyle);
+                    }
+                    fontStyle.innerHTML = '*{font-size:' + newValue + 'px!important;}'
+
+                } else {
+                    var fontStyle = document.getElementById('fontStyle');
+                    if (fontStyle) {
+                        fontStyle.remove();
+                    }
+                }
+            }
+        },
+        created: function () {
+            var val = getCookie('fontSize');
+            if (val) {
+                this.fontSize = parseInt(val);
+            } else {
+                this.fontSize = 0;
+            }
+        },
+        methods: {}
+    });
+
+
+    new Vue({
+        el: '#theme',
+        data: {
+            theme: '',
+        },
+        created: function () {
+            this.theme = getCookie('theme');
+
+            var self = this;
+            //向父组件注册事件
+            if (parent.addEvent) {
+                parent.addEvent('theme', function (theme) {
+                    self.theme = theme;
+                });
+
+                parent.addEvent('font', function (font) {
+                    fontConfig.fontSize = font;
+                });
+                // 注释掉它，避免菜单出现问题
+
+
+
+            }
+
+        }
+    })
+    window.addEventListener('beforeunload', () => {
+        if (window.beforeLoad) {
+            window.beforeLoad();
+        }
+    });
+
+</script>
+<!-- Container -->
+<div id="container">
+
+    
+    
+    <script id="out_message" type="text/javascript">var messages=[]</script>
+    
+    <script type="text/javascript">
+
+        new Vue({
+            created: function () {
+                var self = this;
+
+                messages.forEach(item => {
+                    setTimeout(function () {
+                        self.$notify({
+                            title: getLanuage('Tips'),
+                            message: item.msg,
+                            type: item.tag,
+                            dangerouslyUseHTMLString: true
+                        });
+                    }, 200);
+                });
+
+            }
+        })
+    </script>
+
+    
+
+    <div class="menu-content">
+        
+    </div>
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        
+
+        
+        
+        
+        <div style="display: none">增加 域名加速</div>
+        
+        
+        
+<style type="text/css">
+    .inline-group .tabular td.original p {
+        margin-top: -50px;
+        height: 1.2em;
+    }
+
+    .page-header {
+        padding: 10px;
+    }
+    fieldset > legend{
+        margin: 10px 0 20px;
+        border-width: 1px 0 0;
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+</style>
+<div id="content-main" class="form-main">
+    
+    
+    <div class="page-header">
+        <el-page-header @back="goBack" content="增加 域名加速"/>
+    </div>
+    
+    
+    
+    
+    
+    <form action="" method="post"
+          id="domainsiteinfo_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="HxlJdVl13wsZdSWBQHdg3qwdl7HaOSpuyjBkViZzfb3bBYhPTusIDopjSzSrfbAR">
+        <div>
+            
+            
+            
+            <div id="alert">
+                
+                
+                
+            </div>
+            
+                <ul style="margin: 0 0 4px;color: #ba2121;background: #fff;">
+                
+                </ul>
+
+            
+            
+            
+    <div class="card">
+        <fieldset class="suit-form">
+        <div class="card-block col-md-offset-1 col-md-10">
+
+
+
+
+
+            
+            <form action="" method="post" id="domaininfo_form" ><input type="hidden" name="csrfmiddlewaretoken" value="HxlJdVl13wsZdSWBQHdg3qwdl7HaOSpuyjBkViZzfb3bBYhPTusIDopjSzSrfbAR">
+                <div>
+                <fieldset class="module aligned suit-tab suit-tab-general">
+                 <div class="form-group row form-row ">
+                    <label class="required" for="id_id_full_domain">
+                        完整域名
+                    </label>
+                    <div class="col-xs-12 col-sm-9 col-md-10 col-lg-4 widget-TextInput">
+                        <input type="text" name="full_domain" class="vTextField" maxlength="255" required id="id_full_domain"><div class="help"></div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_zone">
+                    <label class="required" for="id_id_zone">关联节点分组:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                            
+                                <div class="related-widget-wrapper">
+    <select name="zone" required id="id_zone">
+  <option value="" selected>---------</option>
+
+  <option value="209">默认分组</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_zone"
+            data-href-template="/admin/node/nodezone/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="更改选中的分组"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a>
+    
+</div>
+                        <div class="help"></div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_options">
+                    <label class="required" for="id_id_options">加速类型:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                            
+                                <div class="related-widget-wrapper">
+    <select name="options" id="id_options">
+  <option value="" selected>默认配置</option>
+
+  <option value="5322">静态加速</option>
+
+  <option value="5420">动态加速</option>
+
+  <option value="5421">文件下载加速</option>
+
+  <option value="5500">流媒体点播加速</option>
+
+  <option value="5614">流媒体直播加速</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_options"
+            data-href-template="/admin/dsetting/options/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="更改选中的缓存配置"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a><a class="related-widget-wrapper-link add-related" id="add_id_options"
+            href="/admin/dsetting/options/add/?_to_field=id&amp;_popup=1"
+            title="增加另一个 缓存配置"><img src="/static/admin/img/icon-addlink.svg" alt="增加"></a>
+    
+</div>
+                        <div class="help"></div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_https_0">
+                    <label class="required" for="id_id_https_0">网站协议:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                        <ul id="id_https" class="radiolist inline">
+    <li><label for="id_https_0"><input type="radio" name="https" value="False" class="radiolist inline" required id="id_https_0" checked>
+ HTTP</label>
+
+</li>
+    <li><label for="id_https_1"><input type="radio" name="https" value="True" class="radiolist inline" required id="id_https_1">
+ HTTP和HTTPS</label>
+
+</li>
+</ul>
+                        <div class="help">是否开启HTTPS。默认为HTTP协议</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_ssl">
+                    <label for="id_id_ssl">证书:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                            
+                                <div class="related-widget-wrapper">
+    <select name="ssl" id="id_ssl">
+  <option value="" selected>---------</option>
+
+</select><div class="field-easy-select2"
+                   style="display:none"
+                   id="id_ssl"
+                   data-width='250px'></div>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_ssl"
+            data-href-template="/admin/domain/domainssl/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="更改选中的SSL证书"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a><a class="related-widget-wrapper-link add-related" id="add_id_ssl"
+            href="/admin/domain/domainssl/add/?_to_field=id&amp;_popup=1"
+            title="增加另一个 SSL证书"><img src="/static/admin/img/icon-addlink.svg" alt="增加"></a>
+    
+</div>
+                        <div class="help">开启HTTPS，需要选择证书</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_port">
+                    <label class="required" for="id_id_port">HTTP监听端口:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-NumberInput ">
+                        <input type="text" name="port" value="80" class="vTextField" maxlength="50" id="id_port">
+                        <div class="help">默认为80端口。多个端口，用空格分隔；留空，则不监听HTTP端口。</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_port_https">
+                    <label for="id_id_port_https">HTTPS监听端口:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-NumberInput ">
+                        <input type="text" name="port_https" class="vTextField" maxlength="50" id="id_port_https">
+                        <div class="help">默认为空。启用HTTPS通常设置为443；多个端口，用空格分隔</div>
+                        
+                    </div>
+                </div>
+				<div class="form-group row form-row  field-id_port_https">
+                    <label for="id_id_port_https">DNS攻击阀值:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-NumberInput ">
+                        <input type="text" name="port_https" class="vTextField" maxlength="50" id="id_port_https">
+                        <div class="help">当出现DNS攻击并到达预设的阀时，会发出告警通知</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_http_redirect_https_0">
+                    <label for="id_id_http_redirect_https_0">HTTP强制跳转到HTTPS:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                        <ul id="id_http_redirect_https" class="radiolist inline">
+    <li><label for="id_http_redirect_https_0"><input type="radio" name="http_redirect_https" value="False" class="radiolist inline" required id="id_http_redirect_https_0" checked>
+ 关闭</label>
+
+</li>
+    <li><label for="id_http_redirect_https_1"><input type="radio" name="http_redirect_https" value="True" class="radiolist inline" required id="id_http_redirect_https_1">
+ 开启</label>
+
+</li>
+</ul>
+                        <div class="help">开启后，所有HTTP端口都自动跳转至HTTPS监听端口的第一个端口。注意：当开启URL跳转后，此选项将失效</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_http2_0">
+                    <label for="id_id_http2_0">HTTP2协议:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                        <ul id="id_http2" class="radiolist inline">
+    <li><label for="id_http2_0"><input type="radio" name="http2" value="False" class="radiolist inline" required id="id_http2_0" checked>
+ 关闭</label>
+
+</li>
+    <li><label for="id_http2_1"><input type="radio" name="http2" value="True" class="radiolist inline" required id="id_http2_1">
+ 开启</label>
+
+</li>
+</ul>
+                        <div class="help">数据传输将采用串行方式，可减少请求数，适用于连接较多的小文件传输站点。大文件站点建议关闭，默认关闭</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_open_websocket_0">
+                    <label for="id_id_open_websocket_0">Websocket协议:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                        <ul id="id_open_websocket" class="radiolist inline">
+    <li><label for="id_open_websocket_0"><input type="radio" name="open_websocket" value="False" class="radiolist inline" required id="id_open_websocket_0" checked>
+ 关闭</label>
+
+</li>
+    <li><label for="id_open_websocket_1"><input type="radio" name="open_websocket" value="True" class="radiolist inline" required id="id_open_websocket_1">
+ 开启</label>
+
+</li>
+</ul>
+                        <div class="help">默认为关闭状态，Websocket协议简称为ws或wss协议</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_backend_https_0">
+                    <label class="required" for="id_id_backend_https_0">源站协议:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                        <ul id="id_backend_https" class="radiolist inline">
+    <li><label for="id_backend_https_0"><input type="radio" name="backend_https" value="False" class="radiolist inline" required id="id_backend_https_0" checked>
+ HTTP协议(默认的80端口)</label>
+
+</li>
+    <li><label for="id_backend_https_1"><input type="radio" name="backend_https" value="True" class="radiolist inline" required id="id_backend_https_1">
+ HTTPS协议(默认的443端口)</label>
+
+</li>
+</ul>
+                        <div class="help">回源协议默认为HTTP，勾选则使用HTTPS回源，需根据源站配置情况而定</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_balance_option_0">
+                    <label class="required" for="id_id_balance_option_0">源站均衡负载模式:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                        <ul id="id_balance_option" class="radiolist inline">
+    <li><label for="id_balance_option_0"><input type="radio" name="balance_option" value="" class="radiolist inline" id="id_balance_option_0" checked>
+ 轮询模式</label>
+
+</li>
+    <li><label for="id_balance_option_1"><input type="radio" name="balance_option" value="ip_hash" class="radiolist inline" id="id_balance_option_1">
+ IP哈希</label>
+
+</li>
+</ul>
+                        <div class="help">存在多个源站时进行选择</div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row form-row  field-id_backend_host">
+                    <label class="required" for="id_id_backend_host">回源HOST:</label>
+                    <div class=" col-xs-12 col-sm-9 col-md-8 col-lg-7 widget-Select ">
+                        <input type="text" name="backend_host" class="vTextField" maxlength="255" id="id_backend_host">
+                        <div class="help">自定义CDN节点回源过程中所需要访问的WEB服务器域名，默认为空，即使用CDN域名</div>
+                        
+                    </div>
+                </div>
+                </fieldset>
+                </div>
+
+            
+        </form>
+        </div>
+        </fieldset>
+    </div>
+        
+            
+<div class="js-inline-admin-formset inline-group" id="upstream-group"
+     data-inline-type="tabular"
+     data-inline-formset="{&quot;name&quot;: &quot;#upstream&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;upstream&quot;, &quot;addText&quot;: &quot;\u6dfb\u52a0\u53e6\u4e00\u4e2a \u6e90\u7ad9\u4fe1\u606f&quot;, &quot;deleteText&quot;: &quot;\u5220\u9664&quot;}}">
+  <div class="tabular inline-related ">
+<input type="hidden" name="upstream-TOTAL_FORMS" value="1" id="id_upstream-TOTAL_FORMS"><input type="hidden" name="upstream-INITIAL_FORMS" value="0" id="id_upstream-INITIAL_FORMS"><input type="hidden" name="upstream-MIN_NUM_FORMS" value="1" id="id_upstream-MIN_NUM_FORMS"><input type="hidden" name="upstream-MAX_NUM_FORMS" value="10" id="id_upstream-MAX_NUM_FORMS">
+<fieldset class="module ">
+   
+   <table>
+     <thead><tr>
+       <th class="original"></th>
+     
+       
+         <th class="column-ip required">源站信息
+         &nbsp;<img src="/static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(可填写IP或CNAME)" title="可填写IP或CNAME">
+         </th>
+       
+     
+       
+         <th class="column-port required">端口
+         
+         </th>
+       
+     
+     <th>删除？</th>
+     </tr></thead>
+
+     <tbody>
+     
+        
+        <tr class="form-row row1 "
+             id="upstream-0">
+        <td class="original">
+          
+          <input type="hidden" name="upstream-0-id" id="id_upstream-0-id">
+          <input type="hidden" name="upstream-0-domain" id="id_upstream-0-domain">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-ip">
+              
+                  
+                  <input type="text" name="upstream-0-ip" class="vTextField" maxlength="255" id="id_upstream-0-ip">
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-port">
+              
+                  
+                  <input type="number" name="upstream-0-port" value="80" class="vIntegerField" id="id_upstream-0-port">
+              
+              </td>
+              
+            
+          
+        
+        
+          <td class="delete"></td>
+        
+        </tr>
+     
+        
+        <tr class="form-row row2  empty-form"
+             id="upstream-empty">
+        <td class="original">
+          
+          <input type="hidden" name="upstream-__prefix__-id" id="id_upstream-__prefix__-id">
+          <input type="hidden" name="upstream-__prefix__-domain" id="id_upstream-__prefix__-domain">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-ip">
+              
+                  
+                  <input type="text" name="upstream-__prefix__-ip" class="vTextField" maxlength="255" id="id_upstream-__prefix__-ip">
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-port">
+              
+                  
+                  <input type="number" name="upstream-__prefix__-port" value="80" class="vIntegerField" id="id_upstream-__prefix__-port">
+              
+              </td>
+              
+            
+          
+        
+        
+          <td class="delete"></td>
+        
+        </tr>
+     
+     </tbody>
+   </table>
+</fieldset>
+  </div>
+</div>
+
+        
+            
+<div class="js-inline-admin-formset inline-group" id="site_multi-group"
+     data-inline-type="tabular"
+     data-inline-formset="{&quot;name&quot;: &quot;#site_multi&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;site_multi&quot;, &quot;addText&quot;: &quot;\u6dfb\u52a0\u53e6\u4e00\u4e2a \u540c\u7ad9\u591a\u57df\u540d&quot;, &quot;deleteText&quot;: &quot;\u5220\u9664&quot;}}">
+  <div class="tabular inline-related last-related">
+<input type="hidden" name="site_multi-TOTAL_FORMS" value="0" id="id_site_multi-TOTAL_FORMS"><input type="hidden" name="site_multi-INITIAL_FORMS" value="0" id="id_site_multi-INITIAL_FORMS"><input type="hidden" name="site_multi-MIN_NUM_FORMS" value="0" id="id_site_multi-MIN_NUM_FORMS"><input type="hidden" name="site_multi-MAX_NUM_FORMS" value="200" id="id_site_multi-MAX_NUM_FORMS">
+<fieldset class="module col-lg-12">
+    <fieldset>
+        <legend >
+            同站多域名信息
+        </legend>
+    </fieldset>
+   
+   <table>
+     <thead><tr>
+       <th class="original"></th>
+     
+       
+         <th class="column-full_domain required">域名
+         
+         </th>
+       
+     
+       
+         <th class="column-port">HTTP监听端口
+         &nbsp;<img src="/static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(默认为80端口。多个端口，用空格分隔；留空，则不监听HTTP端口。)" title="默认为80端口。多个端口，用空格分隔；留空，则不监听HTTP端口。">
+         </th>
+       
+     
+       
+         <th class="column-port_https">HTTPS监听端口
+         &nbsp;<img src="/static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(默认为空。启用HTTPS通常设置为443；多个端口，用空格分隔)" title="默认为空。启用HTTPS通常设置为443；多个端口，用空格分隔">
+         </th>
+       
+     
+       
+         <th class="column-https required">网站协议
+         &nbsp;<img src="/static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(是否开启HTTPS。默认为HTTP协议)" title="是否开启HTTPS。默认为HTTP协议">
+         </th>
+       
+     
+       
+         <th class="column-ssl">证书
+         &nbsp;<img src="/static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(开启HTTPS，需要选择证书)" title="开启HTTPS，需要选择证书">
+         </th>
+       
+     
+       
+         <th class="column-http_redirect_https required">HTTP强制跳转到HTTPS
+         &nbsp;<img src="/static/admin/img/icon-unknown.svg" class="help help-tooltip" width="10" height="10" alt="(开启后，所有HTTP端口都自动跳转至HTTPS监听端口的第一个端口。注意：当开启URL跳转后，此选项将失效)" title="开启后，所有HTTP端口都自动跳转至HTTPS监听端口的第一个端口。注意：当开启URL跳转后，此选项将失效">
+         </th>
+       
+     
+     <th>删除？</th>
+     </tr></thead>
+
+     <tbody>
+     
+        
+        <tr class="form-row row1  empty-form"
+             id="site_multi-empty">
+        <td class="original">
+          
+          <input type="hidden" name="site_multi-__prefix__-id" id="id_site_multi-__prefix__-id">
+          <input type="hidden" name="site_multi-__prefix__-domain" id="id_site_multi-__prefix__-domain">
+          
+        </td>
+        
+          
+            
+              
+              <td class="field-full_domain">
+              
+                  
+                  <input type="text" name="site_multi-__prefix__-full_domain" class="vTextField" maxlength="255" id="id_site_multi-__prefix__-full_domain">
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-port">
+              
+                  
+                  <input type="text" name="site_multi-__prefix__-port" value="80" class="vTextField" maxlength="50" id="id_site_multi-__prefix__-port">
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-port_https">
+              
+                  
+                  <input type="text" name="site_multi-__prefix__-port_https" class="vTextField" maxlength="50" id="id_site_multi-__prefix__-port_https">
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-https">
+              
+                  
+                  <select name="site_multi-__prefix__-https" id="id_site_multi-__prefix__-https">
+  <option value="False" selected>HTTP</option>
+
+  <option value="True">HTTP和HTTPS</option>
+
+</select>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-ssl">
+              
+                  
+                  <div class="related-widget-wrapper">
+    <select name="site_multi-__prefix__-ssl" id="id_site_multi-__prefix__-ssl">
+  <option value="" selected>---------</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_site_multi-__prefix__-ssl"
+            data-href-template="/admin/domain/domainssl/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="更改选中的SSL证书"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a><a class="related-widget-wrapper-link add-related" id="add_id_site_multi-__prefix__-ssl"
+            href="/admin/domain/domainssl/add/?_to_field=id&amp;_popup=1"
+            title="增加另一个 SSL证书"><img src="/static/admin/img/icon-addlink.svg" alt="增加"></a>
+    
+</div>
+              
+              </td>
+              
+            
+          
+            
+              
+              <td class="field-http_redirect_https">
+              
+                  
+                  <select name="site_multi-__prefix__-http_redirect_https" id="id_site_multi-__prefix__-http_redirect_https">
+  <option value="False" selected>关闭</option>
+
+  <option value="True">开启</option>
+
+</select>
+              
+              </td>
+              
+            
+          
+        
+        
+          <td class="delete"></td>
+        
+        </tr>
+     
+     </tbody>
+   </table>
+</fieldset>
+  </div>
+</div>
+
+        
+    <script>
+        (function ($) {
+            $(document).ready(function(){
+                'use strict';
+                // 检测https，并修改相关属性
+                function CheckHttps() {
+                    var value = $("input:radio[name='https']:checked").val();
+                    var https = value == 'True';
+                    if(https){
+                        $('input[name="port_https"]').val(443);
+                        $('input[name="http_redirect_https"]').prop('disabled', false);
+                        $('input[name="http2"]').prop('disabled', false);
+                    }else{
+                        $('input[name="port_https"]').val('');
+                        $('input[name="http_redirect_https"]').prop('disabled', true);
+                        $('input[name="http_redirect_https"][value="False"]').prop("checked",true);
+                        $('input[name="http2"]').prop('disabled', true);
+                        $('input[name="http2"][value="False"]').prop("checked",true);
+                    }
+                }
+                CheckHttps();
+                $('#id_https').change(function () {
+                    CheckHttps()
+                });
+                // 修改回源的默认端口值
+                function CheckUpstream(){
+                    var value = $("input:radio[name='backend_https']:checked").val();
+                    var port = value == 'True'?443:80;
+                    $('#upstream-empty input[name="upstream-__prefix__-port"]').val(port);
+                    var first_port = $('#id_upstream-0-port').val();
+                    if (!(first_port!="" && first_port!="80" && first_port!="443")){
+                        $('#id_upstream-0-port').val(port);
+                    }
+                }
+                CheckUpstream();
+                $('#id_backend_https').click(function(){
+                    CheckUpstream()
+                });
+                // 解除disbaled，否则不提交到后台
+                function EnableRadio(){
+                    $('input[name="http_redirect_https"]').prop('disabled', false);
+                    $('input[name="http2"]').prop('disabled', false);
+                }
+                $('input[name="_save"]').click(function(){
+                    EnableRadio()
+                })
+            })
+        }(django.jQuery));
+    </script>
+
+
+            
+
+
+
+
+
+
+            
+
+            
+
+            
+<div class="submit-row">
+    
+        <el-button type="button" icon="el-icon-arrow-left" onclick="prev()"
+                   style="float: left;margin-right: 10px;margin-bottom: 10px;">
+            <span v-text="getLanuage('Go back')"></span>
+        </el-button>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        <input type="submit" class="el-button el-button--primary" value="保存" name="_save">
+    
+    <input type="hidden" name="actionName" value="actionValue" id="actionName">
+</div>
+<script type="text/javascript">
+    var submitrows=document.getElementsByClassName('submit-row');
+    function del(url){
+         window.location.href = url;
+    }
+    function prev() {
+         window.location.href='/admin/domain/domainsiteinfo/'
+    }
+
+    for(var i=0;i<submitrows.length;i++){
+        new Vue({
+        el: submitrows[i],
+        data: {},
+        methods: {
+            formSubmit: function (name, v, e) {
+                $("#actionName").attr('name', name).val(v);
+                $("form").submit();
+            }
+        }
+    })
+    }
+
+</script>
+
+            
+            <script type="text/javascript"
+                    id="django-admin-form-add-constants"
+                    src="/static/admin/js/change_form.js"
+                    
+                    data-model-name="domainsiteinfo"
+                    >
+            </script>
+            
+
+            
+            
+<script type="text/javascript"
+        id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: '#tabs',
+        data: function (){
+            return {tabPosition: 'left'}
+        },
+        methods: {
+            goBack: function () {
+                window.location.href = '/admin/domain/domainsiteinfo/'
+            }
+        }
+    })
+    new Vue({
+        el: '.page-header',
+        methods: {
+            goBack: function () {
+                window.location.href = '/admin/domain/domainsiteinfo/'
+            }
+        }
+    })
+    if ($(".object-tools").length != 0) {
+        new Vue({
+            el: '.object-tools',
+            data: {
+                dialogTableVisible: false,
+                url: ''
+            },
+            methods: {
+                go_url: function (url) {
+                    this.url = url;
+                    this.dialogTableVisible = true;
+                }
+            }
+        })
+    }
+    if (document.getElementById('alert')) {
+        new Vue({
+            el: '#alert'
+        })
+    }
+</script>
+
+        
+        <br class="clear"/>
+    </div>
+    <!-- END Content -->
+
+    
+    <div id="footer"></div>
+    
+</div>
+<!-- END Container -->
+</body>
+</html>
