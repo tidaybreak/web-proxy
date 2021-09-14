@@ -77,7 +77,7 @@ def get_cache_file(url, post_data_hash, contain_query=True):
         print(f"error is path:{file_path}")
 
     if not os.path.isfile(file_path):
-        return 'no ' + file_path, 404, {}, None, None
+        return 'no file' + file_path, 404, {}, None, None
 
     f = open(file_path, 'rb')
     data = f.read()
@@ -111,7 +111,7 @@ def get_cache_file(url, post_data_hash, contain_query=True):
                 except Exception as error:
                     print("error eval:", c, str(error))
             return file_path, h['status_code'], h, c, new_data[2]
-    return 'no err' + file_path, 404, {}, None, None
+    return 'no resolve err' + file_path, 404, {}, None, None
 
 
 def save_cache_file(url, post_data_hash, data, status_code=200, header={}, cookies={}, contain_query=True):
