@@ -312,7 +312,7 @@ show-icon>
         window.addEventListener('load', __ => {
             new Vue({el: '#gotop'});
             if(parent.addEvent){
-                parent.addEvent('title','域名流量');
+                parent.addEvent('title','流量查询');
             }
         });
     </script>

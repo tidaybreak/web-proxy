@@ -194,7 +194,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 		"eid": 1013
 	},
 	{
-		"name": "带宽流量",
+		"name": "流量查询",
 		"icon": "fa fa-area-chart",
 		"url": "/admin/statistic/billing/",
 		"codename": "statistic.view_billing",
@@ -426,7 +426,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
             <el-dropdown>
                 <el-button v-waves>
                     <i class="el-icon-user"></i>
-                    demo
+                    admin
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
 
@@ -656,7 +656,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
     
         
             
-<div class="card">
+<div class="card" style="display:none">
     <div class="title">访问统计图</div>
     <div class="body">
         <el-row>
@@ -1191,70 +1191,70 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
                         
                         <el-timeline-item timestamp="2021年8月11日 15:57" placement="top">
                             <el-card>
-                                <p>demo 2021年8月11日 15:57</p>
+                                <p>admin 2021年8月11日 15:57</p>
                                 <h4>缓存配置: 已经添加了 &quot;www.aaa.com&quot;.</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月5日 14:47" placement="top">
                             <el-card>
-                                <p>demo 2021年8月5日 14:47</p>
+                                <p>admin 2021年8月5日 14:47</p>
                                 <h4>全局配置: 修改了 &quot;全局配置&quot; - 已修改error_page_list。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 16:21" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 16:21</p>
+                                <p>admin 2021年8月3日 16:21</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的need_sync。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 16:20" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 16:20</p>
+                                <p>admin 2021年8月3日 16:20</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的global_ip。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 15:56</p>
+                                <p>admin 2021年8月3日 15:56</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;91.193.100.243&quot;的global_ip。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 15:56</p>
+                                <p>admin 2021年8月3日 15:56</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 15:55" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 15:55</p>
+                                <p>admin 2021年8月3日 15:55</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 14:33" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 14:33</p>
+                                <p>admin 2021年8月3日 14:33</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 14:27</p>
+                                <p>admin 2021年8月3日 14:27</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 14:27</p>
+                                <p>admin 2021年8月3日 14:27</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;192.168.40.147&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
@@ -1332,70 +1332,70 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
                         
                         <el-timeline-item timestamp="2021年8月11日 15:57" placement="top">
                             <el-card>
-                                <p>demo 2021年8月11日 15:57</p>
+                                <p>admin 2021年8月11日 15:57</p>
                                 <h4>缓存配置: 已经添加了 &quot;www.aaa.com&quot;.</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月5日 14:47" placement="top">
                             <el-card>
-                                <p>demo 2021年8月5日 14:47</p>
+                                <p>admin 2021年8月5日 14:47</p>
                                 <h4>全局配置: 修改了 &quot;全局配置&quot; - 已修改error_page_list。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 16:21" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 16:21</p>
+                                <p>admin 2021年8月3日 16:21</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的need_sync。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 16:20" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 16:20</p>
+                                <p>admin 2021年8月3日 16:20</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;192.168.40.147&quot;的global_ip。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 15:56</p>
+                                <p>admin 2021年8月3日 15:56</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已修改节点IP &quot;91.193.100.243&quot;的global_ip。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 15:56" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 15:56</p>
+                                <p>admin 2021年8月3日 15:56</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 15:55" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 15:55</p>
+                                <p>admin 2021年8月3日 15:55</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 14:33" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 14:33</p>
+                                <p>admin 2021年8月3日 14:33</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 14:27</p>
+                                <p>admin 2021年8月3日 14:27</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已添加节点IP&quot;91.193.100.243&quot;。</h4>
                             </el-card>
                         </el-timeline-item>
                         
                         <el-timeline-item timestamp="2021年8月3日 14:27" placement="top">
                             <el-card>
-                                <p>demo 2021年8月3日 14:27</p>
+                                <p>admin 2021年8月3日 14:27</p>
                                 <h4>节点: 修改了 &quot;localhost.localdomain&quot; - 已删除节点IP&quot;192.168.40.147&quot;。</h4>
                             </el-card>
                         </el-timeline-item>

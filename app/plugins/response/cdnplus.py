@@ -106,7 +106,7 @@ def billing(data, *args, **kwargs):
         elif item["label"] == "命中次数":
             item["label"] = "命中率(%)"
 
-    start_time = datetime.datetime.now() - datetime.timedelta(days=1)
+    start_time = datetime.datetime.now() - datetime.timedelta(days=30)
     end_time = datetime.datetime.now()
     if "filters" in args[0][1]:
         filters_times = args[0][1]["filters"].split('"')
@@ -183,7 +183,7 @@ def get_data(url, y="domain", min=100000000, max=900000000):
         data["data"].sort(key=takeSecond)
     elif y == "time":
         if len(start_time) > 0:
-            num = 30
+            num = 86400
             start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
             end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
             increment = int((end_time.timestamp() - start_time.timestamp()) / num)
@@ -200,8 +200,8 @@ def get_data(url, y="domain", min=100000000, max=900000000):
 def statistic_summary(data, *args, **kwargs):
     url = args[0][0].replace('[]', '')
     query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(url).query))
-    start_time = query.get('start_time', '')
-    end_time = query.get('end_time', '')
+    start_time = query.get('start_time', (datetime.datetime.now() - datetime.timedelta(days=1)).strftime("%Y%m%d%H%M"))
+    end_time = query.get('end_time', datetime.datetime.now().strftime("%Y%m%d%H%M"))
     start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
     end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
     increment = (end_time.timestamp() - start_time.timestamp()) / 86400
@@ -213,7 +213,7 @@ def statistic_summary(data, *args, **kwargs):
                 "count": int(random.randint(500, 1500) * increment),
                 "hit_rate": str(random.randint(90, 99)) + "%",
                 "max_bindwidth": str(random.randint(100, 150)) + "GB",
-                "flow": str(random.randint(500, 1000)) + "\xa0bps"
+                "flow": str(random.randint(500, 1000)) + "\xa0TB"
             }
         }
 
@@ -223,7 +223,7 @@ def statistic_summary(data, *args, **kwargs):
 
 @export("/statistic/domain-bandwidth/")
 def statistic_domain_bandwidth(data, *args, **kwargs):
-    data = get_data(args[0][0], y="time", min=100, max=160)
+    data = get_data(args[0][0], y="time", min=0, max=160)
     return bytes(data, encoding='utf-8')
 
 

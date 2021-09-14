@@ -630,7 +630,7 @@ Content-Encoding: gzip
 			        //判别单位
                     var max_value = Math.max.apply(null, values);
                     if(max_value < 1024){
-                      var uint = 'Bps';
+                      var uint = 'GB';
                       var uint_num = 1;
                     }else if( 1024 <= max_value && max_value <= 1024*1024 ){
                       var uint = 'Kbps';
@@ -778,7 +778,7 @@ Content-Encoding: gzip
             })
             var max_value = Math.max.apply(null, x_values);
             if(max_value < 1024){
-              var uint = 'Bps';
+              var uint = 'GB';
               var uint_num = 1;
             }else if( 1024 <= max_value && max_value <= 1024*1024 ){
               var uint = 'Kbps';
@@ -914,7 +914,7 @@ Content-Encoding: gzip
             })
             var max_value = Math.max.apply(null, x_values);
             if(max_value < 1024){
-              var uint = 'Bps';
+              var uint = 'GB';
               var uint_num = 1;
             }else if( 1024 <= max_value && max_value <= 1024*1024 ){
               var uint = 'Kbps';
