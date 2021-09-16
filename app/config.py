@@ -49,6 +49,7 @@ class Config(TraceMixinConfig):
 
 class CdnConfig(TraceMixinConfig):
     PLUGIN = "cdnplus"
+    PORT = 8081
     DOMAIN = 'console.cdnplus.cn'
     HTTP = "https://"
 

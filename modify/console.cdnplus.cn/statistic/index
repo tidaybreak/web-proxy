@@ -651,7 +651,7 @@ Content-Encoding: gzip
 	    bandwidth: function (){
 			    var chart = echarts.init(document.getElementById('flot_overview'), 'shine')
 			    chart.showLoading({'effect': 'bubble'});
-			    $.getJSON('/statistic/domain-bandwidth/', params).done(function(res){
+			    $.getJSON('/statistic/flow-bandwidth/', params).done(function(res){
 			        chart.hideLoading();
 			        var times = [];
 			        var values = [];
@@ -725,6 +725,7 @@ Content-Encoding: gzip
                       var uint = 'MB';
                       var uint_num = 1024 * 1024;
                     }
+					uint = 'BG'
                     line_option.xAxis.data = times;
                     line_option.title = [
                         {
@@ -747,7 +748,7 @@ Content-Encoding: gzip
 
 			        var data = [];
 			        for(var index in values){
-			          data.push((values[index]/uint_num).toFixed(1))
+			          data.push((values[index]).toFixed(1))
                     }
 			        line_option.series.data = data;
 			        chart.setOption(line_option)

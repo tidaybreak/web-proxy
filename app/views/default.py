@@ -6,7 +6,7 @@ import hashlib
 import logging
 from flask import Blueprint, request, make_response
 from app.ext import serv, app
-#from app.settings import log
+# from app.settings import log
 
 from app.utils import get_cache_file, save_cache_file, is_valid_domain
 from app.config import cfg
@@ -60,19 +60,22 @@ def catch_all():
     headers, post_data = serv.main.hook_request(real_host, headers, req_data)
 
     # 获取缓存
-    get_cache = True
-    if request.path in cfg.NO_CACHE_READ_PATH:
-        get_cache = False
-    if len(cfg.NO_CACHE_READ_PATH) == 1 and cfg.NO_CACHE_READ_PATH[0] == "*":
-        get_cache = False
+    # get_cache = True
+    # if request.path in cfg.NO_CACHE_READ_PATH:
+    #     get_cache = False
+    # if len(cfg.NO_CACHE_READ_PATH) == 1 and cfg.NO_CACHE_READ_PATH[0] == "*":
+    #     get_cache = False
+
+    get_cache, get_remote = serv.main.hook_body(request.path, full_path, req_data)
+
     contain_query = True
     if request.path in cfg.QUERY_PATH:
         contain_query = False
     cache_file, res_status, res_headers, res_cookies, res_data = 'skip ', 502, {}, None, None
     if get_cache:
         cache_file, res_status, res_headers, res_cookies, res_data = get_cache_file(full_url, post_data_hash,
-                                                                        contain_query=contain_query)
-    if res_data is None:
+                                                                                    contain_query=contain_query)
+    if get_remote and res_data is None:
         # 获取数据
         try:
             result = requests.request(request.method, full_url,
@@ -95,7 +98,8 @@ def catch_all():
             logging.error("error:%s  rul:%s" % (str(error), full_url))
 
     # 改写数据
-    res_status, res_headers, res_data = serv.main.hook_response(request.path, full_path, req_data, res_status, res_headers, res_data)
+    res_status, res_headers, res_data = serv.main.hook_response(request.path, full_path, req_data, res_status,
+                                                                res_headers, res_data)
 
     response = make_response(res_data)
     for k in res_headers:

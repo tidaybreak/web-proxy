@@ -3,6 +3,7 @@
 __author__ = 'ti'
 
 
+import csv
 import time
 import os
 import copy
@@ -10,8 +11,21 @@ import datetime
 import json
 import random
 import urllib.parse
+import sqlite3
 from app.utils import export
-from urllib.parse import urlparse
+from flask import request
+
+file_db = f"{os.getcwd()}/modify/console.cdnplus.cn/db.db"
+conn = sqlite3.connect(file_db, check_same_thread=False)
+db = conn.cursor()
+# db.execute('''CREATE TABLE flow
+#        (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+#        time DATETIME KEY    NOT NULL,
+#        value            INT     NOT NULL);''')
+# db.execute("CREATE UNIQUE INDEX t ON flow (time);")
+# conn.commit()
+# conn.close()
+
 
 eval_globals = {
     'true': True,
@@ -19,8 +33,36 @@ eval_globals = {
     'null': ''
 }
 
+
+@export("/flow/")
+def flow(data, *args, **kwargs):
+    file = request.files['file']
+    # f = file.read()
+    # f_csv = csv.reader(f)
+    # headers = next(f_csv)
+    # print("上传的文件的名字是："+f.filename)
+    # #保存文件
+    # #localPath保存文件到磁盘的指定位置
+    # #f.save(localPath)
+
+    file_csv = f"{os.getcwd()}/modify/console.cdnplus.cn/flow/flow.csv"
+    file.save(file_csv)
+    with open(file_csv) as f:
+        f_csv = csv.reader(f)
+        headers = next(f_csv)
+        for row in f_csv:
+            t = datetime.datetime.strptime(row[0], "%Y/%m/%d %H:%M")
+            sql = "REPLACE INTO flow ('time', 'value') VALUES ('%s', %s);" % (t, row[2])
+            db.execute(sql)
+        conn.commit()
+    return False, False
+
+
 @export("/admin/node/nodeinfo/")
 def nodeinfo(data, *args, **kwargs):
+    if args[0][1] == b'':
+        return data
+
     try:
         data = eval(data, eval_globals)
     except Exception as error:
@@ -58,6 +100,9 @@ def nodeinfo(data, *args, **kwargs):
 
 @export("/admin/node/nodezone/")
 def nodezone(data, *args, **kwargs):
+    if args[0][1] == b'':
+        return data
+
     try:
         data = eval(data, eval_globals)
     except Exception as error:
@@ -69,6 +114,9 @@ def nodezone(data, *args, **kwargs):
 
 @export("/admin/domain/domainsiteinfo/")
 def domainsiteinfo(data, *args, **kwargs):
+    if args[0][1] == b'':
+        return data
+
     try:
         data = data.replace(b'cdnplus', b'cdn')
         data = eval(data, eval_globals)
@@ -89,6 +137,9 @@ def domainsiteinfo(data, *args, **kwargs):
 # 带宽流量
 @export("/admin/statistic/billing/")
 def billing(data, *args, **kwargs):
+    if args[0][1] == b'':
+        return data
+
     try:
         data = eval(data, eval_globals)
     except Exception as error:
@@ -139,7 +190,7 @@ def billing(data, *args, **kwargs):
     return bytes(data, encoding='utf-8')
 
 
-def get_data(url, y="domain", min=100000000, max=900000000):
+def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
     url = url.replace('[]', '')
     query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(url).query))
     domains = url.split('&domain%5B%5D=')
@@ -183,7 +234,7 @@ def get_data(url, y="domain", min=100000000, max=900000000):
         data["data"].sort(key=takeSecond)
     elif y == "time":
         if len(start_time) > 0:
-            num = 86400
+            num = 8640
             start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
             end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
             increment = int((end_time.timestamp() - start_time.timestamp()) / num)
@@ -191,6 +242,26 @@ def get_data(url, y="domain", min=100000000, max=900000000):
                 stamp = int(start_time.timestamp()) + i * increment
                 item = [time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stamp)), random.randint(min, max)]
                 data["data"].append(item)
+    elif y == "db":
+        if len(start_time) > 0:
+            start_time = datetime.datetime.strptime(start_time, "%Y%m%d%H%M")
+            end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
+            total = int((end_time.timestamp() - start_time.timestamp()) / 300)
+            # sql = "SELECT * from `flow` where `time` >= '%s' and `time` <= '%s'" % (start_time, end_time)
+            sql = "SELECT * from `flow` where `time` <= '%s' limit %d" % (end_time, total)
+            cursor = db.execute(sql)
+            i = 0
+            for row in cursor:
+                # data["data"].append([row[1], row[2] / 1000 / 1000 / 1000])
+                stamp = int(start_time.timestamp()) + i * 300
+                value = rate * (row[2] / 1000 / 1000 / 1000)
+                if total > 288 * 7:
+                    data["data"].append([time.strftime("%m-%d", time.localtime(stamp)), value])
+                elif total > 288:
+                    data["data"].append([time.strftime("%d-%d %H", time.localtime(stamp)), value])
+                else:
+                    data["data"].append([time.strftime("%m-%d %H:%M", time.localtime(stamp)), value])
+                i += 1
 
     data = json.dumps(data)
     return data
@@ -218,13 +289,13 @@ def statistic_summary(data, *args, **kwargs):
         }
 
     data = json.dumps(data)
-    return bytes(data, encoding='utf-8')
+    return 200, args[0][3], bytes(data, encoding='utf-8')
 
 
-@export("/statistic/domain-bandwidth/")
+@export("/statistic/flow-bandwidth/")
 def statistic_domain_bandwidth(data, *args, **kwargs):
-    data = get_data(args[0][0], y="time", min=0, max=160)
-    return bytes(data, encoding='utf-8')
+    data = get_data(args[0][0], y="db", rate=1)
+    return 200, args[0][3], bytes(data, encoding='utf-8')
 
 
 @export("/statistic/node-bandwidth-ranking/")
@@ -235,8 +306,8 @@ def statistic_node_bandwidth_ranking(data, *args, **kwargs):
 
 @export("/statistic/node-flow/")
 def statistic_node_flow(data, *args, **kwargs):
-    data = get_data(args[0][0], y="time", min=10000, max=15000)
-    return bytes(data, encoding='utf-8')
+    data = get_data(args[0][0], y="db", rate=1234)
+    return 200, args[0][3], bytes(data, encoding='utf-8')
 
 
 @export("/statistic/node-flow-ranking/")
@@ -304,3 +375,21 @@ def statistic_query_hit(data, *args, **kwargs):
 def statistic_query_ip_ranking(data, *args, **kwargs):
     data = get_data(args[0][0], y="idc")
     return bytes(data, encoding='utf-8')
+
+
+@export("/admin/cache/eagerloading/")
+def eagerloading(data, *args, **kwargs):
+    if args[0][1] == b'':
+        return data
+    h = args[0][3]
+    h['Content-Type'] = 'application/json; charset=utf-8'
+    return 200, h, b'{"state": true, "msg": "ok", "data": {"headers": [{"name": "remark", "label": "\u4efb\u52a1\u540d", "min_width": "100px", "align": "center", "sortable": "custom"}, {"name": "url_desc", "label": "\u6e05\u9664URL", "min_width": "250px", "align": "left", "sortable": false}, {"name": "count", "label": "\u5f15\u7528\u6b21\u6570", "min_width": "50px", "align": "center", "sortable": "custom"}, {"name": "updated_time", "label": "\u6700\u540e\u6267\u884c\u65f6\u95f4", "sortable": false}], "rows": [], "paginator": {"page_size": 10, "count": 0, "page_count": 1}}}'
+
+
+@export("/admin/cache/purgecache/")
+def purgecache(data, *args, **kwargs):
+    if args[0][1] == b'':
+        return data
+    h = args[0][3]
+    h['Content-Type'] = 'application/json; charset=utf-8'
+    return 200, h, b'{"state": true, "msg": "ok", "data": {"headers": [{"name": "remark", "label": "\u4efb\u52a1\u540d", "min_width": "100px", "align": "center", "sortable": "custom"}, {"name": "url_desc", "label": "\u6e05\u9664URL", "min_width": "250px", "align": "left", "sortable": false}, {"name": "count", "label": "\u5f15\u7528\u6b21\u6570", "min_width": "50px", "align": "center", "sortable": "custom"}, {"name": "updated_time", "label": "\u6700\u540e\u6267\u884c\u65f6\u95f4", "sortable": false}], "rows": [{"remark": "3333333333333", "count": 5, "url_desc": "<p>http://www.baidu.com</p>", "updated_time": "2021-06-06 20:23:56", "_id": 5040}], "paginator": {"page_size": 10, "count": 1, "page_count": 1}}}'

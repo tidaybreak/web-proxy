@@ -32,6 +32,10 @@ class MainService(BaseService):
         data = self.plugins['request'].get("request_data", lambda x, _: x)(data, (host))
         return headers, data
 
+    def hook_body(self, path, full_path, req_data):
+        result = self.plugins['body'].get(path, lambda x, _: (True, True))(req_data, (full_path))
+        return result[0], result[1]
+
     def hook_response(self, path, full_path, req_data, res_status, res_headers, res_data):
         # [表-操作]过滤&加工data
         remove_headers = ["connection",     # 穗康码 sk.gzonline.gov.cn
