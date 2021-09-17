@@ -21,7 +21,11 @@ db = conn.cursor()
 # db.execute('''CREATE TABLE flow
 #        (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 #        time DATETIME KEY    NOT NULL,
-#        value            INT     NOT NULL);''')
+#        `in`            INT     NOT NULL,
+#        out            INT     NOT NULL,
+#        flow            INT     NOT NULL,
+#        visit            INT     NOT NULL,
+#        hit            INT     NOT NULL);''')
 # db.execute("CREATE UNIQUE INDEX t ON flow (time);")
 # conn.commit()
 # conn.close()
@@ -46,17 +50,116 @@ def flow(res_data, *args, **kwargs):
     # #localPath保存文件到磁盘的指定位置
     # #f.save(localPath)
 
-    file_csv = f"{os.getcwd()}/modify/console.cdnplus.cn/flow/flow.csv"
+    file_csv = f"{os.getcwd()}/cache/console.cdnplus.cn/flow.csv"
     file.save(file_csv)
     with open(file_csv) as f:
         f_csv = csv.reader(f)
         headers = next(f_csv)
         for row in f_csv:
             t = datetime.datetime.strptime(row[0], "%Y/%m/%d %H:%M")
-            sql = "REPLACE INTO flow ('time', 'value') VALUES ('%s', %s);" % (t, row[2])
+            if row[3] == '':
+                row[3] = '0'
+            if row[4] == '':
+                row[4] = '0'
+            if row[5] == '':
+                row[5] = '0'
+            sql = "REPLACE INTO flow ('time', 'in', 'out', 'flow', 'visit', 'hit') VALUES ('%s', %s, %s, %s, %s, %s);" % (t, row[1], row[2], row[3], row[4], row[5])
             db.execute(sql)
         conn.commit()
     return res_data
+
+
+# 带宽流量
+@export_res_local("/admin/statistic/billing/")
+def billing(res_data, *args, **kwargs):
+    (full_path, req_data, res_status, res_headers) = args[0]
+    if req_data == b'':
+        return res_data
+    if req_data == b'' and res_data is None:
+        return None
+
+    res_data = {
+            "state": True,
+            "msg": "ok",
+            "data": {
+                "headers": [{
+                    "name": "time",
+                    "label": "时间",
+                    "sortable": "custom"
+                },
+                    {
+                        "name": "flow_unit",
+                        "label": "流量(GB)",
+                        "sortable": False
+                    },
+                    {
+                        "name": "max_bandwidth_unit",
+                        "label": "最大带宽(Byte)",
+                        "sortable": False
+                    },
+                    {
+                        "name": "count",
+                        "label": "访问次数",
+                        "sortable": "custom"
+                    },
+                    {
+                        "name": "hit_count",
+                        "label": "命中率(%)",
+                        "sortable": "custom"
+                    }],
+                "summaries": ["",
+                              "",
+                              "\u603b\u6570\u636e\u5408\u8ba1",
+                              "0\u00a0\u5b57\u8282",
+                              "0\u00a0\u5b57\u8282",
+                              "",
+                              ""],
+                "rows": [],
+                "paginator": {
+                    "page_size": 10,
+                    "count": 0,
+                    "page_count": 1
+                }
+            }
+        }
+
+    start_time = datetime.datetime.now() - datetime.timedelta(days=30)
+    end_time = datetime.datetime.now()
+    if "filters" in args[0][1]:
+        filters_times = args[0][1]["filters"].split('"')
+        time_gte = filters_times[3].replace(' 08:00', '')
+        time_lte = filters_times[7].replace(' 08:00', '')
+        start_time = datetime.datetime.strptime(time_gte, "%Y-%m-%d %H:%M:%S")
+        end_time = datetime.datetime.strptime(time_lte, "%Y-%m-%d %H:%M:%S")
+    total = int((end_time.timestamp() - start_time.timestamp()) / 300)
+    if total > 500:
+        total = 500
+
+    sql = "SELECT * from `flow` where `time` <= '%s' limit %d" % (end_time, total)
+    cursor = db.execute(sql)
+    i = 0
+    max_bandwidth_unit_total = 0
+    count_total = 0
+    for row in cursor:
+        # data["data"].append([row[1], row[2] / 1000 / 1000 / 1000])
+        max_bandwidth_unit_total += row[2]
+        count_total += row[5]
+        stamp = int(start_time.timestamp()) + i * 300
+        res_data["data"]["rows"].append({
+            "time": time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp)),
+            "flow_unit": row[4],
+            "max_bandwidth_unit": row[2],
+            "count": row[5],
+            "hit_count": row[6]
+        })
+        i += 1
+
+    res_data["data"]["summaries"][3] = str(max_bandwidth_unit_total) + "(Byte)"
+    res_data["data"]["summaries"][4] = str(count_total) + "字节"
+    del res_data["data"]["summaries"]
+
+    res_data = json.dumps(res_data)
+    return 200, res_headers, bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/admin/node/nodeinfo/")
@@ -108,7 +211,7 @@ def nodezone(res_data, *args, **kwargs):
     if req_data == b'':
         return res_data
     try:
-        data = eval(res_data, eval_globals)
+        res_data = eval(res_data, eval_globals)
     except Exception as error:
         return res_data
     res_data["data"]["rows"][0]["display_cdn_prefix"] = "cdn209.com.cn"
@@ -137,63 +240,6 @@ def domainsiteinfo(res_data, *args, **kwargs):
 
     data = json.dumps(res_data)
     return bytes(data, encoding='utf-8')
-
-
-# 带宽流量
-@export_res_local("/admin/statistic/billing/")
-def billing(res_data, *args, **kwargs):
-    (full_path, req_data, res_status, res_headers) = args[0]
-    if req_data == b'':
-        return res_data
-
-    try:
-        res_data = eval(res_data, eval_globals)
-    except Exception as error:
-        return res_data
-
-    for item in res_data["data"]["headers"]:
-        if item["label"] == "域名":
-            res_data["data"]["headers"].remove(item)
-
-    for item in res_data["data"]["headers"]:
-        if item["label"] == "流量":
-            item["label"] = "流量(GB)"
-        elif item["label"] == "最大带宽":
-            item["label"] = "最大带宽(GB)"
-        elif item["label"] == "命中次数":
-            item["label"] = "命中率(%)"
-
-    start_time = datetime.datetime.now() - datetime.timedelta(days=30)
-    end_time = datetime.datetime.now()
-    if "filters" in args[0][1]:
-        filters_times = args[0][1]["filters"].split('"')
-        time_gte = filters_times[3].replace(' 08:00', '')
-        time_lte = filters_times[7].replace(' 08:00', '')
-        start_time = datetime.datetime.strptime(time_gte, "%Y-%m-%d %H:%M:%S")
-        end_time = datetime.datetime.strptime(time_lte, "%Y-%m-%d %H:%M:%S")
-    num = int((end_time.timestamp() - start_time.timestamp()) / 86400)
-    increment = 86400
-    max_bandwidth_unit_total = 0
-    count_total = 0
-    for i in range(1, num):
-        stamp = int(start_time.timestamp()) + i * increment
-        max_bandwidth_unit = random.randint(100, 150)
-        max_bandwidth_unit_total += max_bandwidth_unit
-        hit_count = random.randint(100000, 900000)
-        count_total += hit_count
-        res_data["data"]["rows"].append({
-            "time": time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp)),
-            "flow_unit": random.randint(100 * 1000, 150 * 1000),
-            "max_bandwidth_unit": max_bandwidth_unit,
-            "count": hit_count,
-            "hit_count": random.randint(90, 100)
-        })
-    res_data["data"]["summaries"][3] = str(max_bandwidth_unit_total) + "(Byte)"
-    res_data["data"]["summaries"][4] = str(count_total) + "字节"
-    del res_data["data"]["summaries"]
-
-    res_data = json.dumps(res_data)
-    return bytes(res_data, encoding='utf-8')
 
 
 def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
@@ -260,7 +306,7 @@ def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
             for row in cursor:
                 # data["data"].append([row[1], row[2] / 1000 / 1000 / 1000])
                 stamp = int(start_time.timestamp()) + i * 300
-                value = rate * (row[2] / 1000 / 1000 / 1000)
+                value = rate * row[2] * (1 / random.randint(min, max))
                 if total > 288 * 7:
                     data["data"].append([time.strftime("%m-%d", time.localtime(stamp)), value])
                 elif total > 288:
@@ -301,7 +347,7 @@ def statistic_summary(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/flow-bandwidth/")
 def statistic_flow_bandwidth(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="db", rate=1)
+    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=1 / 1000 / 1000 / 1000)
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
@@ -313,13 +359,13 @@ def statistic_node_bandwidth_ranking(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/node-flow/")
 def statistic_node_flow(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="db", rate=1234)
+    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=1234 * (1 / 1000 / 1000 / 1000))
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/domain-bandwidth/")
 def statistic_domain_bandwidth(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="db", rate=0.03)
+    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=0.03 * (1 / 1000 / 1000 / 1000))
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
@@ -335,7 +381,6 @@ def statistic_node_flow_ranking(res_data, *args, **kwargs):
     return bytes(res_data, encoding='utf-8')
 
 
-
 @export_res_local("/statistic/node-visit-ranking/")
 def statistic_node_visit_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0])
@@ -344,8 +389,8 @@ def statistic_node_visit_ranking(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/node-visit/")
 def statistic_node_visit_ranking(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="time")
-    return bytes(res_data, encoding='utf-8')
+    res_data = get_data(args[0][0],  y="db", min=5, max=10, rate=1234 * (1 / 1000 / 1000 / 1000))
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/query-domain-ranking/")
@@ -381,8 +426,8 @@ def statistic_query_code_ranking(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/query-hit/")
 def statistic_query_hit(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="time", min=90, max=100)
-    return bytes(res_data, encoding='utf-8')
+    res_data = get_data(args[0][0], y="db", min=5, max=10, rate=1 * (1 / 1000 / 1000 / 1000))
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/query-ip-ranking/")

@@ -85,15 +85,16 @@ csrftoken: KPDs84OGHK06G4saiHvyOpnCKAoawe2XBBT3QrseTpBi4aNoluK0ongIh2zrXxdk
     
 
   <el-form-item style="line-height: initial">
+
     <el-button size="small" type="success" @click="onSubmit" icon="el-icon-search">查询</el-button>
     <el-button size="small" type="warning" @click="refreshData" icon="el-icon-delete">重置</el-button>
 	
-
+  	<el-upload :action="/flow/" style="float:right; padding-left:15px">
+		<el-button size="small" type="primary">Load</el-button>
+	</el-upload>
 
   </el-form-item>
-	<el-upload :action="/flow/">
-		<el-button size="small" type="primary">上传</el-button>
-	</el-upload>
+
 </el-form>
  
                     </div>

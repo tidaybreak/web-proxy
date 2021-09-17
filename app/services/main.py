@@ -37,13 +37,14 @@ class MainService(BaseService):
         if key not in self.plugins['response']:
             return False, res_status, res_headers, res_cookies, res_data
 
-        result = self.plugins['response'].get("res_local_" + path, lambda x, _: x)(res_data, (full_path, req_data, res_status, res_headers))
+        result = self.plugins['response'].get(key, lambda x, _: x)(res_data, (full_path, req_data, res_status, res_headers))
+        if result is None:
+            return False, res_status, res_headers, res_cookies, res_data
+
         if type(result) == tuple:
             res_status = result[0]
             res_headers = result[1]
             res_data = result[2]
-        elif result is None:
-            return False, res_status, res_headers, res_cookies, res_data
         else:
             res_data = result
         return True, res_status, res_headers, res_cookies, res_data
