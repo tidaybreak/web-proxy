@@ -64,6 +64,8 @@ def nodeinfo(res_data, *args, **kwargs):
     (full_path, req_data, res_status, res_headers) = args[0]
     if req_data == b'':
         return res_data
+    if res_data is None:
+        return None
 
     try:
         res_data = eval(res_data, eval_globals)
@@ -298,7 +300,7 @@ def statistic_summary(res_data, *args, **kwargs):
 
 
 @export_res_local("/statistic/flow-bandwidth/")
-def statistic_domain_bandwidth(res_data, *args, **kwargs):
+def statistic_flow_bandwidth(res_data, *args, **kwargs):
     res_data = get_data(args[0][0], y="db", rate=1)
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
@@ -315,16 +317,23 @@ def statistic_node_flow(res_data, *args, **kwargs):
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
-@export_res_local("/statistic/node-flow-ranking/")
-def statistic_node_flow_ranking(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0])
-    return bytes(res_data, encoding='utf-8')
+@export_res_local("/statistic/domain-bandwidth/")
+def statistic_domain_bandwidth(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="db", rate=0.03)
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/source-fail/")
 def statistic_node_visit(res_data, *args, **kwargs):
     res_data = get_data(args[0][0], y='time', min=90, max=100)
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
+
+
+@export_res_local("/statistic/node-flow-ranking/")
+def statistic_node_flow_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0])
+    return bytes(res_data, encoding='utf-8')
+
 
 
 @export_res_local("/statistic/node-visit-ranking/")
