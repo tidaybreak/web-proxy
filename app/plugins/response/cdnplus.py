@@ -12,7 +12,7 @@ import json
 import random
 import urllib.parse
 import sqlite3
-from app.utils import export
+from app.utils import export, export_res_local, export_res_filter
 from flask import request
 
 file_db = f"{os.getcwd()}/modify/console.cdnplus.cn/db.db"
@@ -34,8 +34,9 @@ eval_globals = {
 }
 
 
-@export("/flow/")
-def flow(data, *args, **kwargs):
+@export_res_local("/flow/")
+def flow(res_data, *args, **kwargs):
+    (full_path, req_data, res_status, res_headers) = args[0]
     file = request.files['file']
     # f = file.read()
     # f_csv = csv.reader(f)
@@ -55,27 +56,28 @@ def flow(data, *args, **kwargs):
             sql = "REPLACE INTO flow ('time', 'value') VALUES ('%s', %s);" % (t, row[2])
             db.execute(sql)
         conn.commit()
-    return False, False
+    return res_data
 
 
-@export("/admin/node/nodeinfo/")
-def nodeinfo(data, *args, **kwargs):
-    if args[0][1] == b'':
-        return data
+@export_res_local("/admin/node/nodeinfo/")
+def nodeinfo(res_data, *args, **kwargs):
+    (full_path, req_data, res_status, res_headers) = args[0]
+    if req_data == b'':
+        return res_data
 
     try:
-        data = eval(data, eval_globals)
+        res_data = eval(res_data, eval_globals)
     except Exception as error:
-        return data
+        return res_data
 
-    data["data"]["rows"][0]["remarks"] = ""
-    data["data"]["rows"][0]["is_online"] = '<i class="fa fa-cloud" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="连接正常"></i>'
-    data["data"]["rows"][0]["ng_status"] = '<i class="fa fa-internet-explorer" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="监控正常"></i>'
-    data["data"]["rows"][0]["sync"] = '<i class="fa fa-times-circle" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="DNS同步正常"></i>'
+    res_data["data"]["rows"][0]["remarks"] = ""
+    res_data["data"]["rows"][0]["is_online"] = '<i class="fa fa-cloud" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="连接正常"></i>'
+    res_data["data"]["rows"][0]["ng_status"] = '<i class="fa fa-internet-explorer" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="监控正常"></i>'
+    res_data["data"]["rows"][0]["sync"] = '<i class="fa fa-times-circle" aria-hidden="true" style="color:#00FF00;font-size:16px;" title="DNS同步正常"></i>'
 
     stationname = ["联通节点1", "联通节点2", "移动节点1", "移动节点2", "移动节点1", "移动节点2", "铁通节点1", "铁通节点2", "广电节点1", "广电节点2", "联通节点3"]
     for i in range(10):
-        node = copy.deepcopy(data["data"]["rows"][0])
+        node = copy.deepcopy(res_data["data"]["rows"][0])
         node["stationname"] = stationname[i]
         node["node_ip"] = "192.168.100." + str(i + 10)
 
@@ -92,64 +94,66 @@ def nodeinfo(data, *args, **kwargs):
         network_usage1 + 'Mbps</td><td style="border:0">	&nbsp;/&nbsp;	</td><td style="border:0" title="出服务器的带宽">' +\
         network_usage2 + 'Mbps</td></tr></table></div>'
 
-        data["data"]["rows"].append(node)
+        res_data["data"]["rows"].append(node)
 
-    data = json.dumps(data)
-    return bytes(data, encoding='utf-8')
+    res_data = json.dumps(res_data)
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/admin/node/nodezone/")
-def nodezone(data, *args, **kwargs):
-    if args[0][1] == b'':
-        return data
+@export_res_local("/admin/node/nodezone/")
+def nodezone(res_data, *args, **kwargs):
+    (full_path, req_data, res_status, res_headers) = args[0]
+    if req_data == b'':
+        return res_data
+    try:
+        data = eval(res_data, eval_globals)
+    except Exception as error:
+        return res_data
+    res_data["data"]["rows"][0]["display_cdn_prefix"] = "cdn209.com.cn"
+    res_data = json.dumps(res_data)
+    return bytes(res_data, encoding='utf-8')
+
+
+@export_res_local("/admin/domain/domainsiteinfo/")
+def domainsiteinfo(res_data, *args, **kwargs):
+    (full_path, req_data, res_status, res_headers) = args[0]
+    if req_data == b'':
+        return res_data
 
     try:
-        data = eval(data, eval_globals)
+        res_data = res_data.replace(b'cdnplus', b'cdn')
+        res_data = eval(res_data, eval_globals)
     except Exception as error:
-        return data
-    data["data"]["rows"][0]["display_cdn_prefix"] = "cdn209.com.cn"
-    data = json.dumps(data)
-    return bytes(data, encoding='utf-8')
+        return res_data
 
-
-@export("/admin/domain/domainsiteinfo/")
-def domainsiteinfo(data, *args, **kwargs):
-    if args[0][1] == b'':
-        return data
-
-    try:
-        data = data.replace(b'cdnplus', b'cdn')
-        data = eval(data, eval_globals)
-    except Exception as error:
-        return data
-
-    data["data"]["headers"][0]["label"] = "加速类型"
+    res_data["data"]["headers"][0]["label"] = "加速类型"
     cdntype = ["静态加速", "动态加速", "文件下载加速", "静态加速", "动态加速", "文件下载加速", "流媒体点播加速", "流媒体直播"]
     i = 0
-    for item in data["data"]["rows"]:
+    for item in res_data["data"]["rows"]:
         item["full_domain"] = cdntype[i]
         i += 1
 
-    data = json.dumps(data)
+    data = json.dumps(res_data)
     return bytes(data, encoding='utf-8')
 
 
 # 带宽流量
-@export("/admin/statistic/billing/")
-def billing(data, *args, **kwargs):
-    if args[0][1] == b'':
-        return data
+@export_res_local("/admin/statistic/billing/")
+def billing(res_data, *args, **kwargs):
+    (full_path, req_data, res_status, res_headers) = args[0]
+    if req_data == b'':
+        return res_data
 
     try:
-        data = eval(data, eval_globals)
+        res_data = eval(res_data, eval_globals)
     except Exception as error:
-        return data
+        return res_data
 
-    for item in data["data"]["headers"]:
+    for item in res_data["data"]["headers"]:
         if item["label"] == "域名":
-            data["data"]["headers"].remove(item)
+            res_data["data"]["headers"].remove(item)
 
-    for item in data["data"]["headers"]:
+    for item in res_data["data"]["headers"]:
         if item["label"] == "流量":
             item["label"] = "流量(GB)"
         elif item["label"] == "最大带宽":
@@ -175,19 +179,19 @@ def billing(data, *args, **kwargs):
         max_bandwidth_unit_total += max_bandwidth_unit
         hit_count = random.randint(100000, 900000)
         count_total += hit_count
-        data["data"]["rows"].append({
+        res_data["data"]["rows"].append({
             "time": time.strftime("%Y-%m-%d %H:%M", time.localtime(stamp)),
             "flow_unit": random.randint(100 * 1000, 150 * 1000),
             "max_bandwidth_unit": max_bandwidth_unit,
             "count": hit_count,
             "hit_count": random.randint(90, 100)
         })
-    data["data"]["summaries"][3] = str(max_bandwidth_unit_total) + "(Byte)"
-    data["data"]["summaries"][4] = str(count_total) + "字节"
-    del data["data"]["summaries"]
+    res_data["data"]["summaries"][3] = str(max_bandwidth_unit_total) + "(Byte)"
+    res_data["data"]["summaries"][4] = str(count_total) + "字节"
+    del res_data["data"]["summaries"]
 
-    data = json.dumps(data)
-    return bytes(data, encoding='utf-8')
+    res_data = json.dumps(res_data)
+    return bytes(res_data, encoding='utf-8')
 
 
 def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
@@ -267,8 +271,9 @@ def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
     return data
 
 
-@export("/statistic/summary/")
-def statistic_summary(data, *args, **kwargs):
+@export_res_local("/statistic/summary/")
+def statistic_summary(res_data, *args, **kwargs):
+    (full_path, req_data, res_status, res_headers) = args[0]
     url = args[0][0].replace('[]', '')
     query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(url).query))
     start_time = query.get('start_time', (datetime.datetime.now() - datetime.timedelta(days=1)).strftime("%Y%m%d%H%M"))
@@ -289,107 +294,107 @@ def statistic_summary(data, *args, **kwargs):
         }
 
     data = json.dumps(data)
-    return 200, args[0][3], bytes(data, encoding='utf-8')
+    return 200, res_headers, bytes(data, encoding='utf-8')
 
 
-@export("/statistic/flow-bandwidth/")
-def statistic_domain_bandwidth(data, *args, **kwargs):
-    data = get_data(args[0][0], y="db", rate=1)
-    return 200, args[0][3], bytes(data, encoding='utf-8')
+@export_res_local("/statistic/flow-bandwidth/")
+def statistic_domain_bandwidth(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="db", rate=1)
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/node-bandwidth-ranking/")
-def statistic_node_bandwidth_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0])
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/node-bandwidth-ranking/")
+def statistic_node_bandwidth_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0])
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/node-flow/")
-def statistic_node_flow(data, *args, **kwargs):
-    data = get_data(args[0][0], y="db", rate=1234)
-    return 200, args[0][3], bytes(data, encoding='utf-8')
+@export_res_local("/statistic/node-flow/")
+def statistic_node_flow(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="db", rate=1234)
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/node-flow-ranking/")
-def statistic_node_flow_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0])
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/node-flow-ranking/")
+def statistic_node_flow_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0])
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/source-fail/")
-def statistic_node_visit(data, *args, **kwargs):
-    data = get_data(args[0][0], y='time', min=90, max=100)
-    return 200, args[0][3], bytes(data, encoding='utf-8')
+@export_res_local("/statistic/source-fail/")
+def statistic_node_visit(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y='time', min=90, max=100)
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/node-visit-ranking/")
-def statistic_node_visit_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0])
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/node-visit-ranking/")
+def statistic_node_visit_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0])
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/node-visit/")
-def statistic_node_visit_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0], y="time")
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/node-visit/")
+def statistic_node_visit_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="time")
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/query-domain-ranking/")
-def statistic_query_domain_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0])
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/query-domain-ranking/")
+def statistic_query_domain_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0])
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/source-data/")
-def statistic_source(data, *args, **kwargs):
-    data = get_data(args[0][0], y='time')
-    return 200, args[0][3], bytes(data, encoding='utf-8')
+@export_res_local("/statistic/source-data/")
+def statistic_source(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y='time')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/query-domain-url-ranking/")
-def statistic_query_domain_url_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0], y="area")
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/query-domain-url-ranking/")
+def statistic_query_domain_url_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="area")
+    return bytes(res_data, encoding='utf-8')
 
 
 # 状态码
-@export("/statistic/query-code/")
-def statistic_query_code(data, *args, **kwargs):
-    data = get_data(args[0][0], y="code")
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/query-code/")
+def statistic_query_code(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="code")
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/query-code-ranking/")
-def statistic_query_code_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0], y="code")
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/query-code-ranking/")
+def statistic_query_code_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="code")
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/query-hit/")
-def statistic_query_hit(data, *args, **kwargs):
-    data = get_data(args[0][0], y="time", min=90, max=100)
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/query-hit/")
+def statistic_query_hit(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="time", min=90, max=100)
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/statistic/query-ip-ranking/")
-def statistic_query_ip_ranking(data, *args, **kwargs):
-    data = get_data(args[0][0], y="idc")
-    return bytes(data, encoding='utf-8')
+@export_res_local("/statistic/query-ip-ranking/")
+def statistic_query_ip_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="idc")
+    return bytes(res_data, encoding='utf-8')
 
 
-@export("/admin/cache/eagerloading/")
-def eagerloading(data, *args, **kwargs):
+@export_res_local("/admin/cache/eagerloading/")
+def eagerloading(res_data, *args, **kwargs):
     if args[0][1] == b'':
-        return data
+        return res_data
     h = args[0][3]
     h['Content-Type'] = 'application/json; charset=utf-8'
     return 200, h, b'{"state": true, "msg": "ok", "data": {"headers": [{"name": "remark", "label": "\u4efb\u52a1\u540d", "min_width": "100px", "align": "center", "sortable": "custom"}, {"name": "url_desc", "label": "\u6e05\u9664URL", "min_width": "250px", "align": "left", "sortable": false}, {"name": "count", "label": "\u5f15\u7528\u6b21\u6570", "min_width": "50px", "align": "center", "sortable": "custom"}, {"name": "updated_time", "label": "\u6700\u540e\u6267\u884c\u65f6\u95f4", "sortable": false}], "rows": [], "paginator": {"page_size": 10, "count": 0, "page_count": 1}}}'
 
 
-@export("/admin/cache/purgecache/")
-def purgecache(data, *args, **kwargs):
+@export_res_local("/admin/cache/purgecache/")
+def purgecache(res_data, *args, **kwargs):
     if args[0][1] == b'':
-        return data
+        return res_data
     h = args[0][3]
     h['Content-Type'] = 'application/json; charset=utf-8'
     return 200, h, b'{"state": true, "msg": "ok", "data": {"headers": [{"name": "remark", "label": "\u4efb\u52a1\u540d", "min_width": "100px", "align": "center", "sortable": "custom"}, {"name": "url_desc", "label": "\u6e05\u9664URL", "min_width": "250px", "align": "left", "sortable": false}, {"name": "count", "label": "\u5f15\u7528\u6b21\u6570", "min_width": "50px", "align": "center", "sortable": "custom"}, {"name": "updated_time", "label": "\u6700\u540e\u6267\u884c\u65f6\u95f4", "sortable": false}], "rows": [{"remark": "3333333333333", "count": 5, "url_desc": "<p>http://www.baidu.com</p>", "updated_time": "2021-06-06 20:23:56", "_id": 5040}], "paginator": {"page_size": 10, "count": 1, "page_count": 1}}}'

@@ -32,11 +32,21 @@ class MainService(BaseService):
         data = self.plugins['request'].get("request_data", lambda x, _: x)(data, (host))
         return headers, data
 
-    def hook_body(self, path, full_path, req_data):
-        result = self.plugins['body'].get(path, lambda x, _: (True, True))(req_data, (full_path))
-        return result[0], result[1]
+    def response_local(self, path, full_path, req_data, res_status, res_headers, res_cookies, res_data):
+        key = "res_local_" + path
+        if key not in self.plugins['response']:
+            return False, res_status, res_headers, res_cookies, res_data
 
-    def hook_response(self, path, full_path, req_data, res_status, res_headers, res_data):
+        result = self.plugins['response'].get("res_local_" + path, lambda x, _: x)(res_data, (full_path, req_data, res_status, res_headers))
+        if type(result) == tuple:
+            res_status = result[0]
+            res_headers = result[1]
+            res_data = result[2]
+        else:
+            res_data = result
+        return True, res_status, res_headers, res_cookies, res_data
+
+    def response_filter(self, path, full_path, req_data, res_status, res_headers, res_cookies, res_data):
         # [表-操作]过滤&加工data
         remove_headers = ["connection",     # 穗康码 sk.gzonline.gov.cn
                           "transfer-encoding",
@@ -52,13 +62,13 @@ class MainService(BaseService):
             del res_headers[k]
 
         res_data = self.plugins['response'].get("response_global", lambda x, _: x)(res_data, (full_path, req_data))
-        result = self.plugins['response'].get(path, lambda x, _: x)(res_data, (full_path, req_data, res_status, res_headers))
+        result = self.plugins['response'].get("res_filter_" + path, lambda x, _: x)(res_data, (full_path, req_data, res_status, res_headers))
         if type(result) == tuple:
             res_status = result[0]
             res_headers = result[1]
             res_data = result[2]
         else:
             res_data = result
-        return res_status, res_headers, res_data
+        return res_status, res_headers, res_cookies, res_data
 
 

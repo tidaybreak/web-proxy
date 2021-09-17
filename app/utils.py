@@ -26,6 +26,45 @@ def export(export_name=None):
     return wrapper
 
 
+def export_res_local(export_name=None):
+    """
+    标识一个export
+    :return:
+    """
+
+    def wrapper(func):
+        func.__name__ = export_name or func.__name__
+        func.__name__ = "res_local_" + func.__name__
+        func.export = True
+
+        @wraps(func)
+        def inner(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return inner
+
+    return wrapper
+
+
+def export_res_filter(export_name=None):
+    """
+    标识一个export
+    :return:
+    """
+
+    def wrapper(func):
+        func.__name__ = export_name or func.__name__
+        func.__name__ = "res_filter_" + func.__name__
+        func.export = True
+
+        @wraps(func)
+        def inner(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        return inner
+
+    return wrapper
+
 
 static_res = {'js': {
     'content-type': 'application/javascript'
