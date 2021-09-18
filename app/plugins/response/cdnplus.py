@@ -312,7 +312,7 @@ def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
                 elif total > 288:
                     data["data"].append([time.strftime("%d-%d %H", time.localtime(stamp)), value])
                 else:
-                    data["data"].append([time.strftime("%m-%d %H:%M", time.localtime(stamp)), value])
+                    data["data"].append([time.strftime("%H:%M", time.localtime(stamp)), value])
                 i += 1
 
     data = json.dumps(data)

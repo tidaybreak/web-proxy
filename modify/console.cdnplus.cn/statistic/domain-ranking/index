@@ -33,7 +33,7 @@ Content-Encoding: gzip
 
     <script type="text/javascript" src="/static/admin/simpleui-x/js/vue.min.js?_=2020.9.26"></script>
     <script type="text/javascript" src="/static/admin/simpleui-x/elementui/index.js?_=2020.9.26"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.26.0/ramda.min.js"></script>
+	<script src="/static/ramda.min.js"></script>
 
 
 
