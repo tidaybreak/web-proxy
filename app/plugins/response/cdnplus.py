@@ -396,7 +396,7 @@ def statistic_node_visit_ranking(res_data, *args, **kwargs):
 @export_res_local("/statistic/query-domain-ranking/")
 def statistic_query_domain_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0])
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/source-data/")
