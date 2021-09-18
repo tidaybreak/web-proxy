@@ -202,7 +202,7 @@ def nodeinfo(res_data, *args, **kwargs):
         res_data["data"]["rows"].append(node)
 
     res_data = json.dumps(res_data)
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/admin/node/nodezone/")
@@ -216,7 +216,7 @@ def nodezone(res_data, *args, **kwargs):
         return res_data
     res_data["data"]["rows"][0]["display_cdn_prefix"] = "cdn209.com.cn"
     res_data = json.dumps(res_data)
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/admin/domain/domainsiteinfo/")
@@ -239,7 +239,7 @@ def domainsiteinfo(res_data, *args, **kwargs):
         i += 1
 
     data = json.dumps(res_data)
-    return bytes(data, encoding='utf-8')
+    return 200, args[0][3], bytes(data, encoding='utf-8')
 
 
 def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
@@ -354,7 +354,7 @@ def statistic_flow_bandwidth(res_data, *args, **kwargs):
 @export_res_local("/statistic/node-bandwidth-ranking/")
 def statistic_node_bandwidth_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0])
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/node-flow/")
@@ -378,13 +378,13 @@ def statistic_node_visit(res_data, *args, **kwargs):
 @export_res_local("/statistic/node-flow-ranking/")
 def statistic_node_flow_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0])
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/node-visit-ranking/")
 def statistic_node_visit_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0])
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/node-visit/")
@@ -408,20 +408,20 @@ def statistic_source(res_data, *args, **kwargs):
 @export_res_local("/statistic/query-domain-url-ranking/")
 def statistic_query_domain_url_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0], y="area")
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 # 状态码
 @export_res_local("/statistic/query-code/")
 def statistic_query_code(res_data, *args, **kwargs):
     res_data = get_data(args[0][0], y="code")
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/query-code-ranking/")
 def statistic_query_code_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0], y="code")
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/query-hit/")
@@ -433,7 +433,7 @@ def statistic_query_hit(res_data, *args, **kwargs):
 @export_res_local("/statistic/query-ip-ranking/")
 def statistic_query_ip_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0], y="idc")
-    return bytes(res_data, encoding='utf-8')
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/admin/cache/eagerloading/")
