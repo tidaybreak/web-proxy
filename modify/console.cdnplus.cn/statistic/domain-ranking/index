@@ -344,7 +344,7 @@ Content-Encoding: gzip
         <!-- retina ready -->
         <link rel="stylesheet" href="/static/user/css/retina.css">
         <!-- retina ready -->
-        <script src="/static/user/js/retina.min.js"></script>
+        <!--<script src="/static/user/js/retina.min.js"></script>-->
 
         <script src="/static/user/js/lib/echarts/echarts.min.js"></script>
 		<script src="/static/echarts-china-map-master/js/map/china.js"></script>
