@@ -267,7 +267,7 @@ Content-Encoding: gzip
             </div>
             <div class="col-md-5 col-sm-10">
                 <div class="row">
-                    <div class="col-sm-7 btn-group no-padding">
+                    <div class="col-sm-7 btn-group no-padding" style="width:300px;">
                         <button type="button" class="btn btn-default btn-success" onclick="setTime(this, 202109010843, 202109010943)">1小时</button>
                         <button type="button" class="btn btn-default" onclick="setTime(this, 202109010000, 202109010943)">今天</button>
                         <button type="button" class="btn btn-default" onclick="setTime(this, 202108310943, 202109010943)">24小时</button>
@@ -275,7 +275,7 @@ Content-Encoding: gzip
                         <button type="button" class="btn btn-default" onclick="setTime(this, 202108020943, 202109010943)">1个月</button>
                     </div>
                     <div class="col-sm-3 col-xs-3 no-padding" >
-                        <a data-toggle="modal" href="#tp_modal" id="customTime" class="btn btn-default" style="overflow:hidden;max-width: 250px;">自定义时间</a>
+                        <a data-toggle="modal" href="#tp_modal" id="customTime" class="btn btn-default" style="overflow:hidden;width: 250px;">自定义时间</a>
                         <div class="modal fade" id="tp_modal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -306,7 +306,7 @@ Content-Encoding: gzip
                 </div>
             </div>
             <div class="col-md-1 col-sm-2">
-                <button type="button" class="btn btn-success" onclick="btnSearch()">查询</button>
+                <button type="button" class="btn btn-success" onclick="btnSearch()" style="margin-left:80px;">查询</button>
             </div>
         </div>
 
@@ -466,7 +466,7 @@ Content-Encoding: gzip
                   title : [
                       {
                         text: '状态码曲线图',
-                        subtext: '近 '+timeText,
+                        subtext: '',
                         left: '90%',
                         top: '1%'
                       },
@@ -586,7 +586,7 @@ Content-Encoding: gzip
                 };
 	  pie_option = {
                   title: [{
-                    text: '状态码占比图',
+                    text: '状态码占比',
                     subtext: '近'+timeText,
                     left: '80%',
                     top: '1%'
@@ -603,14 +603,20 @@ Content-Encoding: gzip
                   data: [{name: 200, value: 1000}, {name: 404, value: 200}],
 		        minAngle: 3,
 		        avoidLabelOverlap: true,
-		        label: {
-		            normal: {
-		                textStyle: {
-		                    fontSize: 14,
-		                    color: '#333'
-		                }
-		            }
-		        },
+				label: {
+					normal: {
+						formatter: '{b}' + '\n\r' + '({d}%)',
+						show: true,
+						position: 'left'
+					},
+					emphasis: {
+						show: true,
+						textStyle: {
+							fontSize: '30',
+							fontWeight: 'bold'
+						}
+					}
+				},				
 		        labelLine: {
 		            normal: {
 		                lineStyle: {
@@ -692,7 +698,7 @@ Content-Encoding: gzip
             // bar_option.color = color_values;
             bar.setOption(bar_option);
             //
-            pie_option.title[0].subtext = '近'+timeText;
+            pie_option.title[0].subtext = '';
             pie_option.series.data = pie_data;
             pie_option.color = color_values;
             bar_pie.setOption(pie_option);
@@ -727,7 +733,7 @@ Content-Encoding: gzip
         var end = DateTime(end_str);
         params.start_time = start;
         params.end_time = end;
-        var c = '从'+start_str+'至'+end_str;
+        var c = '从 '+start_str+' 至 '+end_str;
         var e = $('#customTime');
         e.html('<small title="'+c+'">'+c+'</samll>');
         $(e).parent().parent().find('button').removeClass('btn-success');

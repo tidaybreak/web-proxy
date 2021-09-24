@@ -273,7 +273,7 @@ Content-Encoding: gzip
                         <button type="button" class="btn btn-default" onclick="setTime(this, 0, 3600 * 24 * 30)">1个月</button>
                     </div>
                     <div class="col-sm-3 col-xs-3 no-padding" >
-                        <a data-toggle="modal" href="#tp_modal" id="customTime" class="btn btn-default" style="overflow:hidden;max-width: 250px;">自定义时间</a>
+                        <a data-toggle="modal" href="#tp_modal" id="customTime" class="btn btn-default" style="overflow:hidden;width: 250px;">自定义时间</a>
                         <div class="modal fade" id="tp_modal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -304,17 +304,17 @@ Content-Encoding: gzip
                 </div>
             </div>
             <div class="col-md-1 col-sm-2">
-                <button type="button" class="btn btn-success" onclick="btnSearch()">查询</button>
+                <button type="button" class="btn btn-success" onclick="btnSearch()" style="margin-left:50px;">查询</button>
             </div>
         </div>
 
         <div class="row" id="search_type">
             <div class="col-md-9 col-sm-12">
                 <div class="col-sm-2">
-                    <button type="button" class="btn btn-md btn-default" onclick="bandwith_init(this)">回源流量趋势</button>
+                    <button type="button" class="btn btn-md btn-default" onclick="bandwith_init(this)">回源流量</button>
                 </div>
                 <div class="col-md-offset-1 col-sm-2">
-                    <button type="button" class="btn btn-md btn-default" onclick="flow_init(this)">回源带宽趋势</button>
+                    <button type="button" class="btn btn-md btn-default" onclick="flow_init(this)">回源带宽</button>
                 </div> 
                 <div class="col-md-offset-1 col-sm-2">
                     <button type="button" class="btn btn-md btn-default" onclick="visit_init(this)">回源失败率</button>
@@ -639,11 +639,12 @@ Content-Encoding: gzip
                       var uint = 'Mbps';
                       var uint_num = 1024 * 1024;
                     }
+					uint = 'GB';
                     // 修改配置
                     line_option.xAxis.data = times;
                     line_option.title = [
                         {
-                        text: '回源流量趋势',
+                        text: '回源流量',
                         subtext: '近 '+timeText,
                         left: '90%',
                         top: '1%'
@@ -692,10 +693,11 @@ Content-Encoding: gzip
                       var uint = 'MB';
                       var uint_num = 1024 * 1024;
                     }
+					uint = 'MB';
                     line_option.xAxis.data = times;
                     line_option.title = [
                         {
-                        text: '回源带宽趋势',
+                        text: '回源带宽',
                         subtext: '近'+timeText,
                         left: '90%',
                         top: '1%'
@@ -1098,7 +1100,7 @@ Content-Encoding: gzip
         var end = DateTime(end_str);
         params.start_time = start;
         params.end_time = end;
-        var c = '从'+start_str+'至'+end_str;
+        var c = '从 '+start_str+' 至 '+end_str;
         var e = $('#customTime');
         e.html('<small title="'+c+'">'+c+'</samll>');
         $(e).parent().parent().find('button').removeClass('btn-success');

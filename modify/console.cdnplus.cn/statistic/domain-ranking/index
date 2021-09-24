@@ -444,7 +444,7 @@ Content-Encoding: gzip
 	  map_option = {
 					title: [{
 						text: '访问区域-',
-						subtext: '近'+timeText,
+						subtext: '',
 						left: 'center',
 						top: '1%'
                     }],
@@ -453,16 +453,17 @@ Content-Encoding: gzip
 								return params.seriesName+'<br />'+params.name+'：'+params.value
 							}//数据格式化
 						},
-					visualMap: {
-						min: 0,
-						max: 1500,
-						left: 'left',
-						top: 'bottom',
-						text: ['高','低'],//取值范围的文字
-						inRange: {
-							color: ['#e0ffff', '#006edd']//取值范围的颜色
-						},
-						show:true//图注
+					visualMap: {//颜色的设置  dataRange
+						x: 'left',
+						y: 'center',
+						splitList: [
+							{ start: 900, color: '#2D71D6' },
+							{ start: 500, end: 900, color: '#3375e4' },
+							{ start: 300, end: 500, color: '#6797ef' },
+							{ start: 200, end: 300, color: '#96b5ef' },
+							{ start: 50, end: 200, color: '#B8E0F5' },
+							{ start: 0, end: 50, color: '#E1FBFD' },
+						],
 					},
 					geo: {
 						map: 'china',
@@ -632,11 +633,12 @@ Content-Encoding: gzip
 	option = {
 		title: {
 			text: '运营商统计',
-			subtext: '近1小时',
+			subtext: '',
 			left: 'center'
 		},
 		tooltip: {
-			trigger: 'item'
+			show: true,
+			formatter: "{a} <br/>{b} : {c} ({d}%)"
 		},
 		legend: {
 		  orient: "horization", // 垂直排列
@@ -658,6 +660,20 @@ Content-Encoding: gzip
 				name: 'GB',
 				type: 'pie',
 				radius: '50%',
+				label: {
+					normal: {
+						formatter: '{b}:{c}' + '\n\r' + '({d}%)',
+						show: true,
+						position: 'left'
+					},
+					emphasis: {
+						show: true,
+						textStyle: {
+							fontSize: '30',
+							fontWeight: 'bold'
+						}
+					}
+				},				
 				data: [
 					{value: 1048, name: '搜索引擎'},
 					{value: 735, name: '直接访问'},
@@ -665,6 +681,11 @@ Content-Encoding: gzip
 					{value: 484, name: '联盟广告'},
 					{value: 300, name: '视频广告'}
 				],
+				labelLine: {
+					normal: {
+						show: true
+					}
+				},
 				emphasis: {
 					itemStyle: {
 						shadowBlur: 10,

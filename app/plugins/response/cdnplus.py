@@ -135,7 +135,7 @@ def billing(res_data, *args, **kwargs):
     if total > 500:
         total = 500
 
-    sql = "SELECT * from `flow` where `time` <= '%s' limit %d" % (end_time, total)
+    sql = "SELECT * from `flow` where `time` <= '%s' order by `time` asc limit %d" % (end_time, total)
     cursor = db.execute(sql)
     i = 0
     max_bandwidth_unit_total = 0
@@ -306,7 +306,7 @@ def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
             for row in cursor:
                 # data["data"].append([row[1], row[2] / 1000 / 1000 / 1000])
                 stamp = int(start_time.timestamp()) + i * 300
-                value = rate * row[2] * (1 / random.randint(min, max))
+                value = rate * row[3] * (1 / random.randint(min, max))
                 if total > 288 * 7:
                     data["data"].append([time.strftime("%m-%d", time.localtime(stamp)), value])
                 elif total > 288:
@@ -334,10 +334,10 @@ def statistic_summary(res_data, *args, **kwargs):
             "code": 0,
             "message": "",
             "data": {
-                "count": int(random.randint(500, 1500) * increment),
+                "count": int(random.randint(500000, 1500000) * increment),
                 "hit_rate": str(random.randint(90, 99)) + "%",
-                "max_bindwidth": str(random.randint(100, 150)) + "GB",
-                "flow": str(random.randint(500, 1000)) + "\xa0TB"
+                "max_bindwidth": str(random.randint(150, 150)) + "GB",
+                "flow": str(random.randint(500, 1000)) + "\xa0QPS"
             }
         }
 
@@ -347,7 +347,7 @@ def statistic_summary(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/flow-bandwidth/")
 def statistic_flow_bandwidth(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=1 / 1000 / 1000 / 1000)
+    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=(1 / 1000 / 1000 / 1000) * 1.1538)
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
@@ -365,13 +365,13 @@ def statistic_node_flow(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/domain-bandwidth/")
 def statistic_domain_bandwidth(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=0.03 * (1 / 1000 / 1000 / 1000))
+    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=0.88 * (1 / 1000 / 1000 / 1000))
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
 @export_res_local("/statistic/source-fail/")
 def statistic_node_visit(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y='time', min=90, max=100)
+    res_data = get_data(args[0][0], y='db', min=1, max=5, rate=0.077 * (1 / 1000 / 1000 / 1000))
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
@@ -426,7 +426,7 @@ def statistic_query_code_ranking(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/query-hit/")
 def statistic_query_hit(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="db", min=5, max=10, rate=1 * (1 / 1000 / 1000 / 1000))
+    res_data = get_data(args[0][0], y="time", min=90, max=100)
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 

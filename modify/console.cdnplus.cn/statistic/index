@@ -273,7 +273,7 @@ Content-Encoding: gzip
                         <button type="button" class="btn btn-default" onclick="setTime(this, 0, 3600 * 24 * 30)">1个月</button>
                     </div>
                     <div class="col-sm-3 col-xs-3 no-padding" >
-                        <a data-toggle="modal" href="#tp_modal" id="customTime" class="btn btn-default" style="overflow:hidden;max-width: 250px;">自定义时间</a>
+                        <a data-toggle="modal" href="#tp_modal" id="customTime" class="btn btn-default" style="overflow:hidden;width: 250px;">自定义时间</a>
                         <div class="modal fade" id="tp_modal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -304,7 +304,7 @@ Content-Encoding: gzip
                 </div>
             </div>
             <div class="col-md-1 col-sm-2">
-                <button type="button" class="btn btn-success" onclick="btnSearch()">查询</button>
+                <button type="button" class="btn btn-success" onclick="btnSearch()" style="margin-left:50px;">查询</button>
             </div>
         </div>
         <div class="row">
@@ -649,6 +649,7 @@ Content-Encoding: gzip
                 };
 	  overview = {
 	    bandwidth: function (){
+				//alert(document.getElementById('flot_overview'));
 			    var chart = echarts.init(document.getElementById('flot_overview'), 'shine')
 			    chart.showLoading({'effect': 'bubble'});
 			    $.getJSON('/statistic/flow-bandwidth/', params).done(function(res){
@@ -697,6 +698,7 @@ Content-Encoding: gzip
 			          data.push((values[index]/uint_num).toFixed(1))
                     }
 			        line_option.series.data = data;
+					//alert(chart)
 			        chart.setOption(line_option)
                 })
 		},
@@ -1101,8 +1103,7 @@ Content-Encoding: gzip
         $(e).parent().parent().find('button').removeClass('btn-success');
         $(e).addClass('btn-success');
       }
-      //触发默认数据
-      $('#search_type button').eq(0).click();
+
       //搜索按钮
       btnSearch = function(){
         $('#search_type button.btn-success').click();
@@ -1132,7 +1133,7 @@ Content-Encoding: gzip
         var end = DateTime(end_str);
         params.start_time = start;
         params.end_time = end;
-        var c = '从'+start_str+'至'+end_str;
+        var c = '从 '+start_str+' 至 '+end_str;
         var e = $('#customTime');
         e.html('<small title="'+c+'">'+c+'</samll>');
         $(e).parent().parent().find('button').removeClass('btn-success');
@@ -1143,6 +1144,8 @@ Content-Encoding: gzip
 		//自定义去掉样式
         $('#customTime').removeClass('btn-success');
       }
+	  //触发默认数据
+      $('#search_type button').eq(0).click();
     })
     </script>
 

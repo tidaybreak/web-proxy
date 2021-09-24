@@ -54,6 +54,27 @@ class CdnConfig(TraceMixinConfig):
     HTTP = "https://"
 
 
+class SKConfig(TraceMixinConfig):
+    PLUGIN = "sk"
+    PORT = 8080
+    DOMAIN = 'sk.gzonline.gov.cn'
+    HTTP = "https://"
+
+
+class YSSConfig(TraceMixinConfig):
+    PLUGIN = "yss"
+    PORT = 8080
+    DOMAIN = 'zwms.gdbs.gov.cn'
+    HTTP = "https://"
+
+
+class BMConfig(TraceMixinConfig):
+    PLUGIN = "bm"
+    PORT = 8080
+    DOMAIN = 'mztapp.fujian.gov.cn'
+    HTTP = "https://"
+
+
 class PccwConfig(TraceMixinConfig):
     PLUGIN = "pccw"
     DOMAIN = 'app.consoleconnect.com'
