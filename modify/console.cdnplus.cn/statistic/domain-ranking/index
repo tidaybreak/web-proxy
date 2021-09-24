@@ -349,7 +349,7 @@ Content-Encoding: gzip
         <script src="/static/user/js/lib/echarts/echarts.min.js"></script>
 		<script src="/static/echarts-china-map-master/js/map/china.js"></script>
         <script src="/static/user/js/lib/echarts/shine.js"></script>
-        <script src="/static/user/js/lib/echarts/macarons.js"></script>
+        <!--<script src="/static/user/js/lib/echarts/macarons.js"></script>-->
     
 
     <script>

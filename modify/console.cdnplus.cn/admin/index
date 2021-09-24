@@ -680,7 +680,7 @@ sessionid: r922rl3cgtsm9lahffw4r605xwwv0eia
 </div>
     <script src="/static/user/js/lib/echarts/echarts.min.js"></script>
     <script src="/static/user/js/lib/echarts/shine.js"></script>
-    <script src="/static/user/js/lib/echarts/macarons.js"></script>
+    <!--<script src="/static/user/js/lib/echarts/macarons.js"></script>-->
     <script type="text/javascript">
     $(document).ready(function(){
         var timeText = '1小时';
