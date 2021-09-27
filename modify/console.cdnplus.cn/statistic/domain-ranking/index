@@ -556,7 +556,7 @@ Content-Encoding: gzip
       };
 	  //按钮点击事件
       bandwith_init = function(e){
-        overview.map_info('流量', '流量(GB)', 800, 999);
+        overview.map_info('流量', '流量(PB)', 800, 999);
         $(e).parent().parent().find('button').removeClass('btn-success');
         $(e).addClass('btn-success');
       }
@@ -652,17 +652,17 @@ Content-Encoding: gzip
 			let rate = R.propOr(0, "rate", R.find(R.propEq("name", name))(dataList));
 			//rate = (rate * 100).toFixed(1);
 			// 显示名称+百分比
-			return `${name} ${rate}GB`;
+			return `${name} ${rate}PB`;
 		  },
 		},
 		series: [
 			{
-				name: 'GB',
+				name: 'PB',
 				type: 'pie',
 				radius: '50%',
 				label: {
 					normal: {
-						formatter: '{b}:{c}' + '\n\r' + '({d}%)',
+						formatter: '{b}:{c}PB' + '\n\r' + '({d}%)',
 						show: true,
 						position: 'left'
 					},

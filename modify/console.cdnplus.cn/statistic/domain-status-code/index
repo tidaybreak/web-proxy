@@ -667,10 +667,16 @@ Content-Encoding: gzip
 			var last_rand = randomNum(1000000, 9999999)
 			for (var i=0;i<codes.length;i++)
 			{
-				x_values.push(last_rand);
-				y_values.push(codes[i]);
-				pie_data.push({name: codes[i], value: last_rand});
+				if (last_rand > 100) {
+					x_values.push(last_rand);
+					y_values.push(codes[i]);
+					pie_data.push({name: codes[i], value: last_rand});
+				}
+				
 				last_rand = Math.floor(last_rand * randomNum(10, 20) / 100)
+				if (last_rand < 1000) {
+					last_rand = randomNum(1000, 1100)
+				}
 			}	
 			
             // 排名图
