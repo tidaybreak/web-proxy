@@ -483,8 +483,6 @@ Content-Encoding: gzip
           defaultDate: false,
           todayButton: true,
           showApplyButton: false,
-          minDate: "2021-08-02 21:50",
-          maxDate: "2021-09-01 21:50",
         }
         $('#dpStart').datetimepicker(datetime_options).on('change', function(e){
           params.start_time = DateTime($('#dpStart').val());
