@@ -16,8 +16,8 @@ default = Blueprint('default', __name__)
 
 @app.before_request
 def catch_all():
-    if request.url.find('hsf/realtime/focusIndicators') < 0:
-        # print(url)
+    if request.url.find('fujian.gov') >= 0:
+        print(request.url)
         pass
 
     headers = {h[0]: h[1] for h in request.headers}
@@ -27,7 +27,11 @@ def catch_all():
     full_path = serv.main.hook_full_path(full_path, request.args)
 
     # 获取真实host host可能在path[1]
-    real_host = request.values.get('real_host', cfg.DOMAIN)
+    if 'real_host' in request.values:
+        real_host = request.values['real_host']
+        full_path = full_path.replace('&real_host=' + real_host, '')
+    else:
+        real_host = cfg.DOMAIN
     paths = request.path.split('/')
     if len(paths) > 2 and paths[1] in cfg.DOMAIN_PROXY:
         real_host = paths[1]
@@ -40,6 +44,7 @@ def catch_all():
         headers['Origin'] = cfg.HTTP + real_host
     headers['Referer'] = headers.get("Referer", '').replace(request.host_url, cfg.HTTP + real_host + '/')
     full_url = cfg.HTTP + real_host + full_path
+
 
     # byte或dict
     req_data = b''
@@ -68,6 +73,7 @@ def catch_all():
     contain_query = True
     if request.path in cfg.QUERY_PATH:
         contain_query = False
+        post_data_hash = ''
     cache_file, res_status, res_headers, res_cookies, res_data = 'skip ', 502, {}, None, None
     if get_cache:
         cache_file, res_status, res_headers, res_cookies, res_data = get_cache_file(full_url,

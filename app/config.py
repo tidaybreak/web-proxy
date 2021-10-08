@@ -42,8 +42,8 @@ class TraceMixinConfig:
 
 class Config(TraceMixinConfig):
     PORT = 8080
-    PLUGIN = "cdnplus"
-    DOMAIN = 'console.cdnplus.cn'
+    PLUGIN = ""
+    DOMAIN = ''
     HTTP = "https://"
 
 
@@ -68,11 +68,15 @@ class YSSConfig(TraceMixinConfig):
     HTTP = "https://"
 
 
+# 福建八闽健康码 通过Charles Map Remote Settings转发
 class BMConfig(TraceMixinConfig):
     PLUGIN = "bm"
     PORT = 8080
     DOMAIN = 'mztapp.fujian.gov.cn'
     HTTP = "https://"
+    QUERY_PATH = ['/fjyqhm/bmjkm/getJkEwm', '/fjyqhm/bmjkm/getHsInfo', '/fjyqhm/bmjkm/getFzspz',
+                  '/fjyqhm/bmjkm/getJkbg', '/fjyqhm/ymjzcx/getYmjzState', '/fjyqhm/bmjkm/getWtrdbList',
+                  '/fjyqhm/ymjzcx/getYmjzData']
 
 
 class PccwConfig(TraceMixinConfig):

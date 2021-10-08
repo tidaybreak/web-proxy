@@ -188,6 +188,7 @@ def save_cache_file(url, post_data_hash, data, status_code=200, header={}, cooki
     else:
         str_header = f"status_code: {status_code}\r\n"
         for k, v in header.items():
+            v = v.replace('\'', '"')
             str_header += f"{k}: {v}\r\n"
         str_header += "\r\n"
 
