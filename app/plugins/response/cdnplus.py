@@ -300,10 +300,13 @@ def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
             end_time = datetime.datetime.strptime(end_time, "%Y%m%d%H%M")
             total = int((end_time.timestamp() - start_time.timestamp()) / 300)
             # sql = "SELECT * from `flow` where `time` >= '%s' and `time` <= '%s'" % (start_time, end_time)
-            sql = "SELECT * from `flow` where `time` <= '%s' limit %d" % (end_time, total)
+            sql = "SELECT * from `flow` where `time` <= '%s' order by `time` desc limit %d" % (end_time, total)
             cursor = db.execute(sql)
             i = 0
+            cursor2 = []
             for row in cursor:
+                cursor2.append(row)
+            for row in reversed(cursor2):
                 # data["data"].append([row[1], row[2] / 1000 / 1000 / 1000])
                 stamp = int(start_time.timestamp()) + i * 300
                 value = rate * row[3] * (1 / random.randint(min, max))
@@ -347,7 +350,7 @@ def statistic_summary(res_data, *args, **kwargs):
 
 @export_res_local("/statistic/flow-bandwidth/")
 def statistic_flow_bandwidth(res_data, *args, **kwargs):
-    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=(1 / 1000 / 1000 / 1000) * 1.1538)
+    res_data = get_data(args[0][0], y="db", min=1, max=1, rate=(1 / 1000 / 1000 / 1000) * 1)
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 
