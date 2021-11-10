@@ -51,6 +51,7 @@ def flow(res_data, *args, **kwargs):
     # #f.save(localPath)
 
     file_csv = f"{os.getcwd()}/cache/console.cdnplus.cn/flow.csv"
+    os.remove(file_csv)
     file.save(file_csv)
     with open(file_csv) as f:
         f_csv = csv.reader(f)
