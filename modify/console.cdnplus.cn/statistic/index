@@ -365,22 +365,22 @@ Content-Encoding: gzip
 
         </div>
 
-		<!--
+		
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="row">
-                        <div class="col-md-6">
+                        <!--<div class="col-md-6">
                             <div id="chart_bars" class="chart_a" style="height: 400px;"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="chart_ranking" class="chart_a" style="height: 400px;"></div>
+                        </div>-->
+                        <div class="panel panel-default">
+                            <div id="ip_ranking" class="chart_a" style="height: 400px;"></div>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </div>-->
+        </div>
     </div>
 
     
@@ -934,11 +934,11 @@ Content-Encoding: gzip
           })
 
         },
-        domain_bandwidth_ranking: function(){
-          var bar = echarts.init(document.getElementById('chart_ranking'), 'shine');
+        ip_ranking_fun: function(){
+          var bar = echarts.init(document.getElementById('ip_ranking'), 'shine');
           bar.showLoading({'effect': 'bubble'});
           params.type = 'bandwidth';
-          $.getJSON('/statistic/query-domain-ranking/', params).done(function(res){
+          $.getJSON('/statistic/ip-ranking/', params).done(function(res){
             bar.hideLoading();
             var x_values = [];
             var y_values = [];
@@ -963,7 +963,7 @@ Content-Encoding: gzip
             }
             bar_option.title = [
                         {
-                        text: '域名带宽排名',
+                        text: 'IP带宽排名',
                         subtext: '近'+timeText,
                         left: '90%',
                         top: '1%'
@@ -986,7 +986,7 @@ Content-Encoding: gzip
 
         },
         domain_flow_ranking: function(){
-          var bar = echarts.init(document.getElementById('chart_ranking'), 'shine');
+          var bar = echarts.init(document.getElementById('ip_ranking'), 'shine');
           bar.showLoading({'effect': 'bubble'});
           params.type = 'flow';
           $.getJSON('/statistic/query-domain-ranking/', params).done(function(res){
@@ -1037,7 +1037,7 @@ Content-Encoding: gzip
 
         },
         domain_visit_ranking: function(){
-          var bar = echarts.init(document.getElementById('chart_ranking'), 'shine');
+          var bar = echarts.init(document.getElementById('ip_ranking'), 'shine');
           bar.showLoading({'effect': 'bubble'});
           params.type = 'visit';
           $.getJSON('/statistic/query-domain-ranking/', params).done(function(res){
@@ -1086,6 +1086,7 @@ Content-Encoding: gzip
       bandwith_init = function(e){
         overview.summary();
         overview.bandwidth();
+		overview.ip_ranking_fun();
         $(e).parent().parent().find('button').removeClass('btn-success');
         $(e).addClass('btn-success');
       }
@@ -1143,7 +1144,11 @@ Content-Encoding: gzip
         $('#customTime').removeClass('btn-success');
       }
 	  //触发默认数据
-      $('#search_type button').eq(0).click();
+      //$('#search_type button').eq(0).click();
+	  c = function() {
+		$('#search_type button').eq(0).click();
+	  }
+	  setTimeout(c, 3000);
     })
     </script>
 

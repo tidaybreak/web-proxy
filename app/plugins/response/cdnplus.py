@@ -271,6 +271,21 @@ def get_data(url, y="domain", min=100000000, max=900000000, rate=1):
             item = [domain, random.randint(100000000, 900000000)]
             data["data"].append(item)
         data["data"].sort(key=takeSecond)
+    elif y == "ip":
+        ips = ["111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255)),
+               "111.202.107." + str(random.randint(1, 255))]
+        for ip in ips:
+            item = [ip, random.randint(100000000, 900000000)]
+            data["data"].append(item)
+        data["data"].sort(key=takeSecond)
     elif y == "code":
         for code in [200, 301, 404, 500]:
             item = [code, random.randint(1000000, 9000000)]
@@ -401,6 +416,12 @@ def statistic_node_visit_ranking(res_data, *args, **kwargs):
 @export_res_local("/statistic/query-domain-ranking/")
 def statistic_query_domain_ranking(res_data, *args, **kwargs):
     res_data = get_data(args[0][0])
+    return 200, args[0][3], bytes(res_data, encoding='utf-8')
+
+
+@export_res_local("/statistic/ip-ranking/")
+def statistic_ip_ranking(res_data, *args, **kwargs):
+    res_data = get_data(args[0][0], y="ip")
     return 200, args[0][3], bytes(res_data, encoding='utf-8')
 
 

@@ -571,7 +571,10 @@ Content-Encoding: gzip
         $(e).addClass('btn-success');
       }
       //触发默认数据
-      $('#search_type button').eq(0).click();
+	  c = function() {
+		$('#search_type button').eq(0).click();
+	  }
+	  setTimeout(c, 3000);
       //搜索按钮
       btnSearch = function(){
         $('#search_type button.btn-success').click();
